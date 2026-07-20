@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+    a { color: #159B5A; }
+    a:hover { color: #0E1F2B; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;" data-screen-label="Profile">
+
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;"><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="width:100%;height:150px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:22px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;"><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="Market.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
+        <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Activity</a>
+        <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
+        <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Reports</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px; background: #EEEBE2;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+        </a>
+        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 920px; margin: 0 auto; padding: 0 32px;">
+
+    <!-- HERO -->
+    <section style="padding: 56px 0 36px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Account {{ userAccount }} · Member since Jul 1, 2026</p>
+          <h1 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.02em;">Your profile</h1>
+          <p style="margin: 0; font-size: 15px; color: #6B7480; max-width: 620px; line-height: 1.65;">Everything below drives the rest of the site — the flag checks, the idea screening, and what shows up in your weekly report. Change it here; the nightly check picks it up.</p>
+        </div>
+        <span style="font-size: 12px; color: #A9A294; white-space: nowrap; padding-bottom: 4px;">{{ savedMsg }}</span>
+      </div>
+    </section>
+
+    <!-- DISCIPLINE & REWARDS -->
+    <section style="padding: 0 0 8px;">
+      <p style="margin: 0 0 6px; font-size: 12px; font-weight: 700; color: #159B5A; letter-spacing: 0.08em; text-transform: uppercase;">Your discipline</p>
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 26px; font-weight: 500; letter-spacing: -0.015em;">Recognition for the boring things done right</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 620px; line-height: 1.6;">What you actually control — consistency, patience, staying invested. Rewarded quietly here; never your short-term returns.</p>
+    </section>
+
+    <section style="padding: 0 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px;">
+          <p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B7480;">Portfolio Health</p>
+          <span style="font-size: 11.5px; font-weight: 600; color: #159B5A; background: #EAF5EF; border: 1px solid #CBE5D6; padding: 4px 11px; border-radius: 999px;">Strong</span>
+        </div>
+        <div style="display: flex; justify-content: center; padding: 4px 0 2px;">
+          <div style="position: relative; width: 230px; height: 132px;">
+            <svg width="230" height="132" viewBox="0 0 200 118" style="overflow: visible; display: block;">
+              <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="#F0EDE4" stroke-width="14" stroke-linecap="round"></path>
+              <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="#159B5A" stroke-width="14" stroke-linecap="round" stroke-dasharray="211.2 257.6"></path>
+            </svg>
+            <div style="position: absolute; left: 0; right: 0; bottom: 8px; text-align: center;">
+              <div style="font-family: Fraunces, serif; font-size: 46px; font-weight: 500; color: #0E1F2B; line-height: 1;">82</div>
+              <div style="font-size: 11px; color: #A9A294; margin-top: 3px;">of 100</div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 6px;">
+          <sc-for list="{{ factors }}" as="f" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 130px 1fr 34px; gap: 12px; align-items: center;">
+              <span style="font-size: 12.5px; color: #4A5560;">{{ f.label }}</span>
+              <div style="height: 7px; background: #F0EDE4; border-radius: 4px; position: relative;">
+                <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: {{ f.color }}; width: {{ f.w }}%;"></div>
+              </div>
+              <span style="font-size: 12px; font-weight: 600; color: #6B7480; text-align: right; font-variant-numeric: tabular-nums;">{{ f.score }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid #F0EDE4; display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background: #0E1F2B; color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">V</div>
+          <p style="margin: 0; font-size: 13px; color: #4A5560; line-height: 1.65;">Well diversified and consistent. The one lever left is trimming QQQ&rsquo;s 46% share — new money into the broad core would push this past 85.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 26px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 4px;">
+            <p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B7480;">Consistency streak</p>
+            <span style="font-size: 12px; color: #0E1F2B;"><strong style="font-weight: 600; color: #159B5A;">24</strong> of last 26 weeks</span>
+          </div>
+          <p style="margin: 0 0 16px; font-size: 12px; color: #A9A294;">One weekly contribution per cell · Jan – Jun 2026</p>
+          <div style="display: grid; grid-template-columns: repeat(13, 1fr); gap: 5px;">
+            <sc-for list="{{ weekCells }}" as="w" hint-placeholder-count="26">
+              <span title="{{ w.title }}" style="aspect-ratio: 1; border-radius: 3px; background: {{ w.bg }}; border: 1.5px solid {{ w.border }}; box-sizing: border-box;"></span>
+            </sc-for>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin: 7px 1px 0; font-size: 10.5px; color: #A9A294;">
+            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; margin: 15px 0 0; padding-top: 14px; border-top: 1px solid #F0EDE4;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: #6B7480;"><span style="width: 11px; height: 11px; border-radius: 3px; background: #159B5A;"></span>Contributed</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: #6B7480;"><span style="width: 11px; height: 11px; border-radius: 3px; background: #FBF6E6; border: 1.5px solid #C9A227; box-sizing: border-box;"></span>Missed week</span>
+          </div>
+          <p style="margin: 11px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">Missed the weeks of <strong style="color:#0E1F2B; font-weight:600;">Feb 23</strong> and <strong style="color:#0E1F2B; font-weight:600;">Apr 20</strong>. A missed week pauses the streak — it never resets.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 26px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 34px; height: 34px; border-radius: 50%; background: #0E1F2B; color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0;">V</div>
+          <div style="flex: 1;">
+            <p style="margin: 0 0 5px; font-size: 12px; font-weight: 600; color: #6B7480;">Your manager</p>
+            <p style="margin: 0; font-size: 13.5px; color: #0E1F2B; line-height: 1.6;">Six months contributing in a row — that&rsquo;s the part most people get wrong. Nicely done.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 0 0 20px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <p style="margin: 0 0 20px; font-size: 13px; font-weight: 500; color: #6B7480;">Goals · in progress</p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
+            <div style="position: relative; width: 108px; height: 108px;">
+              <svg width="108" height="108" viewBox="0 0 112 112" style="display: block;">
+                <circle cx="56" cy="56" r="46" fill="none" stroke="#F0EDE4" stroke-width="11"></circle>
+                <circle cx="56" cy="56" r="46" fill="none" stroke="#159B5A" stroke-width="11" stroke-linecap="round" stroke-dasharray="138.7 289.0" transform="rotate(-90 56 56)"></circle>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-family: Fraunces, serif; font-size: 24px; font-weight: 500; color: #0E1F2B; line-height: 1;">48%</div>
+                <div style="font-size: 10.5px; color: #A9A294; margin-top: 3px;">to $10k</div>
+              </div>
+            </div>
+            <div>
+              <p style="margin: 0 0 2px; font-size: 13.5px; font-weight: 600;">Savings target</p>
+              <p style="margin: 0; font-size: 12px; color: #6B7480;">$4.8k of $10k</p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
+            <div style="position: relative; width: 108px; height: 108px;">
+              <svg width="108" height="108" viewBox="0 0 112 112" style="display: block;">
+                <circle cx="56" cy="56" r="46" fill="none" stroke="#F0EDE4" stroke-width="11"></circle>
+                <circle cx="56" cy="56" r="46" fill="none" stroke="#7FA8C9" stroke-width="11" stroke-linecap="round" stroke-dasharray="182.1 289.0" transform="rotate(-90 56 56)"></circle>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-family: Fraunces, serif; font-size: 24px; font-weight: 500; color: #0E1F2B; line-height: 1;">63%</div>
+                <div style="font-size: 10.5px; color: #A9A294; margin-top: 3px;">on track</div>
+              </div>
+            </div>
+            <div>
+              <p style="margin: 0 0 2px; font-size: 13.5px; font-weight: 600;">Target allocation</p>
+              <p style="margin: 0; font-size: 12px; color: #6B7480;">Core vs. 75% goal</p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
+            <div style="position: relative; width: 108px; height: 108px;">
+              <svg width="108" height="108" viewBox="0 0 112 112" style="display: block;">
+                <circle cx="56" cy="56" r="46" fill="none" stroke="#F0EDE4" stroke-width="11"></circle>
+                <circle cx="56" cy="56" r="46" fill="none" stroke="#C9A227" stroke-width="11" stroke-linecap="round" stroke-dasharray="34.7 289.0" transform="rotate(-90 56 56)"></circle>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-family: Fraunces, serif; font-size: 24px; font-weight: 500; color: #0E1F2B; line-height: 1;">12%</div>
+                <div style="font-size: 10.5px; color: #A9A294; margin-top: 3px;">to coast</div>
+              </div>
+            </div>
+            <div>
+              <p style="margin: 0 0 2px; font-size: 13.5px; font-weight: 600;">Coast FI number</p>
+              <p style="margin: 0; font-size: 12px; color: #6B7480;">Long horizon</p>
+            </div>
+          </div>
+        </div>
+        <dl style="margin: 22px 0 0; padding-top: 18px; border-top: 1px solid #F0EDE4; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <div><dt style="font-size: 12px; font-weight: 600; color: #0E1F2B; margin-bottom: 4px;">Savings target</dt><dd style="margin: 0; font-size: 11.5px; color: #6B7480; line-height: 1.55;">Cash you aim to put to work this year — progress toward your $10k goal.</dd></div>
+          <div><dt style="font-size: 12px; font-weight: 600; color: #0E1F2B; margin-bottom: 4px;">Target allocation</dt><dd style="margin: 0; font-size: 11.5px; color: #6B7480; line-height: 1.55;">How close your index-fund / individual-stock mix sits to your chosen risk profile.</dd></div>
+          <div><dt style="font-size: 12px; font-weight: 600; color: #0E1F2B; margin-bottom: 4px;">Coast FI number</dt><dd style="margin: 0; font-size: 11.5px; color: #6B7480; line-height: 1.55;">The point where today&rsquo;s balance can grow to retirement on its own — no further contributions needed.</dd></div>
+        </dl>
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #F0EDE4; display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background: #0E1F2B; color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">V</div>
+          <p style="margin: 0; font-size: 13px; color: #4A5560; line-height: 1.65;">Friday&rsquo;s $1,000 moved your savings goal from 46% to <strong style="color:#0E1F2B;">48%</strong>. Small, steady, exactly the idea.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- IDENTITY -->
+    <section style="padding: 0 0 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; gap: 28px; align-items: center;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-family: Fraunces, serif; font-size: 26px; font-weight: 600; flex-shrink: 0;">{{ initial }}</div>
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 18px; flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Name</label>
+            <input type="text" value="{{ name }}" onChange="{{ onName }}" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 12px; outline: none;" style-focus="border-color: #159B5A;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Username</label>
+            <input type="text" value="{{ username }}" disabled style="font-family: inherit; font-size: 14px; color: #6B7480; background: #F7F6F2; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 12px; outline: none; cursor: not-allowed;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISK PROFILE -->
+    <section style="padding: 0 0 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 4px; font-family: Fraunces, serif; font-size: 21px; font-weight: 500; letter-spacing: -0.01em;">Risk profile</h2>
+        <p style="margin: 0 0 20px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Sets your index-fund / individual-stock target — the split the nightly checks compare your holdings against.</p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+          <sc-for list="{{ riskCards }}" as="r" hint-placeholder-count="3">
+            <div onClick="{{ r.onPick }}" style="cursor: pointer; background: {{ r.bg }}; border: {{ r.border }}; border-radius: 12px; padding: {{ r.pad }}; display: flex; flex-direction: column; gap: 7px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <span style="font-family: Fraunces, serif; font-size: 17px; font-weight: 600;">{{ r.label }}</span>
+                <span style="width: 18px; height: 18px; border-radius: 50%; border: {{ r.dot }}; background: #FFFFFF; box-sizing: border-box; flex-shrink: 0;"></span>
+              </div>
+              <span style="font-size: 12.5px; font-weight: 600; color: #0E1F2B; font-variant-numeric: tabular-nums;">{{ r.mix }}</span>
+              <span style="font-size: 12.5px; color: #6B7480; line-height: 1.55;">{{ r.desc }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; height: 14px; border-radius: 6px; overflow: hidden; gap: 2px; margin-top: 20px;">
+          <div style="width: {{ indexPct }}%; background: #0E1F2B; transition: width 0.25s;"></div>
+          <div style="width: {{ indivPct }}%; background: #C9A227; transition: width 0.25s;"></div>
+        </div>
+        <div style="display: flex; gap: 18px; margin-top: 10px; font-size: 12px; color: #6B7480;">
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 9px; height: 9px; border-radius: 3px; background: #0E1F2B;"></span>Index funds {{ indexPct }}%</span>
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 9px; height: 9px; border-radius: 3px; background: #C9A227;"></span>Individual {{ indivPct }}%</span>
+        </div>
+        <div style="margin-top: 16px; background: {{ flagBg }}; border: 1px solid {{ flagBorder }}; border-radius: 10px; padding: 12px 16px; font-size: 12.5px; color: #4A5560; line-height: 1.6;">{{ flagText }} <a href="Performance.dc.html#risk" style="color: #159B5A; font-weight: 500;">See Risk →</a></div>
+      </div>
+    </section>
+
+    <!-- CONTRIBUTIONS -->
+    <section style="padding: 0 0 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 4px; font-family: Fraunces, serif; font-size: 21px; font-weight: 500; letter-spacing: -0.01em;">Contributions</h2>
+        <p style="margin: 0 0 20px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Used by the growth projector on Plan and to size the suggested split on Overview.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Amount per paycheck</label>
+            <div style="display: flex; align-items: center; border: 1px solid #E6E2D8; border-radius: 8px; overflow: hidden;">
+              <span style="padding: 10px 0 10px 12px; font-size: 14px; color: #A9A294;">$</span>
+              <input type="text" value="{{ monthly }}" onChange="{{ onMonthly }}" style="font-family: inherit; font-size: 14px; color: #0E1F2B; border: none; padding: 10px 12px 10px 6px; outline: none; flex: 1; font-variant-numeric: tabular-nums; min-width: 0;">
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Payday cadence</label>
+            <select value="{{ cadence }}" onChange="{{ onCadence }}" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 12px; outline: none; cursor: pointer;">
+              <option>Weekly</option>
+              <option>Every other week</option>
+              <option>Monthly</option>
+            </select>
+          </div>
+        </div>
+        <p style="margin: 16px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">At the current split that's <strong style="color: #0E1F2B;">{{ splitNote }}</strong> each paycheck. <a href="Plan.dc.html" style="color: #159B5A; font-weight: 500;">Adjust the split on Plan →</a></p>
+      </div>
+    </section>
+
+    <!-- IDEA SCREENING -->
+    <section style="padding: 0 0 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 4px; font-family: Fraunces, serif; font-size: 21px; font-weight: 500; letter-spacing: -0.01em;">What ideas get screened for you</h2>
+        <p style="margin: 0 0 18px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Ticker ideas in your weekly report and the "how to invest" section on Overview only come from categories you've switched on.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+            <button onClick="{{ c.onToggle }}" style="font-family: inherit; font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 999px; border: 1px solid {{ c.border }}; background: {{ c.bg }}; color: {{ c.color }}; cursor: pointer;">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <p style="margin: 16px 0 0; font-size: 12px; color: #A9A294;">Everything still passes the Conservative screen and the ~10% individual-stock cap below before it's mentioned.</p>
+      </div>
+    </section>
+
+    <!-- GUARDRAILS -->
+    <section style="padding: 0 0 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 4px; font-family: Fraunces, serif; font-size: 21px; font-weight: 500; letter-spacing: -0.01em;">Guardrails</h2>
+        <p style="margin: 0 0 20px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">The limits the eight nightly flag checks enforce.</p>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 10px;">
+          <label style="font-size: 13.5px; font-weight: 500;">Individual-stock sleeve cap — single names</label>
+          <span style="font-size: 15px; font-weight: 600; color: #0E1F2B; font-variant-numeric: tabular-nums;">{{ specCap }}%</span>
+        </div>
+        <input type="range" min="0" max="25" step="1" value="{{ specCap }}" onChange="{{ onCap }}" style="width: 100%; accent-color: #159B5A; cursor: pointer;">
+        <p style="margin: 10px 0 0; font-size: 12.5px; color: {{ capColor }}; line-height: 1.6;">{{ capNote }}</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 22px; padding-top: 18px; border-top: 1px solid #F0EDE4;">
+          <div>
+            <p style="margin: 0 0 3px; font-size: 13.5px; font-weight: 500;">Drift alert</p>
+            <p style="margin: 0; font-size: 12.5px; color: #6B7480;">Flag when any holding drifts more than 5 points from its target weight.</p>
+          </div>
+          <div onClick="{{ onDrift }}" style="width: 40px; height: 24px; border-radius: 999px; background: {{ driftTrack }}; position: relative; cursor: pointer; flex-shrink: 0; transition: background 0.15s;">
+            <span style="position: absolute; top: 3px; left: {{ driftKnob }}; width: 18px; height: 18px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: left 0.15s;"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATA & SCHEDULE -->
+    <section style="padding: 0 0 88px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 4px; font-family: Fraunces, serif; font-size: 21px; font-weight: 500; letter-spacing: -0.01em;">Data &amp; schedule</h2>
+        <p style="margin: 0 0 8px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">When the nightly log runs. Everything else lives in the app &mdash; check in whenever you like; there are no notifications.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 18px;">
+          <div>
+            <p style="margin: 0 0 3px; font-size: 13.5px; font-weight: 500;">Nightly log time</p>
+            <p style="margin: 0; font-size: 12.5px; color: #6B7480;">When closing prices are logged and flag checks run, weekdays.</p>
+          </div>
+          <select value="{{ logTime }}" onChange="{{ onLogTime }}" style="font-family: inherit; font-size: 13.5px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 9px 12px; outline: none; cursor: pointer;">
+            <option>5:00 PM CT</option>
+            <option>8:30 PM CT</option>
+            <option>10:00 PM CT</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for {{ name }} · Figures are estimates — food for thought, not financial advice</span>
+      <span>Data refreshes weekdays {{ logTime }} · New report every Friday</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  __sessionVals() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); }
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var userName = (s && s.name) || 'Griffin';
+    return {
+      userName: userName,
+      userInitial: (userName.charAt(0) || 'G').toUpperCase(),
+      userAccount: (s && s.account) || 'PD-08842',
+      onLogout: () => {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+    };
+  }
+  state = {
+    name: 'Griffin',
+    username: 'griffin',
+    risk: 'conservative',
+    monthly: '1000',
+    cadence: 'Every other week',
+    interests: { index: true, dividends: true, singles: true, tech: false, international: false, smallcap: false, healthcare: false, value: false, reits: false, gold: false, esg: false, bonds: false },
+    specCap: 10,
+    driftAlert: true,
+    logTime: '8:30 PM CT',
+    savedAt: null,
+  };
+
+  componentDidMount() {
+    try {
+      const sv = this.__sessionVals();
+      this.setState({ name: sv.userName, username: sv.userName.toLowerCase() });
+      const s = JSON.parse(localStorage.getItem('pd-profile-settings-' + sv.userAccount) || 'null');
+      if (s && typeof s === 'object') { delete s.savedAt; this.setState(s); }
+    } catch (e) {}
+  }
+
+  save(patch) {
+    this.setState({ ...patch, savedAt: Date.now() }, () => {
+      try {
+        const copy = { ...this.state };
+        delete copy.savedAt;
+        localStorage.setItem('pd-profile-settings-' + this.__sessionVals().userAccount, JSON.stringify(copy));
+      } catch (e) {}
+    });
+  }
+
+  __rewardsVals() {
+    const rwScore = 82;
+    const C = Math.PI * 82;
+    const gaugeDash = (rwScore / 100 * C).toFixed(1) + ' ' + C.toFixed(1);
+    const factors = [
+      { label: 'Diversification', score: 71, w: 71, color: '#C9A227' },
+      { label: 'Contribution regularity', score: 94, w: 94, color: '#159B5A' },
+      { label: 'Staying invested', score: 88, w: 88, color: '#159B5A' },
+    ];
+    const ringC = 2 * Math.PI * 46;
+    const mk = p => (p / 100 * ringC).toFixed(1) + ' ' + ringC.toFixed(1);
+    const rings = [
+      { label: 'Savings target', detail: '$4.8k of $10k', pctLabel: '48%', sub: 'to $10k', color: '#159B5A', dash: mk(48) },
+      { label: 'Target allocation', detail: 'Core vs. 75% goal', pctLabel: '63%', sub: 'on track', color: '#7FA8C9', dash: mk(63) },
+      { label: 'Coast FI number', detail: 'Long horizon', pctLabel: '12%', sub: 'to coast', color: '#C9A227', dash: mk(12) },
+    ];
+    const yearStats = [
+      { label: 'Contributed', value: '$12,000', note: 'across 11 paychecks' },
+      { label: 'Months consistent', value: '11', note: 'one pause, no reset' },
+      { label: 'Milestones earned', value: '3', note: 'quiet wins' },
+      { label: 'Panic sales', value: '0', note: 'the number that counts' },
+    ];
+    const missedWeeks = { 7: true, 15: true };
+    const wkStart = new Date(2026, 0, 5);
+    const fmt = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const weekCells = Array.from({ length: 26 }, (_, i) => {
+      const missed = !!missedWeeks[i];
+      const d = new Date(wkStart.getTime() + i * 7 * 86400000);
+      return {
+        title: 'Week of ' + fmt(d) + (missed ? ' — missed' : ' — contributed'),
+        bg: missed ? '#FBF6E6' : '#159B5A',
+        border: missed ? '#C9A227' : '#159B5A',
+      };
+    });
+    return { rwScore, gaugeDash, factors, rings, yearStats, streakMonths: 6, weekCells };
+  }
+
+  renderVals() { return Object.assign(this.__realVals(), this.__rewardsVals(), this.__sessionVals()); }
+  __realVals() {
+    const st = this.state;
+
+    const riskDefs = [
+      { key: 'conservative', label: 'Conservative', index: 90, indiv: 10, desc: 'Mostly S&P 500 index funds, with a few individual stocks like NVDA or Apple.' },
+      { key: 'balanced', label: 'Balanced', index: 80, indiv: 20, desc: 'A bigger individual-stock sleeve on top of a broad index core.' },
+      { key: 'aggressive', label: 'Aggressive', index: 70, indiv: 30, desc: 'The largest individual-stock sleeve — index funds still anchor it.' },
+    ];
+    const sel = riskDefs.find(r => r.key === st.risk) || riskDefs[0];
+    const riskCards = riskDefs.map(r => {
+      const on = r.key === st.risk;
+      return {
+        label: r.label,
+        mix: r.index + '% index \u00b7 ' + r.indiv + '% individual',
+        desc: r.desc,
+        bg: on ? '#F4FAF6' : '#FFFFFF',
+        border: on ? '2px solid #159B5A' : '1px solid #ECE8DE',
+        pad: on ? '19px 21px' : '20px 22px',
+        dot: on ? '6px solid #159B5A' : '2px solid #D8D3C6',
+        onPick: () => this.save({ risk: r.key }),
+      };
+    });
+
+    const flagMap = {
+      conservative: { bg: '#EAF6EF', border: '#CDE9D9', text: 'Your 90/10 fund-vs-stock split matches this target. The live flag is concentration inside the index sleeve — QQQ is 46% of the account.' },
+      balanced: { bg: '#FBF6E8', border: '#EFE3BD', text: 'An 80/20 target gives individual stocks more room. Your current ~10% individual sits under it — you\u2019d have room to add a name or two.' },
+      aggressive: { bg: '#FBF6E8', border: '#EFE3BD', text: 'A 70/30 target leans hardest into individual stocks. Your ~10% individual is well under it; the index core would still anchor the account.' },
+    };
+    const flag = flagMap[st.risk] || flagMap.conservative;
+
+    const m = Number(String(st.monthly).replace(/[^0-9]/g, '')) || 0;
+    const splitNote = '$' + Math.round(m * 0.6) + ' to FXAIX core \u00b7 $' + Math.round(m * 0.3) + ' to SCHD \u00b7 $' + Math.round(m * 0.1) + ' to individual stocks';
+
+    const chipDefs = [
+      { k: 'index', label: 'Broad index funds' },
+      { k: 'dividends', label: 'Dividend income' },
+      { k: 'singles', label: 'Quality single stocks' },
+      { k: 'tech', label: 'Tech & AI' },
+      { k: 'international', label: 'International & global' },
+      { k: 'smallcap', label: 'Small-cap growth' },
+      { k: 'healthcare', label: 'Healthcare' },
+      { k: 'value', label: 'Value & defensive' },
+      { k: 'reits', label: 'Real estate / REITs' },
+      { k: 'gold', label: 'Gold & commodities' },
+      { k: 'esg', label: 'Sustainable / ESG' },
+      { k: 'bonds', label: 'Bonds (on request)' },
+    ];
+    const chips = chipDefs.map(d => {
+      const on = !!st.interests[d.k];
+      return {
+        label: d.label,
+        bg: on ? '#0E1F2B' : '#FFFFFF',
+        color: on ? '#F7F6F2' : '#4A5560',
+        border: on ? '#0E1F2B' : '#E6E2D8',
+        onToggle: () => this.save({ interests: { ...st.interests, [d.k]: !on } }),
+      };
+    });
+
+    let capNote, capColor;
+    if (st.specCap < 10) {
+      capNote = 'NVDA + HOOD + FIG use 10.0% today — a ' + st.specCap + '% cap trips a flag at tonight\u2019s check.';
+      capColor = '#B4483C';
+    } else if (st.specCap === 10) {
+      capNote = 'NVDA + HOOD + FIG sit exactly at the cap — no room for new single-stock buys until something is sold or the account grows.';
+      capColor = '#6B7480';
+    } else {
+      capNote = 'Room for about $' + Math.round(4844.67 * (st.specCap - 10) / 100) + ' more in individual stocks before the cap.';
+      capColor = '#6B7480';
+    }
+
+    return {
+      name: st.name,
+      initial: (String(st.name).trim().charAt(0) || 'G').toUpperCase(),
+      username: st.username,
+      monthly: st.monthly,
+      cadence: st.cadence,
+      logTime: st.logTime,
+      specCap: st.specCap,
+      savedMsg: st.savedAt ? 'Saved \u2713 · applies at the next nightly check' : 'Changes save automatically',
+      riskCards,
+      indexPct: sel.index,
+      indivPct: sel.indiv,
+      flagBg: flag.bg,
+      flagBorder: flag.border,
+      flagText: flag.text,
+      splitNote,
+      chips,
+      capNote,
+      capColor,
+      driftTrack: st.driftAlert ? '#159B5A' : '#D8D3C6',
+      driftKnob: st.driftAlert ? '19px' : '3px',
+      onDrift: () => this.save({ driftAlert: !st.driftAlert }),
+      onName: (e) => this.save({ name: e.target.value }),
+      onMonthly: (e) => this.save({ monthly: e.target.value.replace(/[^0-9]/g, '') }),
+      onCadence: (e) => this.save({ cadence: e.target.value }),
+      onCap: (e) => this.save({ specCap: Number(e.target.value) }),
+      onLogTime: (e) => this.save({ logTime: e.target.value }),
+    };
+  }
+}
+</script>
+</body>
+</html>

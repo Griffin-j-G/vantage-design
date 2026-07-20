@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;">
+
+  <!-- ============ STICKY NAV ============ -->
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;"><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="width:100%;height:150px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:22px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;"><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="#overview" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="#overview" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="#holdings" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
+        <a href="#performance" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="#income" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Income</a>
+        <a href="#risk" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Risk</a>
+        <a href="#plan" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
+        <a href="#market" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="#dispatches" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Dispatches</a>
+        <a href="#learn" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Learn</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px;" style-hover="background: #EEEBE2;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+        </a>
+        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
+
+    <!-- ============ OVERVIEW ============ -->
+    <section id="overview" data-screen-label="Overview" style="padding: 64px 0 72px; scroll-margin-top: 72px;">
+      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Wednesday, July 2, 2026 · Prepared privately for Griffin</p>
+      <h1 style="margin: 0 0 40px; font-family: Fraunces, serif; font-size: 44px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;">Good morning, Griffin.</h1>
+
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; align-items: stretch;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 8px; font-size: 13px; font-weight: 500; color: #6B7480;">Total portfolio value</p>
+          <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+            <span style="font-family: Fraunces, serif; font-size: 52px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">{{ totalF }}</span>
+            <span style="font-size: 16px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ dayChangeF }} today</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; padding-top: 24px; border-top: 1px solid #F0EDE4;">
+            <div>
+              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">YTD return</p>
+              <p style="margin: 0; font-size: 19px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">+8.7%</p>
+            </div>
+            <div>
+              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Income YTD</p>
+              <p style="margin: 0; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ incomeYtdF }}</p>
+            </div>
+            <div>
+              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Cash reserve</p>
+              <p style="margin: 0; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ cashF }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 16px; font-size: 13px; font-weight: 500; color: #6B7480;">Allocation</p>
+          <div style="display: flex; align-items: center; gap: 28px;">
+            <svg width="150" height="150" viewBox="0 0 180 180" style="flex-shrink: 0;">
+              <g style="transform: rotate(-90deg); transform-origin: 90px 90px;">
+                <sc-for list="{{ allocSegs }}" as="s" hint-placeholder-count="5">
+                  <circle cx="90" cy="90" r="70" fill="none" style="stroke: {{ s.color }}; stroke-width: 26; stroke-dasharray: {{ s.dash }}; stroke-dashoffset: {{ s.offset }};"></circle>
+                </sc-for>
+              </g>
+            </svg>
+            <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+              <sc-for list="{{ allocSegs }}" as="s" hint-placeholder-count="5">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px;">
+                  <span style="width: 9px; height: 9px; border-radius: 3px; background: {{ s.color }}; flex-shrink: 0;"></span>
+                  <span style="color: #4A5560; flex: 1;">{{ s.label }}</span>
+                  <span style="font-weight: 600; font-variant-numeric: tabular-nums;">{{ s.pct }}%</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOLDINGS ============ -->
+    <section id="holdings" data-screen-label="Holdings" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Holdings</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Nine positions across five asset classes. Click a row for cost basis and notes.</p>
+
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 2.4fr 1fr 1fr 1fr 1fr 0.9fr; gap: 12px; padding: 14px 28px; border-bottom: 1px solid #F0EDE4; font-size: 11.5px; font-weight: 600; color: #6B7480; letter-spacing: 0.05em; text-transform: uppercase;">
+          <span>Position</span>
+          <span style="text-align: right;">Price</span>
+          <span style="text-align: right;">Value</span>
+          <span style="text-align: right;">Day</span>
+          <span style="text-align: right;">Total gain</span>
+          <span style="text-align: right;">Weight</span>
+        </div>
+        <sc-for list="{{ holdings }}" as="h" hint-placeholder-count="9">
+          <div style="border-bottom: 1px solid #F5F2EA;">
+            <div onClick="{{ h.toggle }}" style="display: grid; grid-template-columns: 2.4fr 1fr 1fr 1fr 1fr 0.9fr; gap: 12px; align-items: center; padding: 16px 28px; cursor: pointer; background: {{ h.rowBg }};" style-hover="background: #FAF8F2;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span style="transition: transform 0.2s; transform: rotate({{ h.chev }}deg); color: #A9A294; font-size: 10px;">▶</span>
+                <div>
+                  <p style="margin: 0; font-size: 14.5px; font-weight: 600;">{{ h.ticker }}</p>
+                  <p style="margin: 0; font-size: 12px; color: #6B7480;">{{ h.name }}</p>
+                </div>
+              </div>
+              <span style="text-align: right; font-size: 14px; font-variant-numeric: tabular-nums;">{{ h.priceF }}</span>
+              <span style="text-align: right; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ h.valueF }}</span>
+              <span style="text-align: right; font-size: 13.5px; font-weight: 500; font-variant-numeric: tabular-nums; color: {{ h.dayColor }};">{{ h.dayF }}</span>
+              <span style="text-align: right; font-size: 13.5px; font-weight: 500; font-variant-numeric: tabular-nums; color: {{ h.gainColor }};">{{ h.gainF }}</span>
+              <span style="text-align: right; font-size: 13.5px; font-variant-numeric: tabular-nums; color: #4A5560;">{{ h.weightF }}%</span>
+            </div>
+            <sc-if value="{{ h.expanded }}" hint-placeholder-val="{{ false }}">
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr) 2fr; gap: 24px; padding: 18px 28px 22px 66px; background: #FBFAF6; border-top: 1px solid #F0EDE4;">
+                <div>
+                  <p style="margin: 0 0 3px; font-size: 11px; color: #6B7480; text-transform: uppercase; letter-spacing: 0.05em;">Shares</p>
+                  <p style="margin: 0; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ h.shares }}</p>
+                </div>
+                <div>
+                  <p style="margin: 0 0 3px; font-size: 11px; color: #6B7480; text-transform: uppercase; letter-spacing: 0.05em;">Cost basis</p>
+                  <p style="margin: 0; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ h.costF }}</p>
+                </div>
+                <div>
+                  <p style="margin: 0 0 3px; font-size: 11px; color: #6B7480; text-transform: uppercase; letter-spacing: 0.05em;">Unrealized</p>
+                  <p style="margin: 0; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; color: {{ h.gainColor }};">{{ h.unrealF }}</p>
+                </div>
+                <div>
+                  <p style="margin: 0 0 3px; font-size: 11px; color: #6B7480; text-transform: uppercase; letter-spacing: 0.05em;">Yield</p>
+                  <p style="margin: 0; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ h.yieldF }}</p>
+                </div>
+                <div>
+                  <p style="margin: 0 0 3px; font-size: 11px; color: #6B7480; text-transform: uppercase; letter-spacing: 0.05em;">Note</p>
+                  <p style="margin: 0; font-size: 13px; color: #4A5560; line-height: 1.5;">{{ h.note }}</p>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ============ PERFORMANCE ============ -->
+    <section id="performance" data-screen-label="Performance" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; flex-wrap: wrap;">
+        <div>
+          <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Performance</h2>
+          <p style="margin: 0; font-size: 14px; color: #6B7480;">Portfolio value against a 60/40 benchmark.</p>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <sc-for list="{{ rangeBtns }}" as="r" hint-placeholder-count="4">
+            <button onClick="{{ r.onClick }}" style="font-family: Inter, sans-serif; font-size: 12.5px; font-weight: 600; padding: 7px 16px; border-radius: 999px; border: 1px solid {{ r.border }}; background: {{ r.bg }}; color: {{ r.color }}; cursor: pointer;">{{ r.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <div style="display: flex; gap: 32px; margin-bottom: 20px; align-items: baseline;">
+          <div>
+            <p style="margin: 0 0 2px; font-size: 12px; color: #6B7480;">Return over period</p>
+            <p style="margin: 0; font-size: 24px; font-weight: 600; color: {{ perfRetColor }}; font-variant-numeric: tabular-nums;">{{ perfRetF }}</p>
+          </div>
+          <div style="display: flex; gap: 18px; font-size: 12.5px; color: #6B7480; align-items: center;">
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 18px; height: 3px; background: #0E1F2B; border-radius: 2px;"></span>Portfolio</span>
+            <sc-if value="{{ showBenchmark }}" hint-placeholder-val="{{ true }}">
+              <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 18px; height: 0; border-top: 2px dashed #A9A294;"></span>60/40 benchmark</span>
+            </sc-if>
+          </div>
+        </div>
+        <svg width="100%" viewBox="0 0 1000 280" style="display: block; overflow: visible;">
+          <line x1="0" y1="270" x2="1000" y2="270" stroke="#F0EDE4" stroke-width="1"></line>
+          <line x1="0" y1="140" x2="1000" y2="140" stroke="#F0EDE4" stroke-width="1"></line>
+          <line x1="0" y1="10" x2="1000" y2="10" stroke="#F0EDE4" stroke-width="1"></line>
+          <path d="{{ perfArea }}" fill="rgba(21,155,90,0.07)"></path>
+          <sc-if value="{{ showBenchmark }}" hint-placeholder-val="{{ true }}">
+            <path d="{{ benchPath }}" fill="none" stroke="#A9A294" stroke-width="2" stroke-dasharray="6 6"></path>
+          </sc-if>
+          <path d="{{ perfPath }}" fill="none" stroke="#0E1F2B" stroke-width="2.5"></path>
+          <circle cx="1000" cy="{{ perfEndY }}" r="5" fill="#159B5A"></circle>
+        </svg>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11.5px; color: #A9A294; font-variant-numeric: tabular-nums;">
+          <span>{{ perfStartLabel }}</span>
+          <span>Today</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INCOME ============ -->
+    <section id="income" data-screen-label="Income" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Income</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Dividends and interest, trailing twelve months.</p>
+
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px;">
+            <p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B7480;">Monthly income</p>
+            <p style="margin: 0; font-size: 14px; color: #4A5560;">Projected annual: <span style="font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ annualIncomeF }}</span></p>
+          </div>
+          <div style="display: flex; align-items: flex-end; gap: 10px; height: 150px;">
+            <sc-for list="{{ incomeBars }}" as="b" hint-placeholder-count="12">
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;" title="{{ b.valF }}">
+                <span style="font-size: 10.5px; color: #6B7480; font-variant-numeric: tabular-nums;">{{ b.valShort }}</span>
+                <div style="width: 100%; border-radius: 5px 5px 2px 2px; background: {{ b.color }}; height: {{ b.h }}px;"></div>
+                <span style="font-size: 11px; color: #A9A294;">{{ b.m }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 18px; font-size: 13px; font-weight: 500; color: #6B7480;">Upcoming payouts</p>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <sc-for list="{{ payouts }}" as="p" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid #F5F2EA;">
+                <div style="width: 40px; text-align: center; flex-shrink: 0;">
+                  <p style="margin: 0; font-size: 10.5px; color: #A9A294; text-transform: uppercase;">{{ p.mon }}</p>
+                  <p style="margin: 0; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ p.day }}</p>
+                </div>
+                <div style="flex: 1;">
+                  <p style="margin: 0; font-size: 13.5px; font-weight: 600;">{{ p.ticker }}</p>
+                  <p style="margin: 0; font-size: 12px; color: #6B7480;">{{ p.kind }}</p>
+                </div>
+                <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ p.amtF }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RISK ============ -->
+    <section id="risk" data-screen-label="Risk" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Risk</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">How the portfolio behaves when markets don't cooperate.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Beta vs. S&amp;P 500</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">0.91</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Slightly less volatile than the market.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Volatility (1Y)</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">12.4%</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Annualized standard deviation.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Max drawdown (1Y)</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; color: #B4483C; font-variant-numeric: tabular-nums;">−9.8%</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Peak-to-trough, last February.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Single-name exposure</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ singleNameF }}%</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">MSFT, AAPL and NVDA combined.</p>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <p style="margin: 0 0 20px; font-size: 13px; font-weight: 500; color: #6B7480;">Allocation vs. target</p>
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <sc-for list="{{ riskBars }}" as="r" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 130px 1fr 150px; gap: 20px; align-items: center;">
+              <span style="font-size: 13px; font-weight: 500;">{{ r.label }}</span>
+              <div style="position: relative; height: 12px; background: #F0EDE4; border-radius: 6px;">
+                <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: {{ r.color }}; width: {{ r.pct }}%;"></div>
+                <div style="position: absolute; top: -3px; bottom: -3px; width: 2px; background: #0E1F2B; left: {{ r.target }}%;"></div>
+              </div>
+              <span style="font-size: 12.5px; color: #6B7480; text-align: right; font-variant-numeric: tabular-nums;">{{ r.pctF }}% · target {{ r.target }}%</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin: 22px 0 0; font-size: 13px; color: #4A5560; line-height: 1.6; border-top: 1px solid #F0EDE4; padding-top: 18px;">US equity is {{ driftF }} points above target after the spring rally. Directing new contributions to international and bonds would rebalance without selling — see <a href="#plan" style="color: #159B5A; font-weight: 500;">Plan</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ PLAN ============ -->
+    <section id="plan" data-screen-label="Plan" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Plan</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Target: $1.5M by 2044. Adjust the assumptions to see the trajectory.</p>
+
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px;">
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Monthly contribution</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ monthlyF }}</span>
+            </div>
+            <input type="range" min="0" max="5000" step="50" value="{{ monthly }}" onChange="{{ setMonthly }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0</span><span>$5,000</span></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Expected annual return</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ retF }}%</span>
+            </div>
+            <input type="range" min="3" max="11" step="0.5" value="{{ ret }}" onChange="{{ setRet }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>3%</span><span>11%</span></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Years</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ years }} → {{ endYear }}</span>
+            </div>
+            <input type="range" min="5" max="30" step="1" value="{{ years }}" onChange="{{ setYears }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>5</span><span>30</span></div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; justify-content: center; gap: 24px; border-left: 1px solid #F0EDE4; padding-left: 48px;">
+          <div>
+            <p style="margin: 0 0 4px; font-size: 13px; color: #6B7480;">Projected value in {{ endYear }}</p>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 42px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">{{ projF }}</p>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #6B7480; margin-bottom: 8px;">
+              <span>Progress toward $1.5M</span>
+              <span style="font-weight: 600; color: {{ progColor }}; font-variant-numeric: tabular-nums;">{{ progF }}%</span>
+            </div>
+            <div style="height: 14px; background: #F0EDE4; border-radius: 7px; overflow: hidden;">
+              <div style="height: 100%; background: {{ progColor }}; border-radius: 7px; transition: width 0.3s; width: {{ progW }}%;"></div>
+            </div>
+          </div>
+          <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.6;">{{ planVerdict }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARKET ============ -->
+    <section id="market" data-screen-label="Market" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Market</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Context, not noise. As of this morning's open.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+        <div style="background: #0E1F2B; border-radius: 14px; padding: 24px 28px; color: #F7F6F2;">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">S&amp;P 500</p>
+          <p style="margin: 0; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums;">6,482.11</p>
+          <p style="margin: 6px 0 0; font-size: 13px; font-weight: 500; color: #3FBF7F; font-variant-numeric: tabular-nums;">+0.42%</p>
+        </div>
+        <div style="background: #0E1F2B; border-radius: 14px; padding: 24px 28px; color: #F7F6F2;">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">Nasdaq</p>
+          <p style="margin: 0; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums;">21,904.55</p>
+          <p style="margin: 6px 0 0; font-size: 13px; font-weight: 500; color: #3FBF7F; font-variant-numeric: tabular-nums;">+0.67%</p>
+        </div>
+        <div style="background: #0E1F2B; border-radius: 14px; padding: 24px 28px; color: #F7F6F2;">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">10Y Treasury</p>
+          <p style="margin: 0; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums;">4.11%</p>
+          <p style="margin: 6px 0 0; font-size: 13px; font-weight: 500; color: #E08578; font-variant-numeric: tabular-nums;">+3 bps</p>
+        </div>
+        <div style="background: #0E1F2B; border-radius: 14px; padding: 24px 28px; color: #F7F6F2;">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">VIX</p>
+          <p style="margin: 0; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums;">13.9</p>
+          <p style="margin: 6px 0 0; font-size: 13px; font-weight: 500; color: #3FBF7F; font-variant-numeric: tabular-nums;">−0.8</p>
+        </div>
+      </div>
+      <p style="margin: 20px 0 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; max-width: 720px;">Quiet tape ahead of Friday's jobs report. Rate-cut odds for September are holding near 70%, which has kept both bonds and dividend payers bid. Nothing here changes the plan.</p>
+    </section>
+
+    <!-- ============ DISPATCHES ============ -->
+    <section id="dispatches" data-screen-label="Dispatches" style="padding: 0 0 88px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Dispatches</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Occasional notes on what changed and why. Written for one reader.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+          <button onClick="{{ toggleD1 }}" style="width: 100%; display: flex; align-items: center; gap: 20px; padding: 22px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif;">
+            <span style="font-size: 12px; color: #A9A294; font-variant-numeric: tabular-nums; width: 68px; flex-shrink: 0;">Jun 28</span>
+            <span style="flex: 1; font-family: Fraunces, serif; font-size: 19px; font-weight: 500; color: #0E1F2B;">The quiet case for doing nothing this summer</span>
+            <span style="color: #A9A294; font-size: 18px;">{{ d1Icon }}</span>
+          </button>
+          <sc-if value="{{ d1Open }}" hint-placeholder-val="{{ true }}">
+            <div style="padding: 0 28px 26px 116px; font-size: 14.5px; color: #4A5560; line-height: 1.75; max-width: 780px;">
+              <p style="margin: 0 0 12px;">The portfolio is up 8.7% on the year and every position is doing roughly what it was hired to do. The temptation in stretches like this is to tinker — trim NVDA, chase something newer. Resist it. The single biggest driver of long-run results in this account is time in market, not adjustments.</p>
+              <p style="margin: 0;">The one exception worth acting on: US equity has drifted 4 points above target. New contributions are already routed to VXUS and BND to close the gap by October without triggering a taxable sale.</p>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+          <button onClick="{{ toggleD2 }}" style="width: 100%; display: flex; align-items: center; gap: 20px; padding: 22px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif;">
+            <span style="font-size: 12px; color: #A9A294; font-variant-numeric: tabular-nums; width: 68px; flex-shrink: 0;">Jun 14</span>
+            <span style="flex: 1; font-family: Fraunces, serif; font-size: 19px; font-weight: 500; color: #0E1F2B;">SCHD's raise, and what the income sleeve is actually for</span>
+            <span style="color: #A9A294; font-size: 18px;">{{ d2Icon }}</span>
+          </button>
+          <sc-if value="{{ d2Open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 0 28px 26px 116px; font-size: 14.5px; color: #4A5560; line-height: 1.75; max-width: 780px;">
+              <p style="margin: 0;">SCHD lifted its quarterly distribution 9% year over year, which pushes projected annual income past $11,600. The point of this sleeve was never yield-chasing — it's a stream that grows through drawdowns so the plan never depends on selling shares at a bad moment. It's doing that.</p>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+          <button onClick="{{ toggleD3 }}" style="width: 100%; display: flex; align-items: center; gap: 20px; padding: 22px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif;">
+            <span style="font-size: 12px; color: #A9A294; font-variant-numeric: tabular-nums; width: 68px; flex-shrink: 0;">May 30</span>
+            <span style="flex: 1; font-family: Fraunces, serif; font-size: 19px; font-weight: 500; color: #0E1F2B;">February's drawdown, revisited with the benefit of hindsight</span>
+            <span style="color: #A9A294; font-size: 18px;">{{ d3Icon }}</span>
+          </button>
+          <sc-if value="{{ d3Open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 0 28px 26px 116px; font-size: 14.5px; color: #4A5560; line-height: 1.75; max-width: 780px;">
+              <p style="margin: 0;">The portfolio fell 9.8% peak-to-trough in February and recovered fully by mid-April. Two things worked: the bond sleeve gained while equities fell, and contributions kept buying through the bottom. The lesson isn't that drawdowns are painless — it's that the account is built so you never have to act during one.</p>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LEARN ============ -->
+    <section id="learn" data-screen-label="Learn" style="padding: 0 0 96px; scroll-margin-top: 72px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Learn</h2>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Short answers to questions this portfolio actually raises.</p>
+
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+        <div style="border-bottom: 1px solid #F0EDE4;">
+          <button onClick="{{ toggleL1 }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #0E1F2B;">
+            Why hold bonds at all when stocks return more?
+            <span style="color: #A9A294; font-size: 18px; flex-shrink: 0;">{{ l1Icon }}</span>
+          </button>
+          <sc-if value="{{ l1Open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 720px;">Bonds aren't in the portfolio to maximize return — they're there so February-style drawdowns are −10% instead of −18%, and so there's dry powder to rebalance with. The cost is a bit of upside; the payment is being able to stay invested.</p>
+          </sc-if>
+        </div>
+        <div style="border-bottom: 1px solid #F0EDE4;">
+          <button onClick="{{ toggleL2 }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #0E1F2B;">
+            What does rebalancing with contributions mean?
+            <span style="color: #A9A294; font-size: 18px; flex-shrink: 0;">{{ l2Icon }}</span>
+          </button>
+          <sc-if value="{{ l2Open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 720px;">Instead of selling winners (and paying capital gains tax) to restore target weights, new money is directed to whatever is underweight. It's slower than selling, but in a taxable account it's usually worth the wait.</p>
+          </sc-if>
+        </div>
+        <div style="border-bottom: 1px solid #F0EDE4;">
+          <button onClick="{{ toggleL3 }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #0E1F2B;">
+            How are the dividends taxed?
+            <span style="color: #A9A294; font-size: 18px; flex-shrink: 0;">{{ l3Icon }}</span>
+          </button>
+          <sc-if value="{{ l3Open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 720px;">Most of the equity dividends (VTI, SCHD, MSFT, AAPL) are qualified — taxed at the lower capital-gains rate. BND's interest and SGOV's Treasury income are ordinary income, though SGOV is exempt from state tax. VNQ's distributions are mostly ordinary, which is why REIT exposure is kept modest in a taxable account.</p>
+          </sc-if>
+        </div>
+        <div>
+          <button onClick="{{ toggleL4 }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #0E1F2B;">
+            Is 24% in three tech names too concentrated?
+            <span style="color: #A9A294; font-size: 18px; flex-shrink: 0;">{{ l4Icon }}</span>
+          </button>
+          <sc-if value="{{ l4Open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 720px;">It's at the high end of comfortable. The working rule for this account: no single name above 12%, the three combined below 25%. NVDA crossing 6% of the portfolio would trigger a trim under those rules — it's at 5.3% today.</p>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for Griffin. Not shared, not shareable.</span>
+      <span>Figures as of Jul 2, 2026 open · Not investment advice</span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {},
+  &quot;privacyMode&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Display&quot; },
+  &quot;holdingsSort&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;value&quot;, &quot;gain&quot;, &quot;day&quot;], &quot;default&quot;: &quot;value&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Display&quot; },
+  &quot;showBenchmark&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Performance&quot; }
+}">
+class Component extends DCLogic {
+  __sessionVals() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); }
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var userName = (s && s.name) || 'Griffin';
+    return {
+      userName: userName,
+      userInitial: (userName.charAt(0) || 'G').toUpperCase(),
+      userAccount: (s && s.account) || 'PD-08842',
+      onLogout: () => {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+    };
+  }
+  state = {
+    expanded: null,
+    range: '1Y',
+    d1: true, d2: false, d3: false,
+    l1: false, l2: false, l3: false, l4: false,
+    monthly: 1500, ret: 7, years: 18,
+  };
+
+  data() {
+    return [
+      { ticker: 'VTI',  name: 'Vanguard Total Stock Market ETF', cls: 'US Equity', shares: 412, price: 289.14, cost: 96410, day: 0.51, yield: 1.28, note: 'Core of the portfolio. Bought steadily since 2019; never sold a share.' },
+      { ticker: 'SCHD', name: 'Schwab US Dividend Equity ETF', cls: 'US Equity', shares: 780, price: 82.31, cost: 54912, day: 0.22, yield: 3.42, note: 'The income sleeve. Distributions reinvested automatically each quarter.' },
+      { ticker: 'MSFT', name: 'Microsoft Corporation', cls: 'US Equity', shares: 96, price: 512.40, cost: 26430, day: 0.84, yield: 0.68, note: 'Held since 2018. Largest single-name position; capped at 12% by rule.' },
+      { ticker: 'AAPL', name: 'Apple Inc.', cls: 'US Equity', shares: 210, price: 231.70, cost: 30140, day: -0.31, yield: 0.44, note: 'Legacy position from RSU-era purchases. No new adds planned.' },
+      { ticker: 'NVDA', name: 'NVIDIA Corporation', cls: 'US Equity', shares: 180, price: 142.80, cost: 8964, day: 1.62, yield: 0.03, note: 'Trim triggers at 6% of portfolio per concentration rules. Currently 5.3%.' },
+      { ticker: 'VXUS', name: 'Vanguard Total International ETF', cls: 'International', shares: 620, price: 68.94, cost: 38560, day: 0.18, yield: 3.05, note: 'Underweight vs. target — new contributions routed here through October.' },
+      { ticker: 'BND',  name: 'Vanguard Total Bond Market ETF', cls: 'Bonds', shares: 540, price: 73.85, cost: 40120, day: -0.09, yield: 4.21, note: 'The ballast. Gained through February while equities fell.' },
+      { ticker: 'VNQ',  name: 'Vanguard Real Estate ETF', cls: 'Real Estate', shares: 310, price: 92.60, cost: 26890, day: 0.40, yield: 3.88, note: 'Kept modest in this taxable account — distributions are mostly ordinary income.' },
+      { ticker: 'SGOV', name: 'iShares 0-3 Month Treasury ETF', cls: 'Cash', shares: 685, price: 100.42, cost: 68500, day: 0.01, yield: 5.02, note: 'Emergency fund plus dry powder. State-tax exempt Treasury income.' },
+    ];
+  }
+
+  fmt(n, opts) {
+    if (this.props.privacyMode ?? false) return '$••••••';
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+  fmtSigned(n) {
+    if (this.props.privacyMode ?? false) return '+$•••';
+    const s = n >= 0 ? '+' : '−';
+    return s + '$' + Math.abs(Math.round(n)).toLocaleString('en-US');
+  }
+
+  series(range, total) {
+    const cfg = {
+      '1M':  { n: 22, start: total * 0.982, vol: 2400,  seed: 11 },
+      '6M':  { n: 26, start: total * 0.930, vol: 5200,  seed: 23 },
+      '1Y':  { n: 26, start: total * 0.878, vol: 7200,  seed: 37 },
+      'All': { n: 30, start: total * 0.44,  vol: 11000, seed: 51 },
+    }[range];
+    let s = cfg.seed, v = cfg.start;
+    const drift = (total - cfg.start) / cfg.n;
+    const pts = [v];
+    for (let i = 1; i < cfg.n; i++) {
+      s = (s * 9301 + 49297) % 233280;
+      let dip = (range === '1Y' && i > 14 && i < 18) ? -3200 : 0;
+      v += drift + (s / 233280 - 0.48) * cfg.vol * 2 + dip;
+      pts.push(v);
+    }
+    // Scale the walk so it converges exactly to `total` without a cliff
+    const endErr = total - pts[pts.length - 1];
+    return pts.map((v, i) => v + endErr * (i / (pts.length - 1)));
+  }
+
+  toPath(pts, W, H) {
+    const min = Math.min(...pts), max = Math.max(...pts);
+    const pad = (max - min) * 0.08 || 1;
+    const y = v => 270 - ((v - min + pad) / (max - min + 2 * pad)) * 260;
+    const x = i => (i / (pts.length - 1)) * 1000;
+    return { d: pts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' '), endY: y(pts[pts.length - 1]) };
+  }
+
+  renderVals() { return Object.assign(this.__realVals(), this.__sessionVals()); }
+  __realVals() {
+    const H = this.data();
+    const total = H.reduce((a, h) => a + h.shares * h.price, 0);
+    const dayChange = H.reduce((a, h) => a + h.shares * h.price * h.day / 100, 0);
+    const priv = this.props.privacyMode ?? false;
+
+    // Holdings rows (sortable via prop)
+    const sortKey = this.props.holdingsSort ?? 'value';
+    const rows = H.map(h => {
+      const value = h.shares * h.price;
+      const gainPct = (value - h.cost) / h.cost * 100;
+      return { ...h, value, gainPct };
+    }).sort((a, b) => sortKey === 'day' ? b.day - a.day : sortKey === 'gain' ? b.gainPct - a.gainPct : b.value - a.value);
+
+    const holdings = rows.map(h => {
+      const expanded = this.state.expanded === h.ticker;
+      return {
+        ticker: h.ticker, name: h.name, shares: h.shares.toLocaleString(),
+        priceF: '$' + h.price.toFixed(2),
+        valueF: this.fmt(h.value),
+        costF: this.fmt(h.cost),
+        unrealF: this.fmtSigned(h.value - h.cost),
+        dayF: (h.day >= 0 ? '+' : '−') + Math.abs(h.day).toFixed(2) + '%',
+        dayColor: h.day >= 0 ? '#159B5A' : '#B4483C',
+        gainF: (h.gainPct >= 0 ? '+' : '−') + Math.abs(h.gainPct).toFixed(1) + '%',
+        gainColor: h.gainPct >= 0 ? '#159B5A' : '#B4483C',
+        weightF: (h.value / total * 100).toFixed(1),
+        yieldF: h.yield.toFixed(2) + '%',
+        note: h.note,
+        expanded,
+        chev: expanded ? 90 : 0,
+        rowBg: expanded ? '#FBFAF6' : 'transparent',
+        toggle: () => this.setState(s => ({ expanded: s.expanded === h.ticker ? null : h.ticker })),
+      };
+    });
+
+    // Allocation donut
+    const classes = [
+      { label: 'US Equity', color: '#0E1F2B' },
+      { label: 'International', color: '#159B5A' },
+      { label: 'Bonds', color: '#7FA8C9' },
+      { label: 'Real Estate', color: '#C9A227' },
+      { label: 'Cash', color: '#CFC9BB' },
+    ];
+    const C = 2 * Math.PI * 70;
+    let acc = 0;
+    const allocSegs = classes.map(c => {
+      const v = H.filter(h => h.cls === c.label).reduce((a, h) => a + h.shares * h.price, 0);
+      const frac = v / total;
+      const seg = { ...c, pct: (frac * 100).toFixed(1), dash: (frac * C - 3).toFixed(1) + ' ' + (C - frac * C + 3).toFixed(1), offset: (-acc * C).toFixed(1), frac };
+      acc += frac;
+      return seg;
+    });
+
+    // Performance
+    const range = this.state.range;
+    const pts = this.series(range, total);
+    const { d: perfPath, endY: perfEndY } = this.toPath(pts);
+    const perfArea = perfPath + ' L1000 270 L0 270 Z';
+    const bench = pts.map((v, i) => pts[0] + (v - pts[0]) * 0.68 + Math.sin(i * 1.3) * 1800);
+    bench[0] = pts[0];
+    const benchPath = this.toPath(pts.concat(bench)).d ? this.toPathWith(bench, pts) : '';
+    const ret = (pts[pts.length - 1] - pts[0]) / pts[0] * 100;
+    const rangeBtns = ['1M', '6M', '1Y', 'All'].map(r => ({
+      label: r,
+      onClick: () => this.setState({ range: r }),
+      bg: r === range ? '#0E1F2B' : '#FFFFFF',
+      color: r === range ? '#F7F6F2' : '#4A5560',
+      border: r === range ? '#0E1F2B' : '#E1DCCF',
+    }));
+    const startLabels = { '1M': 'Jun 2, 2026', '6M': 'Jan 2, 2026', '1Y': 'Jul 2, 2025', 'All': 'Jan 2019' };
+
+    // Income
+    const months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+    const vals = [612, 1184, 688, 594, 1471, 634, 598, 1226, 671, 612, 1288, 702];
+    const maxV = Math.max(...vals);
+    const incomeBars = months.map((m, i) => ({
+      m,
+      h: Math.round(vals[i] / maxV * 110) + 8,
+      color: i >= 9 ? '#159B5A' : '#BFD9CB',
+      valShort: priv ? '•••' : '$' + vals[i].toLocaleString(),
+      valF: priv ? '•••' : '$' + vals[i],
+    }));
+    const annualIncome = 11640;
+    const payouts = [
+      { mon: 'Jul', day: '7',  ticker: 'SGOV', kind: 'Monthly interest', amt: 287 },
+      { mon: 'Jul', day: '10', ticker: 'BND',  kind: 'Monthly interest', amt: 141 },
+      { mon: 'Jul', day: '24', ticker: 'VNQ',  kind: 'Quarterly dividend', amt: 278 },
+      { mon: 'Sep', day: '25', ticker: 'SCHD', kind: 'Quarterly dividend', amt: 549 },
+      { mon: 'Sep', day: '29', ticker: 'VTI',  kind: 'Quarterly dividend', amt: 381 },
+    ].map(p => ({ ...p, amtF: priv ? '$•••' : '$' + p.amt }));
+
+    // Risk
+    const targets = { 'US Equity': 58, 'International': 15, 'Bonds': 10, 'Real Estate': 5, 'Cash': 12 };
+    const riskBars = allocSegs.map(s => ({
+      label: s.label, color: s.color,
+      pct: (s.frac * 100).toFixed(1), pctF: (s.frac * 100).toFixed(1),
+      target: targets[s.label],
+    }));
+    const usFrac = allocSegs[0].frac * 100;
+    const singleName = H.filter(h => ['MSFT', 'AAPL', 'NVDA'].includes(h.ticker)).reduce((a, h) => a + h.shares * h.price, 0) / total * 100;
+
+    // Plan
+    const { monthly, years } = this.state;
+    const r = this.state.ret / 100;
+    const n = years;
+    const proj = total * Math.pow(1 + r, n) + monthly * 12 * (Math.pow(1 + r, n) - 1) / (r || 0.0001);
+    const prog = proj / 1500000 * 100;
+    const onTrack = prog >= 100;
+    const planVerdict = onTrack
+      ? 'On track. At these assumptions the target is reached with room to spare — the plan survives a couple of bad years.'
+      : 'Short of target at these assumptions. Raising the monthly contribution or extending the horizon closes the gap; counting on higher returns does not.';
+
+    return {
+      totalF: this.fmt(total),
+      dayChangeF: this.fmtSigned(dayChange),
+      incomeYtdF: priv ? '$••••' : '$5,842',
+      cashF: this.fmt(68788),
+      allocSegs, holdings,
+      // performance
+      rangeBtns, perfPath, perfArea, benchPath, perfEndY: perfEndY.toFixed(1),
+      perfRetF: (ret >= 0 ? '+' : '−') + Math.abs(ret).toFixed(1) + '%',
+      perfRetColor: ret >= 0 ? '#159B5A' : '#B4483C',
+      perfStartLabel: startLabels[range],
+      showBenchmark: this.props.showBenchmark ?? true,
+      // income
+      incomeBars, payouts,
+      annualIncomeF: priv ? '$••,•••' : '$' + annualIncome.toLocaleString(),
+      // risk
+      riskBars,
+      singleNameF: singleName.toFixed(1),
+      driftF: (usFrac - 58).toFixed(1),
+      // plan
+      monthly, years, ret: this.state.ret,
+      monthlyF: priv ? '$•,•••' : '$' + monthly.toLocaleString(),
+      retF: this.state.ret.toFixed(1),
+      endYear: 2026 + years,
+      projF: this.fmt(proj),
+      progF: Math.min(999, prog).toFixed(0),
+      progW: Math.min(100, prog).toFixed(1),
+      progColor: onTrack ? '#159B5A' : '#C9A227',
+      planVerdict,
+      setMonthly: e => this.setState({ monthly: +e.target.value }),
+      setRet: e => this.setState({ ret: +e.target.value }),
+      setYears: e => this.setState({ years: +e.target.value }),
+      // dispatches + learn
+      d1Open: this.state.d1, d2Open: this.state.d2, d3Open: this.state.d3,
+      d1Icon: this.state.d1 ? '−' : '+', d2Icon: this.state.d2 ? '−' : '+', d3Icon: this.state.d3 ? '−' : '+',
+      toggleD1: () => this.setState(s => ({ d1: !s.d1 })),
+      toggleD2: () => this.setState(s => ({ d2: !s.d2 })),
+      toggleD3: () => this.setState(s => ({ d3: !s.d3 })),
+      l1Open: this.state.l1, l2Open: this.state.l2, l3Open: this.state.l3, l4Open: this.state.l4,
+      l1Icon: this.state.l1 ? '−' : '+', l2Icon: this.state.l2 ? '−' : '+', l3Icon: this.state.l3 ? '−' : '+', l4Icon: this.state.l4 ? '−' : '+',
+      toggleL1: () => this.setState(s => ({ l1: !s.l1 })),
+      toggleL2: () => this.setState(s => ({ l2: !s.l2 })),
+      toggleL3: () => this.setState(s => ({ l3: !s.l3 })),
+      toggleL4: () => this.setState(s => ({ l4: !s.l4 })),
+    };
+  }
+
+  toPathWith(pts, ref) {
+    const all = ref;
+    const min = Math.min(...all), max = Math.max(...all);
+    const pad = (max - min) * 0.08 || 1;
+    const y = v => 270 - ((v - min + pad) / (max - min + 2 * pad)) * 260;
+    const x = i => (i / (pts.length - 1)) * 1000;
+    return pts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + Math.max(5, Math.min(275, y(v))).toFixed(1)).join(' ');
+  }
+}
+</script>
+</body>
+</html>

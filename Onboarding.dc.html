@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+    a { color: #159B5A; }
+    a:hover { color: #0E1F2B; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 48px 24px; box-sizing: border-box;" data-screen-label="Onboarding">
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;display:flex;align-items:center;justify-content:center;padding:40px 24px;box-sizing:border-box;">
+    <div style="width:100%;max-width:560px;display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;"><div style="width:210px;height:28px;border-radius:8px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:300px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="width:100%;height:380px;border-radius:16px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+    </div>
+  </div>
+  
+
+  <div style="width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 28px;">
+
+    <!-- HEADER -->
+    <div style="text-align: center;">
+      <p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; color: #159B5A; letter-spacing: 0.08em; text-transform: uppercase;">Welcome, {{ firstName }} · {{ userAccount }}</p>
+      <h1 style="margin: 0 0 8px; font-family: Fraunces, serif; font-size: 30px; font-weight: 600; letter-spacing: -0.015em;">Let&rsquo;s set up your dispatch</h1>
+      <p style="margin: 0; font-size: 14px; color: #6B7480; line-height: 1.6;">A few questions so the nightly checks, screening, and projections fit you. You can change any of it later on your profile.</p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 7px;">
+          <div style="height: 4px; border-radius: 999px; background: {{ s.barColor }};"></div>
+          <span style="font-size: 11px; font-weight: 500; color: {{ s.labelColor }};">{{ s.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- CARD -->
+    <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 16px; padding: 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); min-height: 300px; display: flex; flex-direction: column;">
+
+      <!-- STEP 1: RISK -->
+      <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+          <h2 style="margin: 0; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">How much do you want in individual stocks?</h2>
+          <p style="margin: 0 0 18px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">This sets your index-fund / individual-stock target &mdash; the split every check measures against. Bonds aren&rsquo;t part of it by default; you can request them later as ballast.</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <sc-for list="{{ riskCards }}" as="r" hint-placeholder-count="4">
+              <div onClick="{{ r.onPick }}" style="cursor: pointer; background: {{ r.bg }}; border: {{ r.border }}; border-radius: 12px; padding: {{ r.pad }}; display: flex; align-items: center; gap: 16px;">
+                <span style="width: 20px; height: 20px; border-radius: 50%; border: {{ r.dot }}; background: #FFFFFF; box-sizing: border-box; flex-shrink: 0;"></span>
+                <div style="display: flex; flex-direction: column; gap: 3px; flex: 1;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+                    <span style="font-family: Fraunces, serif; font-size: 17px; font-weight: 600;">{{ r.label }}</span>
+                    <span style="font-size: 12.5px; font-weight: 600; color: #0E1F2B; font-variant-numeric: tabular-nums;">{{ r.mix }}</span>
+                  </div>
+                  <span style="font-size: 12.5px; color: #6B7480; line-height: 1.55;">{{ r.desc }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top: 14px; background: #F4FAF6; border: 1px solid #CDE9D9; border-radius: 12px; padding: 18px 20px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <label style="font-size: 13px; font-weight: 600;">Individual stocks</label>
+                <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ customIndiv }}%</span>
+              </div>
+              <input type="range" min="0" max="100" step="1" value="{{ customIndiv }}" onChange="{{ onCustom }}" style="width: 100%; accent-color: #159B5A; cursor: pointer;">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>0% &mdash; all index funds</span><span>100% &mdash; all individual</span></div>
+              <p style="margin: 10px 0 0; font-size: 12.5px; color: #6B7480;">{{ customIndexPct }}% index funds &middot; {{ customIndiv }}% individual stocks.</p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- STEP 2: PORTFOLIO -->
+      <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+          <h2 style="margin: 0; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">What does your portfolio look like now?</h2>
+          <p style="margin: 0 0 18px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Add what you already hold and roughly how much &mdash; the agent tags each as a fund or an individual stock for you. Starting from scratch? Leave the rows blank and skip ahead.</p>
+
+          <div style="display: grid; grid-template-columns: 1.7fr 1fr 28px; gap: 8px; margin-bottom: 8px; font-size: 11px; font-weight: 600; color: #A9A294; letter-spacing: 0.04em; text-transform: uppercase;">
+            <span>Ticker / name</span>
+            <span style="text-align: right;">Value</span>
+            <span></span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ posRows }}" as="p" hint-placeholder-count="3">
+              <div style="display: grid; grid-template-columns: 1.7fr 1fr 28px; gap: 8px; align-items: center;">
+                <input type="text" value="{{ p.ticker }}" onChange="{{ p.onTicker }}" placeholder="e.g. VOO" style="font-family: inherit; font-size: 13.5px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 11px; outline: none; min-width: 0;" style-focus="border-color: #159B5A;">
+                <div style="display: flex; align-items: center; border: 1px solid #E6E2D8; border-radius: 8px; overflow: hidden;">
+                  <span style="padding: 10px 0 10px 10px; font-size: 13px; color: #A9A294;">$</span>
+                  <input type="text" value="{{ p.amount }}" onChange="{{ p.onAmount }}" placeholder="0" style="font-family: inherit; font-size: 13.5px; color: #0E1F2B; border: none; padding: 10px 8px 10px 4px; outline: none; width: 100%; text-align: right; font-variant-numeric: tabular-nums; min-width: 0;">
+                </div>
+                <button onClick="{{ p.onRemove }}" title="Remove" style="font-family: inherit; font-size: 16px; color: #C0B9AA; background: none; border: none; cursor: pointer; padding: 4px; line-height: 1;" style-hover="color: #B4483C;">&times;</button>
+              </div>
+            </sc-for>
+          </div>
+
+          <button onClick="{{ onAddPos }}" style="align-self: flex-start; margin-top: 14px; font-family: inherit; font-size: 13px; font-weight: 600; color: #159B5A; background: none; border: 1px dashed #CDE0D4; border-radius: 8px; padding: 9px 16px; cursor: pointer;" style-hover="background: #F4FAF6; border-color: #159B5A;">+ Add holding</button>
+
+          <div style="margin-top: 20px; padding-top: 18px; border-top: 1px solid #F0EDE4;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+              <span style="font-size: 13px; font-weight: 600;">Total entered</span>
+              <span style="font-family: Fraunces, serif; font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ posTotalF }}</span>
+            </div>
+            <sc-if value="{{ hasPositions }}" hint-placeholder-val="{{ false }}">
+              <div>
+                <div style="display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px;">
+                  <div style="width: {{ posIndexPct }}%; background: #0E1F2B; transition: width 0.2s;"></div>
+                  <div style="width: {{ posIndivPct }}%; background: #C9A227; transition: width 0.2s;"></div>
+                </div>
+                <p style="margin: 10px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.55;">{{ posVerdict }}</p>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- STEP 3: CONTRIBUTIONS -->
+      <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+          <h2 style="margin: 0; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">What are you adding each payday?</h2>
+          <p style="margin: 0 0 20px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Used to size your suggested split and project growth on the Plan page.</p>
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Amount per paycheck</label>
+              <div style="display: flex; align-items: center; border: 1px solid #E6E2D8; border-radius: 8px; overflow: hidden;">
+                <span style="padding: 12px 0 12px 14px; font-size: 14px; color: #A9A294;">$</span>
+                <input type="text" value="{{ monthly }}" onChange="{{ onMonthly }}" placeholder="1000" style="font-family: inherit; font-size: 14px; color: #0E1F2B; border: none; padding: 12px 14px 12px 6px; outline: none; flex: 1; font-variant-numeric: tabular-nums; min-width: 0;">
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Payday cadence</label>
+              <div style="display: flex; gap: 8px;">
+                <sc-for list="{{ cadenceOpts }}" as="c" hint-placeholder-count="3">
+                  <button onClick="{{ c.onPick }}" style="flex: 1; font-family: inherit; font-size: 12.5px; font-weight: 500; padding: 11px 8px; border-radius: 9px; border: {{ c.border }}; background: {{ c.bg }}; color: {{ c.color }}; cursor: pointer;">{{ c.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- STEP 4: GOALS -->
+      <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+          <h2 style="margin: 0; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">What are you working toward?</h2>
+          <p style="margin: 0 0 18px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">These shape the projections on Plan and the milestones Atlas tracks. Set your long-term target below, then flag any nearer-term goals you want kept in view.</p>
+
+          <p style="margin: 0 0 10px; font-size: 12.5px; font-weight: 600; color: #6B7480;">Your Coast number</p>
+          <div style="background: #FBFAF6; border: 1px solid #ECE8DE; border-radius: 12px; padding: 20px 22px; display: flex; flex-direction: column; gap: 18px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label style="font-size: 12.5px; font-weight: 600; color: #0E1F2B;">Income you&rsquo;d want each year in retirement</label>
+              <div style="display: flex; align-items: center; border: 1px solid #E6E2D8; border-radius: 8px; overflow: hidden; background: #FFFFFF;">
+                <span style="padding: 12px 0 12px 14px; font-size: 14px; color: #A9A294;">$</span>
+                <input type="text" value="{{ annualSpend }}" onChange="{{ onAnnual }}" placeholder="60,000" style="font-family: inherit; font-size: 14px; color: #0E1F2B; border: none; padding: 12px 14px 12px 6px; outline: none; flex: 1; font-variant-numeric: tabular-nums; min-width: 0;">
+                <span style="padding: 12px 14px 12px 0; font-size: 13px; color: #A9A294; white-space: nowrap;">/ year</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <label style="font-size: 12.5px; font-weight: 600; color: #0E1F2B;">Coast by</label>
+                <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ coastYear }}</span>
+              </div>
+              <input type="range" min="2030" max="2058" step="1" value="{{ coastYear }}" onChange="{{ onCoastYear }}" style="width: 100%; accent-color: #159B5A; cursor: pointer;">
+              <span style="font-size: 11.5px; color: #A9A294; line-height: 1.5;">The year you&rsquo;d like to stop <em>having</em> to contribute.</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <label style="font-size: 12.5px; font-weight: 600; color: #0E1F2B;">Retire in</label>
+                <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ retireYear }}</span>
+              </div>
+              <input type="range" min="2035" max="2075" step="1" value="{{ retireYear }}" onChange="{{ onRetireYear }}" style="width: 100%; accent-color: #159B5A; cursor: pointer;">
+              <span style="font-size: 11.5px; color: #A9A294; line-height: 1.5;">When you&rsquo;d actually start drawing an income.</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; background: #0E1F2B; border-radius: 14px; padding: 24px 26px; color: #F7F6F2;">
+            <p style="margin: 0 0 4px; font-size: 12px; font-weight: 600; color: #3FBF7F; letter-spacing: 0.06em; text-transform: uppercase;">Your coast number</p>
+            <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+              <span style="font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.01em; font-variant-numeric: tabular-nums;">{{ coastNumberF }}</span>
+              <span style="font-size: 14px; color: #9AA7B1;">by {{ coastYear }}</span>
+            </div>
+            <p style="margin: 8px 0 0; font-size: 13px; color: #D9DEE2; line-height: 1.6;">Hit this and you could stop contributing &mdash; left alone at ~7%/yr it reaches <strong style="color: #F7F6F2;">{{ targetF }}</strong> by {{ retireYear }}, enough to draw <strong style="color: #F7F6F2;">{{ annualSpendF }}/yr</strong>. A guide, not a guarantee.</p>
+          </div>
+
+          <p style="margin: 24px 0 4px; font-size: 12.5px; font-weight: 600; color: #6B7480;">Other goals to track</p>
+          <p style="margin: 0 0 12px; font-size: 12.5px; color: #A9A294; line-height: 1.5;">Nearer-term milestones Atlas keeps an eye on alongside your Coast number. Tap any that apply.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <sc-for list="{{ goalCards }}" as="g" hint-placeholder-count="5">
+              <button onClick="{{ g.onToggle }}" style="text-align: left; font-family: inherit; display: flex; gap: 11px; align-items: flex-start; padding: 13px 15px; border-radius: 11px; border: 1px solid {{ g.border }}; background: {{ g.bg }}; cursor: pointer;">
+                <span style="flex-shrink: 0; margin-top: 1px; width: 17px; height: 17px; border-radius: 5px; border: 1.5px solid {{ g.dotBorder }}; background: {{ g.dot }}; display: flex; align-items: center; justify-content: center;">
+                  <span style="color: #FFFFFF; font-size: 11px; line-height: 1; opacity: {{ g.check }};">&#10003;</span>
+                </span>
+                <span style="display: flex; flex-direction: column; gap: 3px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #0E1F2B;">{{ g.label }}</span>
+                  <span style="font-size: 11.5px; color: #7A8390; line-height: 1.45;">{{ g.desc }}</span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <p style="margin: 0 0 8px; font-size: 12.5px; font-weight: 600; color: #6B7480;">Have a goal of your own?</p>
+            <div style="display: flex; gap: 8px; max-width: 460px;">
+              <input value="{{ customGoalDraft }}" onInput="{{ onCustomGoalDraft }}" onKeyDown="{{ onCustomGoalKey }}" placeholder="e.g. Pay off student loans, sabbatical fund&hellip;" style="flex: 1; font-family: inherit; font-size: 13.5px; padding: 10px 14px; border: 1px solid #E6E2D8; border-radius: 8px; background: #FCFBF8; color: #0E1F2B; outline: none;" />
+              <button onClick="{{ onAddCustomGoal }}" style="font-family: inherit; font-size: 13.5px; font-weight: 600; padding: 10px 18px; border-radius: 8px; border: 1px solid #0E1F2B; background: #FCFBF8; color: #0E1F2B; cursor: {{ addGoalCursor }}; opacity: {{ addGoalOpacity }};">Add</button>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;">
+              <sc-for list="{{ customGoalCards }}" as="g" hint-placeholder-count="0">
+                <button onClick="{{ g.onRemove }}" title="Remove" style="font-family: inherit; font-size: 13px; font-weight: 500; padding: 9px 14px 9px 16px; border-radius: 999px; border: 1px solid #0E1F2B; background: #0E1F2B; color: #F7F6F2; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">{{ g.label }}<span style="opacity: 0.7; font-size: 15px; line-height: 1;">&times;</span></button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- STEP 5: INTERESTS -->
+      <sc-if value="{{ isStep5 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+          <h2 style="margin: 0; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">What should we screen for?</h2>
+          <p style="margin: 0 0 20px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Ideas in your dispatches come only from categories you switch on. Pick as many as you like.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+              <button onClick="{{ c.onToggle }}" style="font-family: inherit; font-size: 13px; font-weight: 500; padding: 9px 16px; border-radius: 999px; border: 1px solid {{ c.border }}; background: {{ c.bg }}; color: {{ c.color }}; cursor: pointer;">{{ c.label }}</button>
+            </sc-for>
+            <sc-for list="{{ customChips }}" as="c" hint-placeholder-count="0">
+              <button onClick="{{ c.onRemove }}" title="Remove" style="font-family: inherit; font-size: 13px; font-weight: 500; padding: 9px 14px 9px 16px; border-radius: 999px; border: 1px solid #0E1F2B; background: #0E1F2B; color: #F7F6F2; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">{{ c.label }}<span style="opacity: 0.7; font-size: 15px; line-height: 1;">&times;</span></button>
+            </sc-for>
+          </div>
+          <div style="margin-top: 14px;">
+            <p style="margin: 0 0 8px; font-size: 12.5px; font-weight: 600; color: #6B7480;">Something specific in mind?</p>
+            <div style="display: flex; gap: 8px; max-width: 420px;">
+              <input value="{{ customDraft }}" onInput="{{ onCustomDraft }}" onKeyDown="{{ onCustomKey }}" placeholder="e.g. Clean energy, semiconductors, biotech&hellip;" style="flex: 1; font-family: inherit; font-size: 13.5px; padding: 10px 14px; border: 1px solid #E6E2D8; border-radius: 8px; background: #FCFBF8; color: #0E1F2B; outline: none;" />
+              <button onClick="{{ onAddCustom }}" style="font-family: inherit; font-size: 13.5px; font-weight: 600; padding: 10px 18px; border-radius: 8px; border: 1px solid #0E1F2B; background: #FCFBF8; color: #0E1F2B; cursor: {{ addCursor }}; opacity: {{ addOpacity }};">Add</button>
+            </div>
+          </div>
+          <div style="margin-top: 22px; background: #F1EFE8; border: 1px solid #E6E2D8; border-radius: 10px; padding: 14px 18px; font-size: 12.5px; color: #6B7480; line-height: 1.6;">Everything still passes a Conservative-style safety screen and your ~10% individual-stock cap before it&rsquo;s ever suggested. You&rsquo;re all set after this &mdash; welcome aboard.</div>
+        </div>
+      </sc-if>
+
+      <!-- NAV -->
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 26px; padding-top: 22px; border-top: 1px solid #F0EDE4;">
+        <button onClick="{{ onBack }}" style="font-family: inherit; font-size: 13.5px; font-weight: 500; color: {{ backColor }}; background: none; border: none; cursor: {{ backCursor }}; padding: 8px 4px;">&larr; Back</button>
+        <button onClick="{{ onNext }}" style="font-family: inherit; font-size: 14px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; border: none; border-radius: 8px; padding: 12px 24px; cursor: pointer;" style-hover="background: #159B5A;">{{ nextLabel }}</button>
+      </div>
+
+    </div>
+
+    <p style="margin: 0; text-align: center; font-size: 12px; color: #A9A294;"><a href="Overview.dc.html" style="color: #A9A294;">Skip for now</a> &mdash; you can finish setup from your profile anytime.</p>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    step: 1,
+    risk: 'conservative',
+    customIndiv: 15,
+    positions: [
+      { ticker: '', amount: '' },
+      { ticker: '', amount: '' },
+      { ticker: '', amount: '' },
+    ],
+    monthly: '1000',
+    cadence: 'Every other week',
+    annualSpend: '60000',
+    coastYear: 2042,
+    retireYear: 2060,
+    goals: { emergency: true, first100k: true, home: false, income: false, legacy: false },
+    customGoals: [],
+    customGoalDraft: '',
+    interests: { index: true, dividends: true, singles: true, tech: false, international: false, smallcap: false, healthcare: false, value: false, reits: false, gold: false, esg: false, bonds: false },
+    customInterests: [],
+    customDraft: '',
+    session: null,
+  };
+
+  readSession() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    return raw;
+  }
+
+  componentDidMount() {
+    var raw = this.readSession();
+    if (!raw) { window.location.replace('Login.dc.html'); return; }
+    try { this.setState({ session: JSON.parse(raw) }); } catch (e) { window.location.replace('Login.dc.html'); }
+  }
+
+  cleanPositions() {
+    var self = this;
+    return this.state.positions
+      .map(function (p) { return { ticker: p.ticker.trim(), type: self.classifyType(p.ticker) || 'stock', amount: Number(String(p.amount).replace(/[^0-9.]/g, '')) || 0 }; })
+      .filter(function (p) { return p.ticker && p.amount > 0; });
+  }
+
+  classifyType(ticker) {
+    var t = String(ticker || '').trim().toUpperCase();
+    if (!t) return null;
+    var funds = { VOO:1, VTI:1, SPY:1, IVV:1, SPLG:1, ITOT:1, QQQ:1, QQQM:1, SCHD:1, SCHG:1, SCHB:1, SCHX:1, IWY:1, IWF:1, IWM:1, IWB:1, VUG:1, VTV:1, VYM:1, VIG:1, VOOG:1, VEA:1, VWO:1, VXUS:1, VT:1, VNQ:1, DIA:1, BND:1, BNDX:1, AGG:1, TLT:1, GLD:1, SLV:1, DGRO:1, JEPI:1, JEPQ:1 };
+    if (funds[t]) return 'index';
+    if (/^[A-Z]{5}X$/.test(t)) return 'index';
+    if (/ETF|FUND|INDEX/.test(t)) return 'index';
+    return 'stock';
+  }
+
+  finish() {
+    var s = this.state.session || {};
+    var positions = this.cleanPositions();
+    var starting = positions.reduce(function (a, p) { return a + p.amount; }, 0);
+    var settings = {
+      name: s.name,
+      risk: this.state.risk,
+      customIndiv: this.state.customIndiv,
+      positions: positions,
+      starting: starting ? String(Math.round(starting)) : '',
+      monthly: this.state.monthly,
+      cadence: this.state.cadence,
+      annualSpend: this.state.annualSpend,
+      coastYear: this.state.coastYear,
+      retireYear: this.state.retireYear,
+      goals: this.state.goals,
+      customGoals: this.state.customGoals,
+      interests: this.state.interests,
+      customInterests: this.state.customInterests,
+      specCap: 10,
+      driftAlert: true,
+      logTime: '8:30 PM CT',
+      onboarded: true,
+    };
+    try { localStorage.setItem('pd-profile-settings-' + s.account, JSON.stringify(settings)); } catch (e) {}
+    window.location.href = 'Overview.dc.html';
+  }
+
+  next() {
+    if (this.state.step >= 5) { this.finish(); return; }
+    this.setState({ step: this.state.step + 1 });
+  }
+
+  back() {
+    if (this.state.step <= 1) return;
+    this.setState({ step: this.state.step - 1 });
+  }
+
+  updatePos(i, field, value) {
+    this.setState(function (st) {
+      var positions = st.positions.map(function (p, idx) {
+        if (idx !== i) return p;
+        var next = Object.assign({}, p);
+        next[field] = value;
+        return next;
+      });
+      return { positions: positions };
+    });
+  }
+
+  addPos() {
+    this.setState(function (st) {
+      return { positions: st.positions.concat([{ ticker: '', amount: '' }]) };
+    });
+  }
+
+  removePos(i) {
+    this.setState(function (st) {
+      var positions = st.positions.filter(function (p, idx) { return idx !== i; });
+      if (positions.length === 0) positions = [{ ticker: '', amount: '' }];
+      return { positions: positions };
+    });
+  }
+
+  addCustomGoal() {
+    var v = (this.state.customGoalDraft || '').trim();
+    if (!v) return;
+    var existing = (this.state.customGoals || []);
+    if (existing.some(function (x) { return x.toLowerCase() === v.toLowerCase(); })) { this.setState({ customGoalDraft: '' }); return; }
+    this.setState({ customGoals: existing.concat([v]), customGoalDraft: '' });
+  }
+
+  addCustom() {
+    var v = (this.state.customDraft || '').trim();
+    if (!v) return;
+    var existing = (this.state.customInterests || []);
+    if (existing.some(function (x) { return x.toLowerCase() === v.toLowerCase(); })) { this.setState({ customDraft: '' }); return; }
+    this.setState({ customInterests: existing.concat([v]), customDraft: '' });
+  }
+
+  renderVals() {
+    var st = this.state;
+    var self = this;
+    var s = st.session || {};
+
+    var stepDefs = [
+      { n: 1, label: 'Risk' },
+      { n: 2, label: 'Portfolio' },
+      { n: 3, label: 'Contributions' },
+      { n: 4, label: 'Goals' },
+      { n: 5, label: 'Interests' },
+    ];
+    var steps = stepDefs.map(function (d) {
+      var done = st.step >= d.n;
+      return {
+        label: d.label,
+        barColor: done ? '#159B5A' : '#E6E2D8',
+        labelColor: done ? '#0E1F2B' : '#A9A294',
+      };
+    });
+
+    var riskDefs = [
+      { key: 'conservative', label: 'Conservative', index: 90, indiv: 10, desc: 'Mostly S&P 500 index funds, with a few individual stocks like NVDA or Apple.' },
+      { key: 'balanced', label: 'Balanced', index: 80, indiv: 20, desc: 'A bigger individual-stock sleeve on top of a broad index core.' },
+      { key: 'aggressive', label: 'Aggressive', index: 70, indiv: 30, desc: 'The largest individual-stock sleeve \u2014 index funds still anchor it.' },
+      { key: 'custom', label: 'Custom', index: null, indiv: null, desc: 'Set the exact split yourself with the slider below.' },
+    ];
+    var riskCards = riskDefs.map(function (r) {
+      var on = r.key === st.risk;
+      var mix = r.key === 'custom'
+        ? (100 - st.customIndiv) + '% index \u00b7 ' + st.customIndiv + '% individual'
+        : r.index + '% index \u00b7 ' + r.indiv + '% individual';
+      return {
+        label: r.label,
+        mix: mix,
+        desc: r.desc,
+        bg: on ? '#F4FAF6' : '#FFFFFF',
+        border: on ? '2px solid #159B5A' : '1px solid #ECE8DE',
+        pad: on ? '15px 17px' : '16px 18px',
+        dot: on ? '6px solid #159B5A' : '2px solid #D8D3C6',
+        onPick: function () { self.setState({ risk: r.key }); },
+      };
+    });
+
+    // Portfolio step
+    var posRows = st.positions.map(function (p, i) {
+      var type = self.classifyType(p.ticker);
+      var label = type === 'index' ? 'Fund' : (type === 'stock' ? 'Stock' : '\u2014');
+      return {
+        ticker: p.ticker,
+        amount: p.amount,
+        typeLabel: label,
+        typeBg: type === 'index' ? '#0E1F2B' : (type === 'stock' ? '#FBF3E2' : '#F1EFE8'),
+        typeColor: type === 'index' ? '#F7F6F2' : (type === 'stock' ? '#B07A1E' : '#C0B9AA'),
+        onTicker: function (e) { self.updatePos(i, 'ticker', e.target.value); },
+        onAmount: function (e) { self.updatePos(i, 'amount', e.target.value.replace(/[^0-9.]/g, '')); },
+        onRemove: function () { self.removePos(i); },
+      };
+    });
+    var clean = self.cleanPositions();
+    var posTotal = clean.reduce(function (a, p) { return a + p.amount; }, 0);
+    var idxTotal = clean.filter(function (p) { return p.type === 'index'; }).reduce(function (a, p) { return a + p.amount; }, 0);
+    var indivTotal = posTotal - idxTotal;
+    var posIndexPct = posTotal ? (idxTotal / posTotal * 100) : 0;
+    var posIndivPct = 100 - posIndexPct;
+    var posVerdict;
+    if (posIndivPct <= 12) posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual \u2014 right in line with a Conservative shape.';
+    else if (posIndivPct <= 22) posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual \u2014 leans toward a Balanced shape.';
+    else posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual \u2014 a heavy individual-stock tilt, closer to Aggressive.';
+
+    var cadenceOpts = ['Weekly', 'Every other week', 'Monthly'].map(function (c) {
+      var on = st.cadence === c;
+      return {
+        label: c,
+        bg: on ? '#0E1F2B' : '#FFFFFF',
+        color: on ? '#F7F6F2' : '#4A5560',
+        border: on ? '1px solid #0E1F2B' : '1px solid #E6E2D8',
+        onPick: function () { self.setState({ cadence: c }); },
+      };
+    });
+
+    var chipDefs = [
+      { k: 'index', label: 'Broad index funds' },
+      { k: 'dividends', label: 'Dividend income' },
+      { k: 'singles', label: 'Quality single stocks' },
+      { k: 'tech', label: 'Tech & AI' },
+      { k: 'international', label: 'International & global' },
+      { k: 'smallcap', label: 'Small-cap growth' },
+      { k: 'healthcare', label: 'Healthcare' },
+      { k: 'value', label: 'Value & defensive' },
+      { k: 'reits', label: 'Real estate / REITs' },
+      { k: 'gold', label: 'Gold & commodities' },
+      { k: 'esg', label: 'Sustainable / ESG' },
+      { k: 'bonds', label: 'Bonds (on request)' },
+    ];
+    var chips = chipDefs.map(function (d) {
+      var on = !!st.interests[d.k];
+      return {
+        label: d.label,
+        bg: on ? '#0E1F2B' : '#FFFFFF',
+        color: on ? '#F7F6F2' : '#4A5560',
+        border: on ? '#0E1F2B' : '#E6E2D8',
+        onToggle: function () {
+          var next = Object.assign({}, st.interests);
+          next[d.k] = !on;
+          self.setState({ interests: next });
+        },
+      };
+    });
+
+    var firstName = String(s.name || '').trim().split(' ')[0] || 'there';
+
+    // Goals / Coast FI
+    var spend = Number(String(st.annualSpend).replace(/[^0-9.]/g, '')) || 0;
+    var target = spend * 25;
+    var coastYrs = Math.max(1, st.retireYear - st.coastYear);
+    var coastNum = target / Math.pow(1.07, coastYrs);
+    function fmtBig(n) {
+      n = Math.round(n);
+      if (n >= 1e6) return '$' + (n / 1e6).toFixed(2).replace(/\.?0+$/, '') + 'M';
+      if (n >= 1e3) return '$' + Math.round(n / 1e3) + 'k';
+      return '$' + n.toLocaleString('en-US');
+    }
+    var goalDefs = [
+      { k: 'emergency', label: '6-month emergency fund', desc: 'Cash cushion held aside before Atlas leans into growth.' },
+      { k: 'first100k', label: 'Reach my first $100k', desc: 'The milestone where compounding starts to pull real weight.' },
+      { k: 'home', label: 'Home down payment', desc: 'A shorter-horizon target Atlas keeps in safer ground.' },
+      { k: 'income', label: 'Live off dividends', desc: 'Tilt toward durable income as the balance matures.' },
+      { k: 'legacy', label: 'Leave a legacy', desc: 'Invest for a horizon beyond your own retirement.' },
+    ];
+    var goalCards = goalDefs.map(function (d) {
+      var on = !!st.goals[d.k];
+      return {
+        label: d.label,
+        desc: d.desc,
+        on: on,
+        bg: on ? '#F3F7F4' : '#FFFFFF',
+        border: on ? '#159B5A' : '#E6E2D8',
+        dot: on ? '#159B5A' : '#FFFFFF',
+        dotBorder: on ? '#159B5A' : '#D8D3C6',
+        check: on ? 1 : 0,
+        onToggle: function () {
+          var next = Object.assign({}, st.goals);
+          next[d.k] = !on;
+          self.setState({ goals: next });
+        },
+      };
+    });
+    var customGoalCards = (st.customGoals || []).map(function (label, i) {
+      return { label: label, onRemove: function () {
+        var next = (self.state.customGoals || []).slice();
+        next.splice(i, 1);
+        self.setState({ customGoals: next });
+      } };
+    });
+
+    return {
+      firstName: firstName,
+      userAccount: s.account || '',
+      steps: steps,
+      isStep1: st.step === 1,
+      isStep2: st.step === 2,
+      isStep3: st.step === 3,
+      isStep4: st.step === 4,
+      isStep5: st.step === 5,
+      riskCards: riskCards,
+      isCustom: st.risk === 'custom',
+      customIndiv: st.customIndiv,
+      customIndexPct: 100 - st.customIndiv,
+      onCustom: function (e) { self.setState({ customIndiv: +e.target.value }); },
+      posRows: posRows,
+      onAddPos: function () { self.addPos(); },
+      posTotalF: '$' + Math.round(posTotal).toLocaleString('en-US'),
+      hasPositions: posTotal > 0,
+      posIndexPct: posIndexPct.toFixed(1),
+      posIndivPct: posIndivPct.toFixed(1),
+      posVerdict: posVerdict,
+      cadenceOpts: cadenceOpts,
+      chips: chips,
+      customChips: (st.customInterests || []).map(function (label, i) {
+        return { label: label, onRemove: function () {
+          var next = (self.state.customInterests || []).slice();
+          next.splice(i, 1);
+          self.setState({ customInterests: next });
+        } };
+      }),
+      customDraft: st.customDraft,
+      onCustomDraft: function (e) { self.setState({ customDraft: e.target.value }); },
+      onCustomKey: function (e) { if (e.key === 'Enter') { e.preventDefault(); self.addCustom(); } },
+      onAddCustom: function () { self.addCustom(); },
+      addCursor: (st.customDraft || '').trim() ? 'pointer' : 'default',
+      addOpacity: (st.customDraft || '').trim() ? 1 : 0.45,
+      monthly: st.monthly,
+      onMonthly: function (e) { self.setState({ monthly: e.target.value.replace(/[^0-9]/g, '') }); },
+      annualSpend: st.annualSpend,
+      onAnnual: function (e) { self.setState({ annualSpend: e.target.value.replace(/[^0-9.]/g, '') }); },
+      coastYear: st.coastYear,
+      retireYear: st.retireYear,
+      onCoastYear: function (e) { var v = +e.target.value; self.setState({ coastYear: Math.min(v, st.retireYear - 1) }); },
+      onRetireYear: function (e) { var v = +e.target.value; self.setState({ retireYear: Math.max(v, st.coastYear + 1) }); },
+      annualSpendF: '$' + Math.round(spend).toLocaleString('en-US'),
+      targetF: fmtBig(target),
+      coastNumberF: fmtBig(coastNum),
+      goalCards: goalCards,
+      customGoalCards: customGoalCards,
+      customGoalDraft: st.customGoalDraft,
+      onCustomGoalDraft: function (e) { self.setState({ customGoalDraft: e.target.value }); },
+      onCustomGoalKey: function (e) { if (e.key === 'Enter') { e.preventDefault(); self.addCustomGoal(); } },
+      onAddCustomGoal: function () { self.addCustomGoal(); },
+      addGoalCursor: (st.customGoalDraft || '').trim() ? 'pointer' : 'default',
+      addGoalOpacity: (st.customGoalDraft || '').trim() ? 1 : 0.45,
+      nextLabel: st.step >= 5 ? 'Finish setup' : 'Continue',
+      backColor: st.step <= 1 ? '#D8D3C6' : '#6B7480',
+      backCursor: st.step <= 1 ? 'default' : 'pointer',
+      onNext: function () { self.next(); },
+      onBack: function () { self.back(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;" data-screen-label="Plan">
+
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;"><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="width:100%;height:150px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:22px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;"><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="Market.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
+        <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Activity</a>
+        <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Plan</a>
+        <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Reports</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px;" style-hover="background: #EEEBE2;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+        </a>
+        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
+
+    <section style="padding: 56px 0 36px;">
+      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">$1,000/mo contributions · Profile: Conservative</p>
+      <h1 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.02em;">Plan</h1>
+      <p style="margin: 0; font-size: 15px; color: #6B7480; max-width: 640px; line-height: 1.65;">Where each paycheck goes, where the account is heading, and the rules that keep both on track.</p>
+    </section>
+
+    <!-- PAYCHECK ALLOCATOR -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Paycheck allocator</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 680px;">Slide to choose how much of each $1,000 contribution goes toward broadening your S&P 500 core (FXAIX + SCHD) versus continuing the current, QQQ-heavy growth mix.</p>
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Toward the broad core (FXAIX + SCHD)</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ towardF }}</span>
+            </div>
+            <input type="range" min="0" max="1000" step="50" value="{{ toward }}" onChange="{{ setToward }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0 — stay the course</span><span>$1,000 — all to core</span></div>
+            <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 10px;">
+              <sc-for list="{{ splitRows }}" as="s" hint-placeholder-count="4">
+                <div style="display: grid; grid-template-columns: 140px 1fr 70px; gap: 14px; align-items: center;">
+                  <span style="font-size: 12.5px; color: #4A5560;">{{ s.label }}</span>
+                  <div style="height: 12px; background: #F0EDE4; border-radius: 6px; position: relative;">
+                    <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: {{ s.color }}; width: {{ s.w }}%; transition: width 0.2s;"></div>
+                  </div>
+                  <span style="font-size: 12.5px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums;">{{ s.amt }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="border-left: 1px solid #F0EDE4; padding-left: 48px; display: flex; flex-direction: column; justify-content: center; gap: 18px;">
+            <div>
+              <p style="margin: 0 0 4px; font-size: 13px; color: #6B7480;">QQQ’s share of the account after 12 months</p>
+              <p style="margin: 0; font-family: Fraunces, serif; font-size: 36px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ mixF }}</p>
+            </div>
+            <div style="height: 20px; border-radius: 6px; overflow: hidden; display: flex; background: #E8E4DA;">
+              <div style="background: #B4483C; transition: width 0.2s; width: {{ stockW }}%; display: flex; align-items: center; padding-left: 10px;"><span style="font-size: 10px; font-weight: 600; color: #FFFFFF;">QQQ</span></div>
+            </div>
+            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65;">{{ allocVerdict }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRATEGIES -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Three ready-made strategies</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Concrete $1,000/mo splits, mapped to the three responses on the <a href="Performance.dc.html#risk" style="color: #159B5A; font-weight: 500;">Risk page</a>. Pick one in the payday form, or ignore all three.</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+        <sc-for list="{{ strategies }}" as="st" hint-placeholder-count="3">
+          <div style="background: #FFFFFF; border: 1px solid {{ st.border }}; border-radius: 14px; padding: 26px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+            <p style="margin: 0 0 4px; font-size: 12px; font-weight: 600; color: #159B5A; letter-spacing: 0.05em;">{{ st.tag }}</p>
+            <p style="margin: 0 0 14px; font-size: 17px; font-weight: 600; font-family: Fraunces, serif;">{{ st.name }}</p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+              <sc-for list="{{ st.rows }}" as="r" hint-placeholder-count="4">
+                <div style="display: flex; justify-content: space-between; font-size: 13px; padding: 7px 12px; background: #FBFAF6; border-radius: 8px;">
+                  <span style="font-weight: 600;">{{ r.t }}</span>
+                  <span style="color: #4A5560; font-variant-numeric: tabular-nums;">{{ r.amt }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p style="margin: 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ st.note }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- GROWTH PROJECTOR -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Growth projector</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Starting from today's $4,844.67. Adjust contributions, return, and horizon to see the trajectory.</p>
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px;">
+        <div style="display: flex; flex-direction: column; gap: 30px; justify-content: center;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Monthly contribution</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ monthlyF }}</span>
+            </div>
+            <input type="range" min="0" max="3000" step="50" value="{{ monthly }}" onChange="{{ setMonthly }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0</span><span>$3,000</span></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Assumed annual return</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ retF }}%</span>
+            </div>
+            <input type="range" min="3" max="12" step="0.5" value="{{ ret }}" onChange="{{ setRet }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>3% (cautious)</span><span>12% (heroic)</span></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <label style="font-size: 13.5px; font-weight: 500;">Years</label>
+              <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ years }} → {{ endYear }}</span>
+            </div>
+            <input type="range" min="1" max="30" step="1" value="{{ years }}" onChange="{{ setYearsP }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>1</span><span>30</span></div>
+          </div>
+          <div style="background: #FBFAF6; border: 1px solid #F0EDE4; border-radius: 10px; padding: 16px 20px;">
+            <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Value in {{ years }} years ({{ endYear }})</p>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 34px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ projF }}</p>
+            <p style="margin: 6px 0 0; font-size: 12px; color: #6B7480;">of which contributions: {{ contribF }}</p>
+          </div>
+        </div>
+        <div>
+          <div style="position: relative;">
+            <svg width="100%" viewBox="0 0 640 300" style="display: block; overflow: visible;">
+              <line x1="0" y1="290" x2="640" y2="290" stroke="#F0EDE4" stroke-width="1"></line>
+              <line x1="0" y1="150" x2="640" y2="150" stroke="#F0EDE4" stroke-width="1"></line>
+              <line x1="0" y1="10" x2="640" y2="10" stroke="#F0EDE4" stroke-width="1"></line>
+              <path d="{{ contribPath }}" fill="rgba(127,168,201,0.18)" stroke="none"></path>
+              <path d="{{ growthPath }}" fill="rgba(21,155,90,0.10)" stroke="none"></path>
+              <path d="{{ linePath }}" fill="none" stroke="#0E1F2B" stroke-width="2.5"></path>
+              <circle cx="640" cy="10" r="5" fill="#159B5A"></circle>
+            </svg>
+            <span style="position: absolute; top: -7px; right: 0; font-size: 12px; color: #A9A294; font-variant-numeric: tabular-nums;">{{ axisTop }}</span>
+            <span style="position: absolute; top: 46.5%; right: 0; transform: translateY(-50%); font-size: 12px; color: #A9A294; font-variant-numeric: tabular-nums;">{{ axisMid }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 11.5px; color: #A9A294; font-variant-numeric: tabular-nums;">
+            <span>2026</span><span>{{ midYear }}</span><span>{{ endYear }}</span>
+          </div>
+          <div style="display: flex; gap: 20px; margin-top: 12px; font-size: 12px; color: #6B7480;">
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: rgba(127,168,201,0.4);"></span>Contributions</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: rgba(21,155,90,0.25);"></span>Growth</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MILESTONES -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Milestones on the current path</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Assuming $1,000/mo and ~8% annual returns. Dates shift with markets; the shape doesn't.</p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 20px;">
+        <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4">
+          <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+            <p style="margin: 0 0 2px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ m.amt }}</p>
+            <p style="margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #159B5A;">{{ m.when }}</p>
+            <p style="margin: 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ m.note }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #FBFAF6; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 28px;">
+        <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; max-width: 880px;"><strong style="color: #0E1F2B;">Why they accelerate:</strong> the first $10k takes ~10 months because it's almost all deposits. By $50k the account earns roughly $300/mo on its own — a third paycheck. By $100k, market growth contributes more than you do in a typical month. Same $1,000, each milestone arrives faster than the last.</p>
+      </div>
+    </section>
+
+    <!-- RULES OF THUMB -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 20px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Rules of thumb this account runs on</h2>
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6">
+          <div style="border-bottom: 1px solid #F0EDE4;">
+            <button onClick="{{ r.toggle }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 19px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #0E1F2B;">
+              {{ r.title }}
+              <span style="color: #A9A294; font-size: 18px; flex-shrink: 0;">{{ r.icon }}</span>
+            </button>
+            <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 760px;">{{ r.body }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section style="padding: 0 0 88px;">
+      <div style="background: #0E1F2B; border-radius: 14px; padding: 36px 40px; color: #F7F6F2; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;">
+        <div>
+          <h2 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">Your two forms</h2>
+          <p style="margin: 0; font-size: 14px; color: #9AA7B1; line-height: 1.7; max-width: 560px;">The <strong style="color: #F7F6F2;">payday check-in</strong> takes 60 seconds when money lands — it's how contributions and buys enter the system. The <strong style="color: #F7F6F2;">setup form</strong> is where you change the risk profile, contribution amount, or preferences.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSec2TTUMAXD-VrZpr9xgj5dwCfMcA7C3gDei96EDrcuu6PYEQ/viewform" target="_blank" style="font-size: 13.5px; font-weight: 600; color: #0E1F2B; background: #F7F6F2; text-decoration: none; padding: 12px 26px; border-radius: 999px; text-align: center; white-space: nowrap;">Payday check-in →</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfk-4qJrhK8hKvN1ZVoC0IlwXMVVN8avee3xm35EtlH4Uqs0w/viewform" target="_blank" style="font-size: 13.5px; font-weight: 600; color: #F7F6F2; background: transparent; border: 1px solid rgba(247,246,242,0.4); text-decoration: none; padding: 12px 26px; border-radius: 999px; text-align: center; white-space: nowrap;">Setup &amp; preferences →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for Griffin · Figures are estimates — food for thought, not financial advice</span>
+      <span>Data refreshes weekdays 8:30 PM CT · New report every Friday</span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  __sessionVals() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); }
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var userName = (s && s.name) || 'Griffin';
+    return {
+      userName: userName,
+      userInitial: (userName.charAt(0) || 'G').toUpperCase(),
+      userAccount: (s && s.account) || 'PD-08842',
+      onLogout: () => {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+    };
+  }
+  state = { toward: 400, monthly: 1000, ret: 8, years: 15, openRule: 0 };
+
+  renderVals() { return Object.assign(this.__realVals(), this.__sessionVals()); }
+  __realVals() {
+    // Paycheck allocator
+    const toward = this.state.toward;
+    const growth = 1000 - toward;
+    const splitRows = [
+      { label: 'FXAIX core', amt: '$' + Math.round(toward * 0.7), color: '#159B5A', w: (toward * 0.7 / 10) },
+      { label: 'SCHD dividend index', amt: '$' + Math.round(toward * 0.3), color: '#8A9A5B', w: (toward * 0.3 / 10) },
+      { label: 'QQQ growth', amt: '$' + Math.round(growth * 0.6), color: '#B4483C', w: (growth * 0.6 / 10) },
+      { label: 'IWY growth', amt: '$' + Math.round(growth * 0.4), color: '#0E1F2B', w: (growth * 0.4 / 10) },
+    ].map(r => ({ ...r, w: Math.max(0.5, r.w).toFixed(1) }));
+
+    // QQQ concentration after 12 months of this split
+    const qqqNow = 2248.97;
+    const newQQQ = qqqNow + growth * 0.6 * 12;
+    const newTotal = 4844.67 + 1000 * 12;
+    const qqqShare = newQQQ / newTotal * 100;
+    const mixF = qqqShare.toFixed(0) + '%';
+    const allocVerdict = toward === 0
+      ? 'All into the current mix: QQQ climbs past ' + qqqShare.toFixed(0) + '% of the account — the concentration flag gets worse, not better. Fine only if you\u2019re deliberately betting on tech.'
+      : toward >= 800
+        ? 'Aggressive broadening: QQQ\u2019s share falls fast toward ~' + qqqShare.toFixed(0) + '%. The quickest tax-free way to defuse the concentration flag.'
+        : 'A measured broadening. No selling, no taxes — each paycheck dilutes QQQ (to ~' + qqqShare.toFixed(0) + '% in a year) and grows the diversified core.';
+
+    // Growth projector
+    const { monthly, ret, years } = this.state;
+    const r = ret / 100 / 12, n = years * 12;
+    const proj = 4844.67 * Math.pow(1 + r, n) + (monthly > 0 ? monthly * (Math.pow(1 + r, n) - 1) / r : 0);
+    const contrib = 4844.67 + monthly * n;
+    const fmt = v => '$' + Math.round(v).toLocaleString('en-US');
+    // paths: sample 30 points
+    const pts = [], cpts = [];
+    for (let i = 0; i <= 30; i++) {
+      const m = i / 30 * n;
+      pts.push(4844.67 * Math.pow(1 + r, m) + (monthly > 0 ? monthly * (Math.pow(1 + r, m) - 1) / r : 0));
+      cpts.push(4844.67 + monthly * m);
+    }
+    const maxV = pts[30];
+    const y = v => 290 - v / maxV * 280;
+    const x = i => i / 30 * 640;
+    const line = pts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    const contribLine = cpts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    const contribPath = contribLine + ' L640 290 L0 290 Z';
+    const growthPath = line + ' L' + [...cpts].reverse().map((v, i) => x(30 - i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' L') + ' Z';
+
+    const strategies = [
+      { tag: 'MATCHES OPTION A', name: 'Stay the Course', border: '#ECE8DE',
+        rows: [ { t: 'QQQ', amt: '$470' }, { t: 'FXAIX', amt: '$290' }, { t: 'IWY', amt: '$110' }, { t: 'Rest of mix', amt: '$130' } ],
+        note: 'Keep buying the current weights (47/29/11/13). QQQ stays ~46% of the account — honest only if you\u2019re deliberately leaning into tech.' },
+      { tag: 'MATCHES OPTION B', name: 'Broaden the Core', border: '#159B5A',
+        rows: [ { t: 'FXAIX', amt: '$600' }, { t: 'SCHD', amt: '$300' }, { t: 'NVDA', amt: '$100' }, { t: 'QQQ / IWY', amt: '$0' } ],
+        note: 'Every dollar to the broad S&P 500 core and dividend index, plus a small individual top-up. Sells nothing, dilutes QQQ\u2019s 46% share over time.' },
+      { tag: 'MATCHES OPTION C', name: 'Add Ballast', border: '#ECE8DE',
+        rows: [ { t: 'BND (on request)', amt: '$300' }, { t: 'FXAIX', amt: '$500' }, { t: 'SCHD', amt: '$200' }, { t: 'QQQ', amt: '$0' } ],
+        note: 'For lower swings: a bond index fund by request, alongside the broad core — ballast the S&P 500 can\u2019t provide. Off by default, on when you ask in the payday form.' },
+    ];
+
+    const milestones = [
+      { amt: '$10k', when: '≈ May 2027', note: 'Almost entirely deposits — 10 months in, the market has barely had time to matter.' },
+      { amt: '$25k', when: '≈ Dec 2028', note: 'Growth now adds ~$150/mo. Dividends become visible line items instead of cents.' },
+      { amt: '$50k', when: '≈ Sep 2030', note: 'The account earns ~$300/mo by itself — a phantom third paycheck every month.' },
+      { amt: '$100k', when: '≈ Feb 2034', note: 'Market growth now typically outearns your monthly deposit. Compounding takes the wheel.' },
+    ];
+
+    const ruleData = [
+      { title: 'Rebalance with new money, not sales', body: 'Selling winners to rebalance triggers capital gains tax. Directing fresh contributions to whatever is underweight achieves the same drift correction for free — it\u2019s slower, and that\u2019s fine. This is the engine behind Broaden the Core.' },
+      { title: 'Never wait for a dip to invest a paycheck', body: 'Timing entries on regular contributions is a documented losing game — missing the market\u2019s 10 best days in a decade roughly halves returns, and those days cluster next to the worst ones. The $1,000 goes in on payday, whatever the tape looks like.' },
+      { title: 'Stagger lump sums only in frothy markets', body: 'For regular paychecks: invest immediately. For a rare windfall arriving mid-euphoria — like this AI reset moment — splitting it into 2–3 tranches over a few weeks trades a little expected return for a lot of regret insurance. Issue 15 made exactly this point about new QQQ money.' },
+      { title: 'Keep individual stocks near 10%', body: 'NVDA + HOOD + FIG currently sit at ~10% of the account (flag rule 8). Individual stocks are fine — sized so that being completely wrong about all of them costs one year of contributions, not the plan. Everything else is broad index funds.' },
+      { title: 'Review the shape quarterly, not daily', body: 'Prices move daily; the shape of the portfolio — core vs. growth vs. income vs. individual stocks — moves slowly. The nightly checks watch the daily noise so you don\u2019t have to. October is the first scheduled shape review.' },
+      { title: 'Suggestions are screened, never pushed', body: 'Ticker ideas in dispatches (COST, AAPL, GLD…) are filtered through your Conservative profile before they\u2019re mentioned, and nothing is ever bought on your behalf. Every trade in this account is one you made yourself.' },
+    ];
+    const rules = ruleData.map((rd, i) => ({
+      ...rd,
+      open: this.state.openRule === i,
+      icon: this.state.openRule === i ? '−' : '+',
+      toggle: () => this.setState(s => ({ openRule: s.openRule === i ? null : i })),
+    }));
+
+    return {
+      toward, splitRows, mixF, allocVerdict,
+      towardF: '$' + toward + ' of $1,000',
+      stockW: qqqShare.toFixed(1),
+      setToward: e => this.setState({ toward: +e.target.value }),
+      monthly, ret, years,
+      setYearsP: e => this.setState({ years: +e.target.value }),
+      monthlyF: '$' + monthly.toLocaleString('en-US'),
+      retF: ret.toFixed(1),
+      setMonthly: e => this.setState({ monthly: +e.target.value }),
+      setRet: e => this.setState({ ret: +e.target.value }),
+      projF: fmt(proj), contribF: fmt(contrib),
+      linePath: line, contribPath, growthPath,
+      axisTop: fmt(maxV), axisMid: fmt(maxV / 2),
+      endYear: 2026 + years, midYear: 2026 + Math.round(years / 2),
+      strategies, milestones, rules,
+    };
+  }
+}
+</script>
+</body>
+</html>

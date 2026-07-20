@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;" data-screen-label="Holdings">
+
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;"><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="width:100%;height:150px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:22px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;"><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="Market.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Holdings</a>
+        <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Activity</a>
+        <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
+        <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Reports</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px;" style-hover="background: #EEEBE2;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+        </a>
+        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
+
+    <section style="padding: 56px 0 36px;">
+      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">As of Jul 2, 2026 close</p>
+      <h1 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.02em;">Holdings</h1>
+      <p style="margin: 0; font-size: 15px; color: #6B7480; max-width: 640px; line-height: 1.65;">Seven positions, $4,842.75 invested. Click any row for what it is, the job it does, its main risk, and what the agent is watching right now.</p>
+    </section>
+
+    <!-- TABLE -->
+    <section style="padding: 0 0 56px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1.1fr 0.8fr; gap: 12px; padding: 14px 28px; border-bottom: 1px solid #F0EDE4; font-size: 11.5px; font-weight: 600; color: #6B7480; letter-spacing: 0.05em; text-transform: uppercase;">
+          <span>Position</span>
+          <span style="text-align: right;">Cost / share</span>
+          <span style="text-align: right;">Price now</span>
+          <span style="text-align: right;">Value</span>
+          <span style="text-align: right;">Gain / loss</span>
+          <span style="text-align: right;">Weight</span>
+        </div>
+        <sc-for list="{{ holdings }}" as="h" hint-placeholder-count="7">
+          <div style="border-bottom: 1px solid #F5F2EA;">
+            <div onClick="{{ h.toggle }}" style="display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1.1fr 0.8fr; gap: 12px; align-items: center; padding: 16px 28px; cursor: pointer; background: {{ h.rowBg }};" style-hover="background: #FAF8F2;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span style="transition: transform 0.2s; transform: rotate({{ h.chev }}deg); color: #A9A294; font-size: 10px;">▶</span>
+                <div>
+                  <p style="margin: 0; font-size: 14.5px; font-weight: 600;">{{ h.ticker }}</p>
+                  <p style="margin: 0; font-size: 12px; color: #6B7480;">{{ h.name }}</p>
+                </div>
+              </div>
+              <span style="text-align: right; font-size: 13.5px; color: #6B7480; font-variant-numeric: tabular-nums;">{{ h.costF }}</span>
+              <span style="text-align: right; font-size: 14px; font-variant-numeric: tabular-nums;">{{ h.priceF }}</span>
+              <span style="text-align: right; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ h.valueF }}</span>
+              <span style="text-align: right; font-size: 13.5px; font-weight: 500; font-variant-numeric: tabular-nums; color: {{ h.gainColor }};">{{ h.gainF }}</span>
+              <span style="text-align: right; font-size: 13.5px; font-variant-numeric: tabular-nums; color: #4A5560;">{{ h.weight }}%</span>
+            </div>
+            <sc-if value="{{ h.expanded }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 20px 28px 26px 66px; background: #FBFAF6; border-top: 1px solid #F0EDE4;">
+                <div style="display: flex; gap: 32px; margin-bottom: 18px; font-size: 13px; color: #4A5560; flex-wrap: wrap;">
+                  <span><strong style="color: #0E1F2B;">{{ h.shares }}</strong> shares</span>
+                  <span>Sleeve: <strong style="color: #0E1F2B;">{{ h.sleeve }}</strong></span>
+                  <span>Expense ratio: <strong style="color: #0E1F2B;">{{ h.er }}</strong></span>
+                  <span>Est. dividends: <strong style="color: #0E1F2B;">{{ h.div }}</strong></span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px 32px;">
+                  <div>
+                    <p style="margin: 0 0 4px; font-size: 11px; font-weight: 600; color: #159B5A; text-transform: uppercase; letter-spacing: 0.05em;">What it is</p>
+                    <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65;">{{ h.what }}</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 4px; font-size: 11px; font-weight: 600; color: #159B5A; text-transform: uppercase; letter-spacing: 0.05em;">Its role here</p>
+                    <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65;">{{ h.role }}</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 4px; font-size: 11px; font-weight: 600; color: #B4483C; text-transform: uppercase; letter-spacing: 0.05em;">Main risk</p>
+                    <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65;">{{ h.risk }}</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 4px; font-size: 11px; font-weight: 600; color: #0E1F2B; text-transform: uppercase; letter-spacing: 0.05em;">Watching now</p>
+                    <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65;">{{ h.watching }}</p>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1.1fr 0.8fr; gap: 12px; padding: 14px 28px; background: #FBFAF6; font-size: 13px; font-weight: 600;">
+          <span style="padding-left: 24px;">Total invested</span>
+          <span></span><span></span>
+          <span style="text-align: right; font-variant-numeric: tabular-nums;">$4,842.75</span>
+          <span style="text-align: right; color: #B4483C; font-variant-numeric: tabular-nums;">−$46.24</span>
+          <span style="text-align: right; font-variant-numeric: tabular-nums;">100%</span>
+        </div>
+      </div>
+      <p style="margin: 12px 0 0; font-size: 12.5px; color: #A9A294;">Plus $1.92 uninvested cash. Cost basis locked at onboarding, Jul 1, 2026.</p>
+    </section>
+
+    <!-- SHAPE -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">The shape of the portfolio</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Grouping the seven positions by the job they do makes the structure easier to see.</p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 24px;">
+        <sc-for list="{{ sleeves }}" as="s" hint-placeholder-count="4">
+          <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="width: 10px; height: 10px; border-radius: 3px; background: {{ s.color }};"></span>
+              <p style="margin: 0; font-size: 13px; font-weight: 600;">{{ s.label }}</p>
+            </div>
+            <p style="margin: 0 0 2px; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ s.pct }}%</p>
+            <p style="margin: 0 0 10px; font-size: 12px; color: #6B7480;">{{ s.tickers }}</p>
+            <div style="height: 8px; background: #F0EDE4; border-radius: 4px; position: relative; margin-bottom: 8px;">
+              <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: {{ s.color }}; width: {{ s.pct }}%;"></div>
+            </div>
+            <p style="margin: 0; font-size: 12px; color: #6B7480; line-height: 1.55;">Typical range: <strong style="color: #0E1F2B;">{{ s.typical }}</strong> — {{ s.verdict }}</p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <p style="margin: 0 0 18px; font-size: 13px; font-weight: 500; color: #6B7480;">Where you are vs. your goal</p>
+
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+            <span style="font-size: 12.5px; font-weight: 600;">Your holdings vs the 90 / 10 goal</span>
+            <span style="font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; color: {{ splitPill.color }}; background: {{ splitPill.bg }}; border: 1px solid {{ splitPill.border }}; white-space: nowrap;">{{ splitPill.label }}</span>
+          </div>
+          <div style="position: relative; padding-top: 16px;">
+            <div style="position: absolute; top: 0; left: 90%; transform: translateX(-50%); font-size: 10px; font-weight: 600; color: #B4483C; white-space: nowrap;">GOAL 90%</div>
+            <div style="display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 1px; position: relative;">
+              <sc-for list="{{ splitBar }}" as="s" hint-placeholder-count="7">
+                <div title="{{ s.ticker }}" style="width: {{ s.w }}%; background: {{ s.color }}; display: flex; align-items: center; justify-content: center; min-width: 0;"><span style="font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,0.92); overflow: hidden; text-overflow: clip; white-space: nowrap;">{{ s.ticker }}</span></div>
+              </sc-for>
+            </div>
+            <div style="position: absolute; top: 16px; bottom: 0; left: 90%; width: 2px; background: #B4483C; transform: translateX(-50%);"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: #6B7480;">
+            <span><span style="display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: #0E1F2B; margin-right: 5px;"></span>Index funds — left of the line (89.9%, goal 90%)</span>
+            <span><span style="display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: #C9A227; margin-right: 5px;"></span>Individual — right (10.1%, goal 10%)</span>
+          </div>
+        </div>
+
+        <p style="margin: 0 0 20px; padding-bottom: 20px; border-bottom: 1px solid #F0EDE4; font-size: 12.5px; color: #4A5560; line-height: 1.6;">Each block is one of your holdings, sized to its real weight. Everything left of the red line is your index sleeve; everything right is individual stocks. The tracker flags you only if either side drifts <strong>7.5 points or more</strong> from its goal — right now you&rsquo;re 89.9% / 10.1%, well inside that, so you&rsquo;re on plan. How the 90% is split between the funds is your call, not a flag.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+              <span style="font-size: 12px; font-weight: 600; color: #0E1F2B; letter-spacing: 0.03em; text-transform: uppercase;">Index funds — the 90%</span>
+              <span style="font-size: 12px; font-weight: 600; color: #6B7480; font-variant-numeric: tabular-nums;">89.9%</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <sc-for list="{{ indexBars }}" as="c" hint-placeholder-count="4">
+                <div style="display: grid; grid-template-columns: 58px 1fr 108px; gap: 12px; align-items: center;">
+                  <span style="font-size: 13px; font-weight: 600;">{{ c.ticker }}</span>
+                  <div style="height: 14px; background: #F5F2EA; border-radius: 5px; position: relative;">
+                    <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: {{ c.color }}; width: {{ c.w }}%;"></div>
+                  </div>
+                  <span style="font-size: 12px; color: #6B7480; text-align: right; font-variant-numeric: tabular-nums;">{{ c.pct }}% · {{ c.valF }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+              <span style="font-size: 12px; font-weight: 600; color: #C9A227; letter-spacing: 0.03em; text-transform: uppercase;">Individual stocks — the 10%</span>
+              <span style="font-size: 12px; font-weight: 600; color: #6B7480; font-variant-numeric: tabular-nums;">10.1%</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <sc-for list="{{ indivBars }}" as="c" hint-placeholder-count="3">
+                <div style="display: grid; grid-template-columns: 58px 1fr 108px; gap: 12px; align-items: center;">
+                  <span style="font-size: 13px; font-weight: 600;">{{ c.ticker }}</span>
+                  <div style="height: 14px; background: #F5F2EA; border-radius: 5px; position: relative;">
+                    <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: {{ c.color }}; width: {{ c.w }}%;"></div>
+                  </div>
+                  <span style="font-size: 12px; color: #6B7480; text-align: right; font-variant-numeric: tabular-nums;">{{ c.pct }}% · {{ c.valF }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin: 20px 0 0; padding-top: 16px; border-top: 1px solid #F0EDE4; font-size: 13px; color: #4A5560; line-height: 1.65;">Individual stocks are the riskier sleeve, kept small on purpose at ~10%. As long as that stays near 10% and the index sleeve stays near 90%, you&rsquo;re on plan — new paycheck money just tops up whichever side has drifted (see <a href="Plan.dc.html" style="color: #159B5A; font-weight: 500;">Plan</a>). Bars scale 0–50%.</p>
+      </div>
+    </section>
+
+    <!-- NVIDIA LOOK-THROUGH -->
+    <section style="padding: 0 0 56px;">
+      <div style="background: #0E1F2B; border-radius: 14px; padding: 32px 36px; color: #F7F6F2;">
+        <h2 style="margin: 0 0 8px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">You own more NVIDIA than you think</h2>
+        <p style="margin: 0 0 24px; font-size: 14px; color: #9AA7B1; max-width: 680px; line-height: 1.65;">Your direct NVDA position is 6.7% — but QQQ, FXAIX and IWY each hold NVIDIA too. Looking through the funds, your effective exposure is roughly <strong style="color: #F7F6F2;">14% of the whole portfolio</strong>.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 680px;">
+          <sc-for list="{{ nvdaBars }}" as="n" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 150px 1fr 70px; gap: 16px; align-items: center;">
+              <span style="font-size: 13px; color: #D9DEE2;">{{ n.label }}</span>
+              <div style="height: 14px; background: rgba(247,246,242,0.1); border-radius: 4px; position: relative;">
+                <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: {{ n.color }}; width: {{ n.w }}%;"></div>
+              </div>
+              <span style="font-size: 13px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums;">{{ n.pct }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin: 24px 0 0; font-size: 13.5px; color: #9AA7B1; line-height: 1.7; max-width: 680px;">The same look-through logic applies to all the mega-caps: the top seven US companies are roughly <strong style="color: #F7F6F2;">40–45% of your entire portfolio</strong> once fund holdings are counted. That's why the flag rules track <em>effective</em> exposure, not just what's on the ticket. Effective exposure above 20% in one company would trip a flag — NVIDIA at ~14% is the closest.</p>
+      </div>
+    </section>
+
+    <!-- FEE RECEIPT -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">The fee receipt</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">What the funds themselves charge, per year, at today's values. Individual stocks (NVDA, HOOD, FIG) charge nothing to hold.</p>
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 12px; padding: 13px 26px; border-bottom: 1px solid #F0EDE4; font-size: 11.5px; font-weight: 600; color: #6B7480; letter-spacing: 0.05em; text-transform: uppercase;">
+            <span>Fund</span><span style="text-align: right;">Expense ratio</span><span style="text-align: right;">You hold</span><span style="text-align: right;">Cost / yr</span>
+          </div>
+          <sc-for list="{{ feeRows }}" as="f" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 12px; padding: 14px 26px; border-bottom: 1px solid #F5F2EA; font-size: 13.5px; align-items: center;">
+              <span style="font-weight: 600;">{{ f.ticker }}</span>
+              <span style="text-align: right; font-variant-numeric: tabular-nums;">{{ f.er }}</span>
+              <span style="text-align: right; color: #6B7480; font-variant-numeric: tabular-nums;">{{ f.held }}</span>
+              <span style="text-align: right; font-weight: 600; font-variant-numeric: tabular-nums;">{{ f.cost }}</span>
+            </div>
+          </sc-for>
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 12px; padding: 14px 26px; background: #FBFAF6; font-size: 13.5px; font-weight: 600;">
+            <span>Blended</span>
+            <span style="text-align: right; font-variant-numeric: tabular-nums;">0.121%</span>
+            <span></span>
+            <span style="text-align: right; font-variant-numeric: tabular-nums;">$5.88</span>
+          </div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 26px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 10px; font-size: 13px; font-weight: 600;">Why $5.88 is worth watching anyway</p>
+          <p style="margin: 0 0 12px; font-size: 13.5px; color: #4A5560; line-height: 1.7;">Fees compound just like returns, silently and forever. 0.121% is genuinely cheap — FXAIX at 0.015% is nearly free. But the same portfolio built from 1% funds would cost about <strong>$48/yr today</strong> and, on a portfolio that grows to $100k, roughly <strong>$1,000 every year</strong>.</p>
+          <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">The nightly checks flag any fund that raises its expense ratio. Nothing has changed since onboarding.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLAG RULES -->
+    <section style="padding: 0 0 88px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">The eight standing flag rules</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Checked every weeknight at 8:30 PM CT. A tripped flag never trades anything — it earns a paragraph in your next dispatch.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+        <sc-for list="{{ flagRules }}" as="r" hint-placeholder-count="8">
+          <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 26px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; gap: 16px;">
+            <span style="width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; background: {{ r.bg }}; color: {{ r.fg }};">{{ r.n }}</span>
+            <div>
+              <p style="margin: 0 0 4px; font-size: 14px; font-weight: 600;">{{ r.title }}</p>
+              <p style="margin: 0; font-size: 13px; color: #4A5560; line-height: 1.6;">{{ r.desc }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for Griffin · Figures are estimates — food for thought, not financial advice</span>
+      <span>Data refreshes weekdays 8:30 PM CT · New report every Friday</span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  __sessionVals() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); }
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var userName = (s && s.name) || 'Griffin';
+    return {
+      userName: userName,
+      userInitial: (userName.charAt(0) || 'G').toUpperCase(),
+      userAccount: (s && s.account) || 'PD-08842',
+      onLogout: () => {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+    };
+  }
+  state = { expanded: 'QQQ' };
+
+  renderVals() { return Object.assign(this.__realVals(), this.__sessionVals()); }
+  __realVals() {
+    const data = [
+      { ticker: 'QQQ', name: 'Invesco Nasdaq-100 ETF', shares: '3.156', cost: 725.17, price: 712.60, value: 2248.97, weight: '46.4', gain: -39.67, gainPct: -1.73, sleeve: 'Growth', er: '0.20%', div: '$13.73/yr',
+        what: 'An ETF tracking the Nasdaq-100 — the hundred largest non-financial companies on the Nasdaq. In practice, a concentrated bet on US mega-cap tech: Apple, Microsoft, NVIDIA, Amazon, Meta and friends dominate it.',
+        role: 'Your largest position and the engine of the portfolio. When tech leads the market, this is what carries your returns.',
+        risk: 'Concentration, squared. It is nearly half your account, and its own top ten holdings are over half the fund. A tech-led selloff — like the one happening right now — hits it hardest.',
+        watching: 'Down 1.73% since onboarding as the AI valuation reset plays out. At 46.4% it sits far above the 25% single-position flag line; Issue 15 covered staggering any new QQQ buys rather than adding in one lump.' },
+      { ticker: 'FXAIX', name: 'Fidelity 500 Index Fund', shares: '5.358', cost: 261.23, price: 260.68, value: 1396.72, weight: '28.8', gain: -2.95, gainPct: -0.21, sleeve: 'Core', er: '0.015%', div: '$16.61/yr',
+        what: 'A mutual fund tracking the S&P 500 — the 500 largest US companies across every sector. At 0.015% it is close to the cheapest way to own the US market that exists.',
+        role: 'The core. Broad, boring, nearly free. This is the position everything else should be measured against.',
+        risk: 'It’s an all-stock fund, and about a third of it is the same mega-cap tech you hold via QQQ and IWY — it diversifies less against them than it appears to.',
+        watching: 'Barely moved (−0.21%) through a week that hit tech hard — the other 490 companies held it up. Also your single biggest dividend payer at $16.61/yr.' },
+      { ticker: 'IWY', name: 'iShares Russell Top 200 Growth ETF', shares: '1.886', cost: 287.80, price: 283.39, value: 534.47, weight: '11.0', gain: -8.32, gainPct: -1.53, sleeve: 'Growth', er: '0.20%', div: '$2.64/yr',
+        what: 'An ETF holding the growth half of the 200 largest US companies. Its top holdings — Apple, Microsoft, NVIDIA — are nearly identical to QQQ\u2019s.',
+        role: 'A second growth engine. Honest framing: it mostly doubles down on what QQQ already does rather than adding anything new.',
+        risk: 'Redundancy. It moves almost in lockstep with QQQ (down 1.53% vs QQQ\u2019s 1.73% this period), so it adds concentration without adding diversification.',
+        watching: 'Whether it ever earns its 0.20% fee over just holding more FXAIX. If growth and core keep converging, this is the natural candidate to redirect new money away from.' },
+      { ticker: 'NVDA', name: 'NVIDIA Corporation', shares: '1.657', cost: 197.58, price: 194.83, value: 322.83, weight: '6.7', gain: -4.56, gainPct: -1.39, sleeve: 'Individual', er: '—', div: '$0.07/yr',
+        what: 'The company selling the chips the AI boom runs on. The most-watched stock on earth, and the center of the current valuation debate.',
+        role: 'A deliberate single-stock bet on AI infrastructure. Sized small on purpose — the individual-stock sleeve targets about 10% of the account.',
+        risk: 'You already own a lot of it indirectly. Direct 6.7% plus its weight inside QQQ, FXAIX and IWY puts effective exposure near 14% — one company driving a seventh of your portfolio.',
+        watching: 'The AI reset (−1.39% for you so far) and the 20% effective-exposure flag line. Q2 earnings season, covered in Issue 16, is the next real test.' },
+      { ticker: 'SCHD', name: 'Schwab US Dividend Equity ETF', shares: '5.502', cost: 31.85, price: 32.39, value: 178.21, weight: '3.7', gain: 2.97, gainPct: 1.70, sleeve: 'Income', er: '0.06%', div: '$6.05/yr',
+        what: 'An ETF holding ~100 established dividend payers — companies screened for a decade of payouts and healthy balance sheets. Utilities, staples, healthcare, energy.',
+        role: 'The income sleeve, and the portfolio\u2019s only real diversifier away from tech. Pays ~3.4% and tends to hold up when growth sells off.',
+        risk: 'Modest growth by design — in a roaring tech market it will lag badly and feel like dead weight. It isn\u2019t; that\u2019s the point of it.',
+        watching: 'Your only green fund since onboarding, +1.70% while everything tech fell. The defensives rotation is treating it well. Issue 15 flagged SCHD-type funds for anyone locking in yield.' },
+      { ticker: 'HOOD', name: 'Robinhood Markets, Inc.', shares: '1.360', cost: 108.65, price: 112.73, value: 153.31, weight: '3.2', gain: 5.55, gainPct: 3.76, sleeve: 'Individual', er: '—', div: '—',
+        what: 'The brokerage app. Revenue comes from trading activity, net interest on customer cash, and its growing subscription tier.',
+        role: 'A single-stock bet on retail investing continuing to grow. Also, notably, the app your own portfolio lives in.',
+        risk: 'Volatile and cyclical — its earnings rise and fall with market enthusiasm itself, so it tends to fall exactly when everything else does.',
+        watching: 'Up 3.76%, your best dollar performer this period. Nothing flagged; it stays comfortably inside the ~10% individual-stock sleeve alongside NVDA and FIG.' },
+      { ticker: 'FIG', name: 'Figma, Inc.', shares: '0.386', cost: 19.48, price: 21.33, value: 8.23, weight: '0.2', gain: 0.71, gainPct: 9.47, sleeve: 'Individual', er: '—', div: '—',
+        what: 'The collaborative design platform, public since 2025. A fractional share — less than half of one.',
+        role: 'A toe-hold, not a position. At $8.23 it\u2019s a company you wanted on the scoreboard to follow, and that\u2019s a fine reason at this size.',
+        risk: 'Single young-company risk — but at 0.2% of the account, even a total loss would cost less than a sandwich.',
+        watching: 'Best percentage gainer at +9.47%. If conviction grows it could earn a real allocation from a future paycheck; nothing needs deciding now.' },
+    ];
+
+    const holdings = data.map(h => {
+      const expanded = this.state.expanded === h.ticker;
+      return {
+        ...h,
+        costF: '$' + h.cost.toFixed(2),
+        priceF: '$' + h.price.toFixed(2),
+        valueF: '$' + h.value.toLocaleString('en-US', { minimumFractionDigits: 2 }),
+        gainF: (h.gain >= 0 ? '+$' : '−$') + Math.abs(h.gain).toFixed(2) + ' (' + (h.gainPct >= 0 ? '+' : '−') + Math.abs(h.gainPct).toFixed(2) + '%)',
+        gainColor: h.gain >= 0 ? '#159B5A' : '#B4483C',
+        expanded,
+        chev: expanded ? 90 : 0,
+        rowBg: expanded ? '#FBFAF6' : 'transparent',
+        toggle: () => this.setState(s => ({ expanded: s.expanded === h.ticker ? null : h.ticker })),
+      };
+    });
+
+    const sleeves = [
+      { label: 'Core', tickers: 'FXAIX', pct: '28.8', color: '#159B5A', typical: '40–60%', verdict: 'light. The broad-market anchor is smaller than the bets stacked on top of it.' },
+      { label: 'Growth', tickers: 'QQQ + IWY', pct: '57.5', color: '#0E1F2B', typical: '10–30%', verdict: 'roughly double the top of the range. This is where the portfolio\u2019s character comes from.' },
+      { label: 'Income', tickers: 'SCHD', pct: '3.7', color: '#8A9A5B', typical: '10–25%', verdict: 'a seedling. The only sleeve pulling in a different direction from tech.' },
+      { label: 'Individual stocks', tickers: 'NVDA + HOOD + FIG', pct: '10.0', color: '#C9A227', typical: '~10%', verdict: 'right at your Conservative target. Flag rule 8 trips only if it grows well past this.' },
+    ];
+
+    const conc = [
+      { ticker: 'QQQ', pct: 46.4, val: '$2,248.97', group: 'index' },
+      { ticker: 'FXAIX', pct: 28.8, val: '$1,396.72', group: 'index' },
+      { ticker: 'IWY', pct: 11.0, val: '$534.47', group: 'index' },
+      { ticker: 'SCHD', pct: 3.7, val: '$178.21', group: 'index' },
+      { ticker: 'NVDA', pct: 6.7, val: '$322.83', group: 'individual' },
+      { ticker: 'HOOD', pct: 3.2, val: '$153.31', group: 'individual' },
+      { ticker: 'FIG', pct: 0.2, val: '$8.23', group: 'individual' },
+    ];
+    const toBar = (c) => ({
+      ticker: c.ticker,
+      pct: c.pct.toFixed(1),
+      valF: c.val,
+      w: Math.max(1.5, c.pct / 50 * 100).toFixed(1),
+      color: c.group === 'index' ? '#0E1F2B' : '#C9A227',
+    });
+    const indexBars = conc.filter(c => c.group === 'index').map(toBar);
+    const indivBars = conc.filter(c => c.group === 'individual').map(toBar);
+    const segShades = { QQQ: '#0E1F2B', FXAIX: '#283C4E', IWY: '#425A6E', SCHD: '#5E7788', NVDA: '#C9A227', HOOD: '#DBBB57', FIG: '#EAD595' };
+    const splitBar = conc.map(c => ({ ticker: c.ticker, w: c.pct.toFixed(2), color: segShades[c.ticker] || '#0E1F2B' }));
+    const indivActual = conc.filter(c => c.group === 'individual').reduce((a, c) => a + c.pct, 0);
+    const indexActual = 100 - indivActual;
+    const drift = Math.abs(indivActual - 10);
+    const splitFlagged = drift >= 7.5;
+    const splitPill = splitFlagged
+      ? { label: 'Off goal · ' + indexActual.toFixed(1) + ' / ' + indivActual.toFixed(1), color: '#B4483C', bg: '#FAEDEB', border: '#F0D8D4' }
+      : { label: 'On target · ' + indexActual.toFixed(1) + ' / ' + indivActual.toFixed(1), color: '#159B5A', bg: '#EAF6EF', border: '#CDE9D9' };
+
+    const nvdaBars = [
+      { label: 'Direct NVDA shares', pct: '6.7%', w: 47, color: '#C9A227' },
+      { label: 'Inside QQQ', pct: '~4.5%', w: 32, color: '#3FBF7F' },
+      { label: 'Inside FXAIX', pct: '~2.0%', w: 14, color: '#3FBF7F' },
+      { label: 'Inside IWY', pct: '~0.9%', w: 7, color: '#3FBF7F' },
+    ];
+
+    const feeRows = [
+      { ticker: 'QQQ', er: '0.20%', held: '$2,248.97', cost: '$4.50' },
+      { ticker: 'FXAIX', er: '0.015%', held: '$1,396.72', cost: '$0.21' },
+      { ticker: 'IWY', er: '0.20%', held: '$534.47', cost: '$1.07' },
+      { ticker: 'SCHD', er: '0.06%', held: '$178.21', cost: '$0.11' },
+    ];
+
+    const tripped = { bg: '#FAEDEB', fg: '#B4483C' };
+    const ok = { bg: '#EAF5EF', fg: '#159B5A' };
+    const flagRules = [
+      { n: '1', ...tripped, title: 'Single position above 25%', desc: 'TRIPPED — QQQ is 46.4%, the one live flag. Standing topic in every dispatch until it changes.' },
+      { n: '2', ...ok, title: 'Effective single-company exposure above 20%', desc: 'NVIDIA is closest at ~14% once fund holdings are counted through. Clear, but watched.' },
+      { n: '3', ...ok, title: 'Any position down 15% in two weeks', desc: 'Worst two-week move is QQQ at −1.73%. Clear.' },
+      { n: '4', ...ok, title: 'A fund raises its expense ratio', desc: 'All four funds unchanged since onboarding. Clear.' },
+      { n: '5', ...ok, title: 'A holding cuts its dividend', desc: 'No cuts. SCHD\u2019s payers screened for 10+ year records. Clear.' },
+      { n: '6', ...ok, title: 'Cash pileup above one contribution', desc: 'Cash is $1.92 against $1,000/mo contributions. Clear.' },
+      { n: '7', ...ok, title: 'Fund vs individual mix drifts from target', desc: 'CLEAR — 90% index funds / 10% individual matches your Conservative target.' },
+      { n: '8', ...ok, title: 'Individual-stock sleeve above ~10%', desc: 'NVDA + HOOD + FIG = 10.0%, right at target. Any big growth here trips it.' },
+    ];
+
+    return { holdings, sleeves, splitBar, splitPill, indexBars, indivBars, nvdaBars, feeRows, flagRules };
+  }
+}
+</script>
+</body>
+</html>

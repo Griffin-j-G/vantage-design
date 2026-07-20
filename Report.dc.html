@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+    a { color: #159B5A; }
+    a:hover { color: #0E1F2B; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;" data-screen-label="Report">
+
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;"><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="width:100%;height:150px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:22px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;"><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="Market.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
+        <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Activity</a>
+        <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
+        <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Reports</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px;" style-hover="background: #EEEBE2;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+        </a>
+        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
+
+    <!-- HERO -->
+    <section style="padding: 56px 0 36px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 8px;">
+        <p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Weekly report · Week of Jul 6–10, 2026</p>
+        <span style="font-size: 12px; color: #A9A294;">Account {{ userAccount }} · New report every Friday</span>
+      </div>
+      <h1 style="margin: 0 0 22px; font-family: Fraunces, serif; font-size: 44px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;">This week in review</h1>
+
+      <div style="background: #0E1F2B; border-radius: 16px; padding: 34px 38px; color: #F7F6F2;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 28px; flex-wrap: wrap;">
+          <div style="max-width: 620px;">
+            <p style="margin: 0 0 12px; font-size: 12px; font-weight: 600; color: #3FBF7F; letter-spacing: 0.06em; text-transform: uppercase;">The one-line version</p>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em;">A calm, risk-on week: tech led the rebound, the account clawed back last week&rsquo;s dip and then some. Nothing new tripped — your one standing flag is still QQQ.</p>
+          </div>
+          <div style="text-align: right; min-width: 200px; flex: 1;">
+            <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">Portfolio value</p>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em;">$4,912.30</p>
+            <p style="margin: 10px 0 0; font-size: 13px; font-weight: 600; color: #3FBF7F; font-variant-numeric: tabular-nums;">+$67.63 (+1.40%) on the week</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE NUMBERS -->
+    <section style="padding: 0 0 44px;">
+      <h2 style="margin: 0 0 18px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">The numbers this week</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Change on the week</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; color: #159B5A; font-variant-numeric: tabular-nums;">+1.40%</p>
+          <p style="margin: 6px 0 0; font-size: 12px; color: #A9A294;">+$67.63 in dollars</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Best mover</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums;">NVDA</p>
+          <p style="margin: 6px 0 0; font-size: 12px; color: #159B5A; font-weight: 600;">+4.2% this week</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Laggard</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums;">SCHD</p>
+          <p style="margin: 6px 0 0; font-size: 12px; color: #B4483C; font-weight: 600;">−0.6% this week</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Flags tripped</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums;">1</p>
+          <p style="margin: 6px 0 0; font-size: 12px; color: #A9A294;">Unchanged — QQQ concentration</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT MOVED -->
+    <section style="padding: 0 0 44px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">What moved, and why</h2>
+      <p style="margin: 0 0 20px; font-size: 14px; color: #6B7480; max-width: 640px; line-height: 1.6;">The three things worth knowing from this week&rsquo;s five sessions. Everything else was noise.</p>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; gap: 20px; align-items: baseline;">
+          <span style="font-family: Fraunces, serif; font-size: 15px; font-weight: 600; color: #159B5A; white-space: nowrap; min-width: 96px;">Tech rebound</span>
+          <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;">QQQ finished the week +1.9% as megacap tech recovered from last week&rsquo;s AI-reset dip. Because QQQ is 46% of your account, most of this week&rsquo;s +1.40% came from here — a reminder of how much one fund drives your results in both directions.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; gap: 20px; align-items: baseline;">
+          <span style="font-family: Fraunces, serif; font-size: 15px; font-weight: 600; color: #C9A227; white-space: nowrap; min-width: 96px;">NVDA news</span>
+          <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;">Your best single name, +4.2%, on renewed data-center demand headlines. A good week for a small position — but a reminder it swings roughly twice as hard as the account does. It stays inside your ~10% individual-stock sleeve.</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; gap: 20px; align-items: baseline;">
+          <span style="font-family: Fraunces, serif; font-size: 15px; font-weight: 600; color: #7FA8C9; white-space: nowrap; min-width: 96px;">Dividends lag</span>
+          <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;">SCHD slipped −0.6% as defensive dividend names took a back seat in a risk-on week — exactly the weeks they&rsquo;re supposed to lag. Its job is to steady you when tech doesn&rsquo;t. See the <a href="Performance.dc.html#income" style="color: #159B5A; font-weight: 500;">Income section</a> for the dividend detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STANDING FLAG + SUGGESTED MOVE -->
+    <section style="padding: 0 0 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #C9A227;"></span>
+          <p style="margin: 0; font-size: 12px; font-weight: 600; color: #C9A227; letter-spacing: 0.05em; text-transform: uppercase;">Standing flag · unchanged</p>
+        </div>
+        <h3 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 20px; font-weight: 600;">QQQ is 46% of the account</h3>
+        <p style="margin: 0 0 16px; font-size: 13.5px; color: #4A5560; line-height: 1.7; flex: 1;">Your 90/10 index-vs-individual split is right on target — the flag is concentration <em>inside</em> the index sleeve. This week&rsquo;s rally nudged QQQ a hair higher, not lower. It stays the one thing worth acting on.</p>
+        <a href="Performance.dc.html#risk" style="font-size: 13.5px; font-weight: 600; color: #159B5A; text-decoration: none;">See the full breakdown under Risk →</a>
+      </div>
+      <div style="background: #F4FAF6; border: 1px solid #CDE9D9; border-radius: 14px; padding: 28px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #159B5A;"></span>
+          <p style="margin: 0; font-size: 12px; font-weight: 600; color: #159B5A; letter-spacing: 0.05em; text-transform: uppercase;">This week&rsquo;s suggested move</p>
+        </div>
+        <h3 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 20px; font-weight: 600;">Point your Jul 17 paycheck at the core</h3>
+        <p style="margin: 0 0 16px; font-size: 13.5px; color: #4A5560; line-height: 1.7; flex: 1;">Your next $1,000 contribution lands Friday. Sending <strong>$600 to FXAIX, $300 to SCHD, $100 to NVDA</strong> keeps broadening the core and gently dilutes QQQ — no selling, no taxes. This is the &ldquo;Broaden the Core&rdquo; strategy.</p>
+        <a href="Plan.dc.html" style="font-size: 13.5px; font-weight: 600; color: #159B5A; text-decoration: none;">Adjust the split on Plan →</a>
+      </div>
+    </section>
+
+    <!-- ON THE RADAR -->
+    <section style="padding: 0 0 44px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 30px 34px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 18px; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">On the radar next week</h2>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; gap: 14px; align-items: baseline;">
+            <span style="font-size: 13px; font-weight: 600; color: #6B7480; white-space: nowrap; min-width: 92px; font-variant-numeric: tabular-nums;">Fri Jul 17</span>
+            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;">Your $1,000 contribution posts, and the next weekly report lands. First chance to act on the suggested split above.</p>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: baseline;">
+            <span style="font-size: 13px; font-weight: 600; color: #6B7480; white-space: nowrap; min-width: 92px; font-variant-numeric: tabular-nums;">Mid-week</span>
+            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;">Big-tech earnings season opens — the names behind QQQ report. Expect your account to move more than usual, up or down. Context will be in the market read on your <a href="Overview.dc.html" style="color: #159B5A; font-weight: 500;">Overview</a>.</p>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: baseline;">
+            <span style="font-size: 13px; font-weight: 600; color: #6B7480; white-space: nowrap; min-width: 92px; font-variant-numeric: tabular-nums;">Ongoing</span>
+            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;">Nightly checks keep watching the eight flag rules. Nothing new is close to tripping — the account&rsquo;s shape is steady.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHIVE -->
+    <section style="padding: 0 0 44px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">The archive</h2>
+      <p style="margin: 0 0 20px; font-size: 14px; color: #6B7480; max-width: 640px; line-height: 1.6;">Every past issue and what it covered. The latest report is always at the top of this page; here&rsquo;s the backlog.</p>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+
+        <div style="background: #FFFFFF; border: 2px dashed #D8D2C4; border-radius: 14px; padding: 24px 30px; display: grid; grid-template-columns: 92px 1fr auto; gap: 24px; align-items: center;">
+          <div>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 26px; font-weight: 500; color: #A9A294;">№ 16</p>
+            <p style="margin: 2px 0 0; font-size: 12px; color: #A9A294;">Fri Jul 17</p>
+          </div>
+          <div>
+            <p style="margin: 0 0 6px; font-size: 16px; font-weight: 600; color: #4A5560;">Q2 earnings season kicks off</p>
+            <p style="margin: 0; font-size: 13.5px; color: #6B7480; line-height: 1.65;">Covers Jul 3–16 — the first full fortnight of your account&rsquo;s history and the earnings reports that will test the AI valuation reset.</p>
+          </div>
+          <span style="font-size: 11.5px; font-weight: 700; color: #B07A1E; background: #FBF3E2; border: 1px solid #EFDFBC; padding: 6px 14px; border-radius: 999px; white-space: nowrap;">UP NEXT</span>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 92px 1fr auto; gap: 24px; align-items: center;">
+          <div>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 26px; font-weight: 500;">№ 15</p>
+            <p style="margin: 2px 0 0; font-size: 12px; color: #A9A294;">Fri Jul 3</p>
+          </div>
+          <div>
+            <p style="margin: 0 0 6px; font-size: 16px; font-weight: 600;">The AI reset meets your new account</p>
+            <p style="margin: 0; font-size: 13.5px; color: #6B7480; line-height: 1.65;">Your first issue as a subscriber. Jun 20–Jul 2: Nasdaq-100 −3.8% on the AI/chip reset, oil −11.7% on the ceasefire, soft June payrolls, a Dow record. A −0.95% first week, and why it&rsquo;s a non-event.</p>
+          </div>
+          <span style="font-size: 11.5px; font-weight: 700; color: #159B5A; background: #EAF5EF; border: 1px solid #CBE5D6; padding: 6px 14px; border-radius: 999px; white-space: nowrap;">SENT</span>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 92px 1fr auto; gap: 24px; align-items: center;">
+          <div>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 26px; font-weight: 500;">№ 14</p>
+            <p style="margin: 2px 0 0; font-size: 12px; color: #A9A294;">Tue Jun 30</p>
+          </div>
+          <div>
+            <p style="margin: 0 0 6px; font-size: 16px; font-weight: 600;">H1 2026, closed out</p>
+            <p style="margin: 0; font-size: 13.5px; color: #6B7480; line-height: 1.65;">The half-year scoreboard: Dow +8.9%, S&amp;P +9.6%, Nasdaq +12.8%, Russell 2000 +22%. The underrated story was breadth — small caps doubling mega-cap tech&rsquo;s return.</p>
+          </div>
+          <span style="font-size: 11.5px; font-weight: 700; color: #159B5A; background: #EAF5EF; border: 1px solid #CBE5D6; padding: 6px 14px; border-radius: 999px; white-space: nowrap;">SENT</span>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 30px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 92px 1fr auto; gap: 24px; align-items: center;">
+          <div>
+            <p style="margin: 0; font-family: Fraunces, serif; font-size: 26px; font-weight: 500;">№ 13</p>
+            <p style="margin: 2px 0 0; font-size: 12px; color: #A9A294;">Fri Jun 26</p>
+          </div>
+          <div>
+            <p style="margin: 0 0 6px; font-size: 16px; font-weight: 600;">Ceasefire week</p>
+            <p style="margin: 0; font-size: 13.5px; color: #6B7480; line-height: 1.65;">The US–Iran 60-day ceasefire and the Strait of Hormuz reopening — what a geopolitical de-escalation does to oil, inflation, and the rate path. Written before your onboarding; included for continuity.</p>
+          </div>
+          <span style="font-size: 11.5px; font-weight: 700; color: #6B7480; background: #F0EDE4; border: 1px solid #E1DCCF; padding: 6px 14px; border-radius: 999px; white-space: nowrap;">ARCHIVE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section style="padding: 0 0 64px;">
+      <div style="background: #0E1F2B; border-radius: 14px; padding: 34px 40px; color: #F7F6F2; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;">
+        <div>
+          <h2 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">Shape the next issue</h2>
+          <p style="margin: 0; font-size: 14px; color: #9AA7B1; line-height: 1.7; max-width: 560px;">Too long? Too basic? Want more on a specific holding, or a topic explained? The report is written for exactly one reader, so feedback changes it immediately.</p>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf35D-LQK7RcYeBqZEJB2qyhm5E1H7hVgO27avhmbD1Dl8A-A/viewform" target="_blank" style="font-size: 13.5px; font-weight: 600; color: #0E1F2B; background: #F7F6F2; text-decoration: none; padding: 12px 26px; border-radius: 999px; white-space: nowrap;">Reader feedback →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for {{ userName }} · Figures are estimates — food for thought, not financial advice</span>
+      <span>Data refreshes weekdays 8:30 PM CT · New report every Friday</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  __sessionVals() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); }
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var userName = (s && s.name) || 'Griffin';
+    return {
+      userName: userName,
+      userInitial: (userName.charAt(0) || 'G').toUpperCase(),
+      userAccount: (s && s.account) || 'PD-08842',
+      onLogout: () => {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+    };
+  }
+  renderVals() { return this.__sessionVals(); }
+}
+</script>
+</body>
+</html>

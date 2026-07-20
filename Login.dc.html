@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+    a { color: #159B5A; }
+    a:hover { color: #0E1F2B; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; box-sizing: border-box;" data-screen-label="Login">
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;display:flex;align-items:center;justify-content:center;padding:40px 24px;box-sizing:border-box;">
+    <div style="width:100%;max-width:440px;display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;"><div style="width:210px;height:28px;border-radius:8px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:300px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="width:100%;height:380px;border-radius:16px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+    </div>
+  </div>
+  
+
+  <div style="width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 26px;">
+
+    <div style="text-align: center;">
+      <img src="uploads/vantage-logo-dark.png" alt="Vantage — Market Analysis" style="width: 280px; max-width: 100%; height: auto; display: block; margin: 0 auto 8px;">
+      <p style="margin: 0; font-size: 14px; color: #6B7480; line-height: 1.6;">{{ subtitle }}</p>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 16px; padding: 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; flex-direction: column; gap: 22px;">
+
+      <!-- MODE TOGGLE -->
+      <div style="display: flex; gap: 4px; background: #F1EFE8; border-radius: 10px; padding: 4px;">
+        <button onClick="{{ onSignInMode }}" style="flex: 1; font-family: inherit; font-size: 13px; font-weight: 600; padding: 9px 12px; border-radius: 7px; border: none; cursor: pointer; background: {{ signInTabBg }}; color: {{ signInTabColor }}; box-shadow: {{ signInTabShadow }};">Sign in</button>
+        <button onClick="{{ onCreateMode }}" style="flex: 1; font-family: inherit; font-size: 13px; font-weight: 600; padding: 9px 12px; border-radius: 7px; border: none; cursor: pointer; background: {{ createTabBg }}; color: {{ createTabColor }}; box-shadow: {{ createTabShadow }};">Create account</button>
+      </div>
+
+      <!-- USERNAME -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Username</label>
+        <input type="text" value="{{ username }}" onChange="{{ onUsername }}" onKeyDown="{{ onKey }}" placeholder="{{ userPlaceholder }}" autocapitalize="none" autocomplete="username" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid {{ userBorder }}; border-radius: 8px; padding: 12px 14px; outline: none;" style-focus="border-color: #159B5A;">
+      </div>
+
+      <!-- PASSWORD -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 12px; font-weight: 500; color: #6B7480;">{{ passLabel }}</label>
+        <input type="password" value="{{ pass }}" onChange="{{ onPass }}" onKeyDown="{{ onKey }}" placeholder="{{ passPlaceholder }}" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid {{ passBorder }}; border-radius: 8px; padding: 12px 14px; outline: none;" style-focus="border-color: #159B5A;">
+      </div>
+
+      <!-- CONFIRM (create only) -->
+      <sc-if value="{{ isCreate }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Confirm password</label>
+          <input type="password" value="{{ confirm }}" onChange="{{ onConfirm }}" onKeyDown="{{ onKey }}" placeholder="Re-enter your password" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid {{ passBorder }}; border-radius: 8px; padding: 12px 14px; outline: none;" style-focus="border-color: #159B5A;">
+        </div>
+      </sc-if>
+
+      <span style="min-height: 18px; margin-top: -8px; font-size: 12.5px; color: {{ msgColor }}; line-height: 1.45;">{{ message }}</span>
+
+      <button onClick="{{ onSubmit }}" style="font-family: inherit; font-size: 14px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; border: none; border-radius: 8px; padding: 13px 16px; cursor: pointer; letter-spacing: 0.01em;" style-hover="background: #159B5A;">{{ submitLabel }}</button>
+
+      <!-- QUICK SIGN-IN (sign-in mode only) -->
+      <sc-if value="{{ showQuick }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 4px; border-top: 1px solid #F0EDE4;">
+          <span style="font-size: 11.5px; color: #A9A294; padding-top: 12px;">Demo accounts &mdash; tap to fill</span>
+          <div style="display: flex; gap: 10px;">
+            <sc-for list="{{ demos }}" as="d" hint-placeholder-count="2">
+              <button onClick="{{ d.onFill }}" style="flex: 1; font-family: inherit; text-align: left; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 10px; padding: 10px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px;" style-hover="border-color: #159B5A;">
+                <span style="width: 30px; height: 30px; border-radius: 50%; background: {{ d.avatarBg }}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0;">{{ d.initial }}</span>
+                <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0;">
+                  <span style="font-size: 13px; font-weight: 600; color: #0E1F2B;">{{ d.name }}</span>
+                  <span style="font-size: 11px; color: #A9A294;">@{{ d.username }}</span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+
+    <p style="margin: 0; text-align: center; font-size: 12px; color: #A9A294; line-height: 1.6;">Your session stays on this device until you log out.<br>Prepared privately &middot; not financial advice</p>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mode: 'signin', username: '', pass: '', confirm: '', message: '', msgError: false };
+
+  readSession() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    return raw;
+  }
+
+  // Registry of all accounts (seed + user-created), keyed by lowercase username.
+  loadAccounts() {
+    var reg = {};
+    try { reg = JSON.parse(localStorage.getItem('pd-accounts') || '{}') || {}; } catch (e) {}
+    if (!reg['griffin']) reg['griffin'] = { name: 'Griffin', account: 'PD-08842', pass: 'dispatch-8842', seed: true };
+    if (!reg['luca']) reg['luca'] = { name: 'Luca', account: 'PD-10231', pass: 'dispatch-1023', seed: true };
+    return reg;
+  }
+
+  saveAccounts(reg) {
+    try { localStorage.setItem('pd-accounts', JSON.stringify(reg)); } catch (e) {}
+  }
+
+  persistSession(json) {
+    var saved = false;
+    try { localStorage.setItem('pd-session', json); saved = true; } catch (e) {}
+    if (!saved) { try { sessionStorage.setItem('pd-session', json); saved = true; } catch (e) {} }
+    if (!saved) window.name = 'pd-session:' + json;
+  }
+
+  componentDidMount() {
+    if (this.readSession()) window.location.replace('Overview.dc.html');
+  }
+
+  signIn() {
+    var uname = this.state.username.trim().toLowerCase();
+    if (!uname || !this.state.pass) { this.setState({ message: 'Enter your username and password.', msgError: true }); return; }
+    var reg = this.loadAccounts();
+    var u = reg[uname];
+    if (!u) { this.setState({ message: 'No account with that username. Create one instead?', msgError: true }); return; }
+    if (u.pass !== this.state.pass) { this.setState({ message: 'That password doesn\u2019t match. Try again.', msgError: true }); return; }
+    this.persistSession(JSON.stringify({ name: u.name, account: u.account }));
+    window.location.href = 'Overview.dc.html';
+  }
+
+  createAccount() {
+    var raw = this.state.username.trim();
+    var uname = raw.toLowerCase();
+    if (!raw) { this.setState({ message: 'Choose a username.', msgError: true }); return; }
+    if (!/^[a-z0-9_.-]{3,20}$/.test(uname)) { this.setState({ message: 'Username: 3\u201320 letters, numbers, . _ - only.', msgError: true }); return; }
+    if (this.state.pass.length < 6) { this.setState({ message: 'Password needs at least 6 characters.', msgError: true }); return; }
+    if (this.state.pass !== this.state.confirm) { this.setState({ message: 'Passwords don\u2019t match.', msgError: true }); return; }
+    var reg = this.loadAccounts();
+    if (reg[uname]) { this.setState({ message: 'That username is taken. Try another.', msgError: true }); return; }
+    var num = 'PD-' + String(10000 + Math.floor(Math.random() * 89999));
+    reg[uname] = { name: raw, account: num, pass: this.state.pass };
+    this.saveAccounts(reg);
+    this.persistSession(JSON.stringify({ name: raw, account: num }));
+    window.location.href = 'Onboarding.dc.html';
+  }
+
+  renderVals() {
+    var st = this.state;
+    var isCreate = st.mode === 'create';
+
+    var reg = this.loadAccounts();
+    var demoDefs = [
+      { key: 'griffin', avatarBg: '#0E1F2B' },
+      { key: 'luca', avatarBg: '#7FA8C9' },
+    ];
+    var demos = demoDefs.map(function (d) {
+      var u = reg[d.key] || {};
+      var self = this;
+      return {
+        name: u.name || '',
+        username: d.key,
+        initial: (u.name || '?').charAt(0).toUpperCase(),
+        avatarBg: d.avatarBg,
+        onFill: function () { self.setState({ username: d.key, pass: u.pass, message: '', msgError: false }); },
+      };
+    }, this);
+
+    var tabActive = { bg: '#FFFFFF', color: '#0E1F2B', shadow: '0 1px 2px rgba(14,31,43,0.12)' };
+    var tabIdle = { bg: 'transparent', color: '#6B7480', shadow: 'none' };
+    var siTab = isCreate ? tabIdle : tabActive;
+    var crTab = isCreate ? tabActive : tabIdle;
+
+    return {
+      subtitle: isCreate ? 'Pick a username and password to start your private dashboard.' : 'Your private paycheck-investing dashboard. Sign in to continue.',
+      isCreate: isCreate,
+      showQuick: !isCreate,
+      demos: demos,
+
+      signInTabBg: siTab.bg, signInTabColor: siTab.color, signInTabShadow: siTab.shadow,
+      createTabBg: crTab.bg, createTabColor: crTab.color, createTabShadow: crTab.shadow,
+      onSignInMode: function () { this.setState({ mode: 'signin', message: '', msgError: false }); }.bind(this),
+      onCreateMode: function () { this.setState({ mode: 'create', message: '', msgError: false }); }.bind(this),
+
+      username: st.username,
+      pass: st.pass,
+      confirm: st.confirm,
+      userPlaceholder: isCreate ? 'Pick a username' : 'Your username',
+      passLabel: isCreate ? 'Choose a password' : 'Password',
+      passPlaceholder: isCreate ? 'At least 6 characters' : 'Your password',
+      submitLabel: isCreate ? 'Create account' : 'Sign in',
+
+      message: st.message,
+      msgColor: st.msgError ? '#B4483C' : '#159B5A',
+      userBorder: st.msgError ? '#B4483C' : '#E6E2D8',
+      passBorder: st.msgError ? '#B4483C' : '#E6E2D8',
+
+      onUsername: function (e) { this.setState({ username: e.target.value, message: '' }); }.bind(this),
+      onPass: function (e) { this.setState({ pass: e.target.value, message: '' }); }.bind(this),
+      onConfirm: function (e) { this.setState({ confirm: e.target.value, message: '' }); }.bind(this),
+      onKey: function (e) { if (e.key === 'Enter') { isCreate ? this.createAccount() : this.signIn(); } }.bind(this),
+      onSubmit: function () { isCreate ? this.createAccount() : this.signIn(); }.bind(this),
+    };
+  }
+}
+</script>
+</body>
+</html>

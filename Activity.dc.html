@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+    a { color: #159B5A; }
+    a:hover { color: #0E1F2B; }
+  
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;" data-screen-label="Activity">
+
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;"><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:58px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="width:100%;height:150px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:22px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:110px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;"><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:180px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="Market.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
+        <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Activity</a>
+        <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
+        <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Reports</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px;" style-hover="background: #EEEBE2;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+        </a>
+        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
+
+    <!-- HERO -->
+    <section style="padding: 56px 0 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 8px;">
+        <p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Trade log · Account {{ userAccount }}</p>
+        <span style="font-size: 12px; color: #A9A294;">{{ savedMsg }}</span>
+      </div>
+      <h1 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.02em;">Log what you bought</h1>
+      <p style="margin: 0; font-size: 15px; color: #6B7480; max-width: 660px; line-height: 1.65;">Vantage isn&rsquo;t linked to your brokerage, so it only knows what you tell it. Whenever an order fills, record it here at the exact price &mdash; that&rsquo;s what keeps your holdings, cost basis, and flags current instead of a day behind.</p>
+    </section>
+
+    <!-- ENTRY FORM -->
+    <section style="padding: 0 0 28px;">
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 26px 30px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <h2 style="margin: 0 0 18px; font-family: Fraunces, serif; font-size: 20px; font-weight: 600;">Record an order</h2>
+        <div style="display: grid; grid-template-columns: 0.8fr 1.4fr 1fr 1fr 1.1fr auto; gap: 12px; align-items: end;">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Side</label>
+            <div style="display: flex; gap: 4px; background: #F1EFE8; border-radius: 8px; padding: 3px;">
+              <button onClick="{{ onPickBuy }}" style="flex: 1; font-family: inherit; font-size: 12px; font-weight: 600; padding: 8px 4px; border-radius: 6px; border: none; cursor: pointer; background: {{ buyBg }}; color: {{ buyColor }};">Buy</button>
+              <button onClick="{{ onPickSell }}" style="flex: 1; font-family: inherit; font-size: 12px; font-weight: 600; padding: 8px 4px; border-radius: 6px; border: none; cursor: pointer; background: {{ sellBg }}; color: {{ sellColor }};">Sell</button>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Ticker</label>
+            <input type="text" value="{{ fTicker }}" onChange="{{ onTicker }}" placeholder="e.g. FXAIX" autocapitalize="characters" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 12px; outline: none; text-transform: uppercase; min-width: 0;" style-focus="border-color: #159B5A;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Shares</label>
+            <input type="text" value="{{ fShares }}" onChange="{{ onShares }}" placeholder="0" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 12px; outline: none; text-align: right; font-variant-numeric: tabular-nums; min-width: 0;" style-focus="border-color: #159B5A;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Fill price</label>
+            <div style="display: flex; align-items: center; border: 1px solid #E6E2D8; border-radius: 8px; overflow: hidden;">
+              <span style="padding: 10px 0 10px 10px; font-size: 14px; color: #A9A294;">$</span>
+              <input type="text" value="{{ fPrice }}" onChange="{{ onPrice }}" placeholder="0.00" style="font-family: inherit; font-size: 14px; color: #0E1F2B; border: none; padding: 10px 10px 10px 4px; outline: none; width: 100%; text-align: right; font-variant-numeric: tabular-nums; min-width: 0;">
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 500; color: #6B7480;">Date filled</label>
+            <input type="date" value="{{ fDate }}" onChange="{{ onDate }}" style="font-family: inherit; font-size: 14px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 8px; padding: 9px 12px; outline: none; min-width: 0;" style-focus="border-color: #159B5A;">
+          </div>
+          <button onClick="{{ onAdd }}" style="font-family: inherit; font-size: 14px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; border: none; border-radius: 8px; padding: 11px 22px; cursor: pointer; white-space: nowrap;" style-hover="background: #159B5A;">Add</button>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #F0EDE4;">
+          <span style="font-size: 12.5px; color: {{ hintColor }};">{{ hint }}</span>
+          <span style="font-size: 13px; color: #6B7480;">Order value: <strong style="color: #0E1F2B; font-variant-numeric: tabular-nums;">{{ orderValue }}</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUMMARY -->
+    <section style="padding: 0 0 20px;">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Orders logged</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ countF }}</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Total bought</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; color: #159B5A; font-variant-numeric: tabular-nums;">{{ boughtF }}</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Total sold</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; color: #B4483C; font-variant-numeric: tabular-nums;">{{ soldF }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOG -->
+    <section style="padding: 0 0 64px;">
+      <h2 style="margin: 0 0 16px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">Order history</h2>
+
+      <sc-if value="{{ hasTrades }}" hint-placeholder-val="{{ true }}">
+        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+          <div style="display: grid; grid-template-columns: 90px 1fr 0.9fr 1fr 1.1fr 44px; gap: 12px; padding: 14px 24px; background: #FBFAF6; border-bottom: 1px solid #F0EDE4; font-size: 11px; font-weight: 600; color: #A9A294; letter-spacing: 0.04em; text-transform: uppercase;">
+            <span>Side</span>
+            <span>Ticker</span>
+            <span style="text-align: right;">Shares</span>
+            <span style="text-align: right;">Fill price</span>
+            <span style="text-align: right;">Value · date</span>
+            <span></span>
+          </div>
+          <sc-for list="{{ tradeRows }}" as="t" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 90px 1fr 0.9fr 1fr 1.1fr 44px; gap: 12px; padding: 16px 24px; border-bottom: 1px solid #F4F1E9; align-items: center;">
+              <span style="font-size: 11px; font-weight: 600; text-align: center; padding: 4px 0; border-radius: 6px; background: {{ t.sideBg }}; color: {{ t.sideColor }};">{{ t.sideLabel }}</span>
+              <span style="font-family: Fraunces, serif; font-size: 16px; font-weight: 600;">{{ t.ticker }}</span>
+              <span style="font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; color: #4A5560;">{{ t.shares }}</span>
+              <span style="font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; color: #4A5560;">{{ t.price }}</span>
+              <span style="text-align: right;">
+                <span style="display: block; font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ t.value }}</span>
+                <span style="display: block; font-size: 11.5px; color: #A9A294;">{{ t.date }}</span>
+              </span>
+              <button onClick="{{ t.onRemove }}" title="Delete" style="font-family: inherit; font-size: 16px; color: #C0B9AA; background: none; border: none; cursor: pointer; padding: 4px; line-height: 1; justify-self: end;" style-hover="color: #B4483C;">&times;</button>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="background: #FFFFFF; border: 1px dashed #D8D2C4; border-radius: 14px; padding: 48px 30px; text-align: center;">
+          <p style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 18px; font-weight: 500; color: #4A5560;">No orders logged yet</p>
+          <p style="margin: 0; font-size: 13.5px; color: #A9A294;">Add your first fill above and it&rsquo;ll appear here, newest first.</p>
+        </div>
+      </sc-if>
+    </section>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for {{ userName }} · Figures are estimates — food for thought, not financial advice</span>
+      <span>Manual entries · saved on this device</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { side: 'buy', fTicker: '', fShares: '', fPrice: '', fDate: '', trades: [], loaded: false, savedAt: null, hint: '', hintError: false };
+
+  __session() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); return null; }
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  }
+
+  key() {
+    var s = this.__session() || {};
+    return 'pd-trades-' + (s.account || 'unknown');
+  }
+
+  componentDidMount() {
+    var trades = [];
+    try { trades = JSON.parse(localStorage.getItem(this.key()) || '[]') || []; } catch (e) {}
+    var today = new Date().toISOString().slice(0, 10);
+    this.setState({ trades: trades, loaded: true, fDate: today });
+  }
+
+  persist(trades) {
+    try { localStorage.setItem(this.key(), JSON.stringify(trades)); } catch (e) {}
+  }
+
+  add() {
+    var ticker = this.state.fTicker.trim().toUpperCase();
+    var shares = parseFloat(String(this.state.fShares).replace(/[^0-9.]/g, ''));
+    var price = parseFloat(String(this.state.fPrice).replace(/[^0-9.]/g, ''));
+    if (!ticker) { this.setState({ hint: 'Enter a ticker symbol.', hintError: true }); return; }
+    if (!(shares > 0)) { this.setState({ hint: 'Enter the number of shares.', hintError: true }); return; }
+    if (!(price > 0)) { this.setState({ hint: 'Enter the exact fill price.', hintError: true }); return; }
+    var trade = {
+      id: Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+      side: this.state.side,
+      ticker: ticker,
+      shares: shares,
+      price: price,
+      date: this.state.fDate || new Date().toISOString().slice(0, 10),
+    };
+    var trades = [trade].concat(this.state.trades);
+    this.persist(trades);
+    this.setState({ trades: trades, fTicker: '', fShares: '', fPrice: '', savedAt: Date.now(), hint: 'Saved ' + (trade.side === 'buy' ? 'buy' : 'sell') + ' of ' + trade.shares + ' ' + trade.ticker + ' \u2713', hintError: false });
+  }
+
+  remove(id) {
+    var trades = this.state.trades.filter(function (t) { return t.id !== id; });
+    this.persist(trades);
+    this.setState({ trades: trades, savedAt: Date.now(), hint: 'Order removed.', hintError: false });
+  }
+
+  renderVals() {
+    var self = this;
+    var s = this.__session() || {};
+    var st = this.state;
+
+    var money = function (n) {
+      return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    };
+    var fmtDate = function (d) {
+      if (!d) return '';
+      var parts = String(d).split('-');
+      if (parts.length !== 3) return d;
+      var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(parts[1], 10) - 1] || '';
+      return mo + ' ' + parseInt(parts[2], 10) + ', ' + parts[0];
+    };
+
+    var bought = 0, sold = 0;
+    var tradeRows = st.trades.map(function (t) {
+      var value = t.shares * t.price;
+      if (t.side === 'sell') sold += value; else bought += value;
+      var isBuy = t.side !== 'sell';
+      return {
+        sideLabel: isBuy ? 'BUY' : 'SELL',
+        sideBg: isBuy ? '#EAF6EF' : '#FAEDEB',
+        sideColor: isBuy ? '#159B5A' : '#B4483C',
+        ticker: t.ticker,
+        shares: (Math.round(t.shares * 10000) / 10000).toString(),
+        price: money(t.price),
+        value: money(value),
+        date: fmtDate(t.date),
+        onRemove: function () { self.remove(t.id); },
+      };
+    });
+
+    var shares = parseFloat(String(st.fShares).replace(/[^0-9.]/g, ''));
+    var price = parseFloat(String(st.fPrice).replace(/[^0-9.]/g, ''));
+    var order = (shares > 0 && price > 0) ? shares * price : 0;
+
+    var buyActive = st.side !== 'sell';
+
+    return {
+      userName: s.name || 'Griffin',
+      userInitial: (String(s.name || 'G').charAt(0) || 'G').toUpperCase(),
+      userAccount: s.account || 'PD-08842',
+      onLogout: function () {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+
+      buyBg: buyActive ? '#159B5A' : 'transparent',
+      buyColor: buyActive ? '#F7F6F2' : '#6B7480',
+      sellBg: !buyActive ? '#B4483C' : 'transparent',
+      sellColor: !buyActive ? '#F7F6F2' : '#6B7480',
+      onPickBuy: function () { self.setState({ side: 'buy' }); },
+      onPickSell: function () { self.setState({ side: 'sell' }); },
+
+      fTicker: st.fTicker,
+      fShares: st.fShares,
+      fPrice: st.fPrice,
+      fDate: st.fDate,
+      onTicker: function (e) { self.setState({ fTicker: e.target.value, hint: '' }); },
+      onShares: function (e) { self.setState({ fShares: e.target.value.replace(/[^0-9.]/g, ''), hint: '' }); },
+      onPrice: function (e) { self.setState({ fPrice: e.target.value.replace(/[^0-9.]/g, ''), hint: '' }); },
+      onDate: function (e) { self.setState({ fDate: e.target.value }); },
+      onAdd: function () { self.add(); },
+
+      orderValue: money(order),
+      hint: st.hint || 'Enter the exact price your order filled at — not the current quote.',
+      hintColor: st.hintError ? '#B4483C' : '#A9A294',
+      savedMsg: st.savedAt ? 'Saved \u2713' : 'Entries save automatically to this device',
+
+      countF: st.trades.length.toString(),
+      boughtF: money(bought),
+      soldF: money(sold),
+      tradeRows: tradeRows,
+      hasTrades: st.loaded && st.trades.length > 0,
+      isEmpty: st.loaded && st.trades.length === 0,
+    };
+  }
+}
+</script>
+</body>
+</html>
