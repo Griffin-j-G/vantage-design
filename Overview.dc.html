@@ -212,11 +212,11 @@
       <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
         <div style="background: #F1EFE8; border: 1px solid #E6E2D8; border-radius: 12px; padding: 14px 20px; display: flex; gap: 12px; align-items: baseline;">
           <span style="font-size: 11px; font-weight: 600; color: #C9A227; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;">Watching, not buying</span>
-          <p style="margin: 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">COST, a quality dividend grower flagged in Issue 15. It'd sit in your individual-stock sleeve, which is already near its ~10% target.</p>
+          <p style="margin: 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">COST, a quality dividend grower flagged in Issue 15. It'd sit in your individual-stock sleeve, sized by your risk profile.</p>
         </div>
         <div style="background: #F1EFE8; border: 1px solid #E6E2D8; border-radius: 12px; padding: 14px 20px; display: flex; gap: 12px; align-items: baseline;">
           <span style="font-size: 11px; font-weight: 600; color: #B4483C; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;">Skip for now</span>
-          <p style="margin: 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">Adding more to QQQ, already 46.4% of the account. New money there deepens the concentration flag instead of easing it.</p>
+          <p style="margin: 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ skipNote }}</p>
         </div>
       </div>
     </section>
@@ -228,11 +228,11 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px;">
           <div style="display: flex; gap: 14px;">
             <span style="width: 26px; height: 26px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span>
-            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;"><strong style="color: #0E1F2B;">The AI selloff hit your growth sleeve.</strong> The Nasdaq-100 fell 3.8% over Jun 20–Jul 2 as AI and chip valuations reset, and your portfolio is built from exactly those names, QQQ, IWY and NVDA are 64.1% of the account.</p>
+            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;"><strong style="color: #0E1F2B;">The AI selloff hit tech hardest.</strong> {{ week1 }}</p>
           </div>
           <div style="display: flex; gap: 14px;">
             <span style="width: 26px; height: 26px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span>
-            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;"><strong style="color: #0E1F2B;">SCHD was your only green fund, +1.7%.</strong> Money rotated into defensives and dividend payers, the Dow hit a record 52,844. Your smallest sleeve did its job on day one.</p>
+            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;"><strong style="color: #0E1F2B;">Dividend payers were the bright spot.</strong> {{ week2 }}</p>
           </div>
           <div style="display: flex; gap: 14px;">
             <span style="width: 26px; height: 26px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span>
@@ -240,7 +240,7 @@
           </div>
           <div style="display: flex; gap: 14px;">
             <span style="width: 26px; height: 26px; border-radius: 50%; background: #159B5A; color: #FFFFFF; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">✓</span>
-            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;"><strong style="color: #0E1F2B;">Nothing to do today.</strong> A −0.95% first two days on a 15-year horizon is noise. The one thing worth thinking about is the flag below.</p>
+            <p style="margin: 0; font-size: 14px; color: #4A5560; line-height: 1.65;"><strong style="color: #0E1F2B;">Nothing to do today.</strong> Early wobbles on a 15-year horizon are noise. The one thing worth thinking about is the flag below.</p>
           </div>
         </div>
       </div>
@@ -252,7 +252,7 @@
         <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(201,162,39,0.18); border: 1px solid rgba(201,162,39,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #C9A227;">⚑</div>
         <div>
           <p style="margin: 0 0 6px; font-size: 12px; font-weight: 600; color: #C9A227; letter-spacing: 0.06em; text-transform: uppercase;">The one flag on this account</p>
-          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #D9DEE2; max-width: 640px;">Your split is right on target, <strong style="color: #F7F6F2;">90% index funds, 10% individual stocks</strong>, exactly what a Conservative profile calls for. The flag is concentration <em>inside</em> that index sleeve: <strong style="color: #F7F6F2;">QQQ alone is 46.4% of the account</strong>, nearly double the 25% single-position line. It's covered in full under <a href="Performance.dc.html#risk" style="color: #3FBF7F; font-weight: 500;">Risk</a>, with three ways to respond on <a href="Plan.dc.html" style="color: #3FBF7F; font-weight: 500;">Plan</a>.</p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #D9DEE2; max-width: 640px;">{{ flagBanner }} It's covered in full under <a href="Performance.dc.html#risk" style="color: #3FBF7F; font-weight: 500;">Risk</a>, with three ways to respond on <a href="Plan.dc.html" style="color: #3FBF7F; font-weight: 500;">Plan</a>.</p>
         </div>
         <a href="Performance.dc.html#risk" style="font-size: 13px; font-weight: 600; color: #0E1F2B; background: #F7F6F2; text-decoration: none; padding: 10px 20px; border-radius: 999px; white-space: nowrap;">Review it →</a>
       </div>
@@ -413,7 +413,31 @@ class Component extends DCLogic {
         foot: 'Individual-stock sleeve' },
     ];
 
+    // ---- Editorial tie-ins computed from real holdings ----
+    var GROWTH = { QQQ: 1, QQQM: 1, IWY: 1, IWF: 1, VUG: 1, SCHG: 1, VOOG: 1 };
+    var TECHS = { NVDA: 1, AAPL: 1, MSFT: 1, GOOGL: 1, GOOG: 1, META: 1, AMZN: 1, TSLA: 1, AMD: 1, AVGO: 1, HOOD: 1, FIG: 1, PLTR: 1, CRM: 1 };
+    var techRows2 = sorted.filter(function (p) { var t = String(p.ticker).toUpperCase(); return GROWTH[t] || (p.type !== 'index' && TECHS[t]); });
+    var techPct2 = total ? techRows2.reduce(function (a, p) { return a + Number(p.amount); }, 0) / total * 100 : 0;
+    var week1 = techPct2 >= 30
+      ? 'The Nasdaq-100 fell 3.8% over Jun 20\u2013Jul 2 as AI and chip valuations reset, and your portfolio leans on exactly that theme: ' + techRows2.map(function (p) { return String(p.ticker).toUpperCase(); }).join(', ') + ' are ' + techPct2.toFixed(1) + '% of the account.'
+      : 'The Nasdaq-100 fell 3.8% over Jun 20\u2013Jul 2 as AI and chip valuations reset. Broad index funds carry a slice of that move.';
+    var hasSCHD2 = sorted.some(function (p) { return String(p.ticker).toUpperCase() === 'SCHD'; });
+    var week2 = 'Money rotated into defensives and dividend payers, and the Dow hit a record 52,844.' + (hasSCHD2 ? ' Your SCHD sleeve did its job on day one.' : '');
+    var maxPos2 = sorted[0] || null;
+    var maxT2 = maxPos2 ? String(maxPos2.ticker).toUpperCase() : '';
+    var maxW2 = maxPos2 && total ? Number(maxPos2.amount) / total * 100 : 0;
+    var drift2 = Math.abs(indivPct - targetIndiv);
+    var flagBanner;
+    if (!hasHoldings) flagBanner = 'No holdings entered yet, the nightly flag checks start once you add them.';
+    else if (maxW2 > 25) flagBanner = 'Your split is ' + idxPct + '% index funds, ' + indivPct + '% individual stocks against a ' + targetIdx + ' / ' + targetIndiv + ' target. The flag is concentration inside the sleeve: ' + maxT2 + ' alone is ' + maxW2.toFixed(1) + '% of the account, above the 25% single-position line.';
+    else if (drift2 >= 7.5) flagBanner = 'Your split is ' + idxPct + '% index funds, ' + indivPct + '% individual stocks, off your ' + targetIdx + ' / ' + targetIndiv + ' target. Expect a drift flag until new money closes the gap.';
+    else flagBanner = 'Your split is ' + idxPct + '% index funds, ' + indivPct + '% individual stocks, on target, and no position crosses the 25% line. Nothing is flagged tonight.';
+    var skipNote = maxW2 > 25
+      ? 'Adding more to ' + maxT2 + ', already ' + maxW2.toFixed(1) + '% of the account. New money there deepens the concentration flag instead of easing it.'
+      : 'Chasing whatever ran up last week. New money does more good topping up whichever side of your split has drifted below target.';
+
     return {
+      week1: week1, week2: week2, flagBanner: flagBanner, skipNote: skipNote,
       hasHoldings: hasHoldings,
       noHoldings: !hasHoldings,
       totalValueF: fmt(total),

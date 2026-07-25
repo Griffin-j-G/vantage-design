@@ -85,27 +85,28 @@
 
     <!-- ============ OVERVIEW ============ -->
     <section id="overview" data-screen-label="Overview" style="padding: 64px 0 72px; scroll-margin-top: 72px;">
-      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Wednesday, July 2, 2026 · Prepared privately for Griffin</p>
-      <h1 style="margin: 0 0 40px; font-family: Fraunces, serif; font-size: 44px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;">Good morning, Griffin.</h1>
+      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Prepared privately for {{ userName }} · As entered at onboarding</p>
+      <h1 style="margin: 0 0 40px; font-family: Fraunces, serif; font-size: 44px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;">Good morning, {{ userName }}.</h1>
 
+      <sc-if value="{{ hasHoldings }}">
       <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; align-items: stretch;">
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 8px; font-size: 13px; font-weight: 500; color: #6B7480;">Total portfolio value</p>
           <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
             <span style="font-family: Fraunces, serif; font-size: 52px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">{{ totalF }}</span>
-            <span style="font-size: 16px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ dayChangeF }} today</span>
+            <span style="font-size: 16px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ dayChangeF }}</span>
           </div>
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; padding-top: 24px; border-top: 1px solid #F0EDE4;">
             <div>
               <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">YTD return</p>
-              <p style="margin: 0; font-size: 19px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">+8.7%</p>
+              <p style="margin: 0; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ ytdF }}</p>
             </div>
             <div>
-              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Income YTD</p>
+              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Est. annual income</p>
               <p style="margin: 0; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ incomeYtdF }}</p>
             </div>
             <div>
-              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Cash reserve</p>
+              <p style="margin: 0 0 4px; font-size: 12px; color: #6B7480;">Positions</p>
               <p style="margin: 0; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ cashF }}</p>
             </div>
           </div>
@@ -133,12 +134,21 @@
           </div>
         </div>
       </div>
+      </sc-if>
+      <sc-if value="{{ noHoldings }}">
+      <div style="background: #FFFFFF; border: 1px dashed #D8D3C6; border-radius: 14px; padding: 40px 36px; text-align: center;">
+        <p style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">No holdings yet</p>
+        <p style="margin: 0 0 18px; font-size: 14px; color: #6B7480; line-height: 1.6; max-width: 460px; margin-left: auto; margin-right: auto;">You haven&rsquo;t entered any positions, so there&rsquo;s no dispatch to build. Add what you hold and this page fills in.</p>
+        <a href="Onboarding.dc.html" style="display: inline-block; font-size: 13.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 11px 22px; border-radius: 8px;">Add your holdings &rarr;</a>
+      </div>
+      </sc-if>
     </section>
 
+    <sc-if value="{{ hasHoldings }}">
     <!-- ============ HOLDINGS ============ -->
     <section id="holdings" data-screen-label="Holdings" style="padding: 0 0 88px; scroll-margin-top: 72px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Holdings</h2>
-      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Nine positions across five asset classes. Click a row for cost basis and notes.</p>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">{{ holdingsIntro }}</p>
 
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
         <div style="display: grid; grid-template-columns: 2.4fr 1fr 1fr 1fr 1fr 0.9fr; gap: 12px; padding: 14px 28px; border-bottom: 1px solid #F0EDE4; font-size: 11.5px; font-weight: 600; color: #6B7480; letter-spacing: 0.05em; text-transform: uppercase;">
@@ -199,7 +209,7 @@
       <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; flex-wrap: wrap;">
         <div>
           <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Performance</h2>
-          <p style="margin: 0; font-size: 14px; color: #6B7480;">Portfolio value against a 60/40 benchmark.</p>
+          <p style="margin: 0; font-size: 14px; color: #6B7480;">Fills in as nightly closes are logged. No history yet.</p>
         </div>
         <div style="display: flex; gap: 6px;">
           <sc-for list="{{ rangeBtns }}" as="r" hint-placeholder-count="4">
@@ -290,23 +300,23 @@
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Beta vs. S&amp;P 500</p>
-          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">0.91</p>
-          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Slightly less volatile than the market.</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">Pending</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Needs a year of logged closes.</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Volatility (1Y)</p>
-          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">12.4%</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">Pending</p>
           <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Annualized standard deviation.</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Max drawdown (1Y)</p>
-          <p style="margin: 0; font-size: 26px; font-weight: 600; color: #B4483C; font-variant-numeric: tabular-nums;">−9.8%</p>
-          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Peak-to-trough, last February.</p>
+          <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">Pending</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Peak-to-trough, once history accrues.</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Single-name exposure</p>
           <p style="margin: 0; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ singleNameF }}%</p>
-          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">MSFT, AAPL and NVDA combined.</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">{{ singleNameSub }}</p>
         </div>
       </div>
 
@@ -324,14 +334,15 @@
             </div>
           </sc-for>
         </div>
-        <p style="margin: 22px 0 0; font-size: 13px; color: #4A5560; line-height: 1.6; border-top: 1px solid #F0EDE4; padding-top: 18px;">US equity is {{ driftF }} points above target after the spring rally. Directing new contributions to international and bonds would rebalance without selling, see <a href="#plan" style="color: #159B5A; font-weight: 500;">Plan</a>.</p>
+        <p style="margin: 22px 0 0; font-size: 13px; color: #4A5560; line-height: 1.6; border-top: 1px solid #F0EDE4; padding-top: 18px;">{{ driftNote }} See <a href="#plan" style="color: #159B5A; font-weight: 500;">Plan</a>.</p>
       </div>
     </section>
+    </sc-if>
 
     <!-- ============ PLAN ============ -->
     <section id="plan" data-screen-label="Plan" style="padding: 0 0 88px; scroll-margin-top: 72px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.015em;">Plan</h2>
-      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Target: $1.5M by 2044. Adjust the assumptions to see the trajectory.</p>
+      <p style="margin: 0 0 28px; font-size: 14px; color: #6B7480;">Target: {{ targetBigF }} by {{ targetYearF }}. Adjust the assumptions to see the trajectory.</p>
 
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px;">
         <div style="display: flex; flex-direction: column; gap: 32px;">
@@ -368,7 +379,7 @@
           </div>
           <div>
             <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #6B7480; margin-bottom: 8px;">
-              <span>Progress toward $1.5M</span>
+              <span>Progress toward {{ targetBigF }}</span>
               <span style="font-weight: 600; color: {{ progColor }}; font-variant-numeric: tabular-nums;">{{ progF }}%</span>
             </div>
             <div style="height: 14px; background: #F0EDE4; border-radius: 7px; overflow: hidden;">
@@ -424,8 +435,8 @@
           </button>
           <sc-if value="{{ d1Open }}" hint-placeholder-val="{{ true }}">
             <div style="padding: 0 28px 26px 116px; font-size: 14.5px; color: #4A5560; line-height: 1.75; max-width: 780px;">
-              <p style="margin: 0 0 12px;">The portfolio is up 8.7% on the year and every position is doing roughly what it was hired to do. The temptation in stretches like this is to tinker, trim NVDA, chase something newer. Resist it. The single biggest driver of long-run results in this account is time in market, not adjustments.</p>
-              <p style="margin: 0;">The one exception worth acting on: US equity has drifted 4 points above target. New contributions are already routed to VXUS and BND to close the gap by October without triggering a taxable sale.</p>
+              <p style="margin: 0 0 12px;">Every position is doing roughly what it was hired to do. The temptation in stretches like this is to tinker, trim NVDA, chase something newer. Resist it. The single biggest driver of long-run results in this account is time in market, not adjustments.</p>
+              <p style="margin: 0;">The one exception worth acting on is drift: when a sleeve moves well above target, new contributions get routed to the underweight side to close the gap without triggering a taxable sale.</p>
             </div>
           </sc-if>
         </div>
@@ -438,7 +449,7 @@
           </button>
           <sc-if value="{{ d2Open }}" hint-placeholder-val="{{ false }}">
             <div style="padding: 0 28px 26px 116px; font-size: 14.5px; color: #4A5560; line-height: 1.75; max-width: 780px;">
-              <p style="margin: 0;">SCHD lifted its quarterly distribution 9% year over year, which pushes projected annual income past $11,600. The point of this sleeve was never yield-chasing, it's a stream that grows through drawdowns so the plan never depends on selling shares at a bad moment. It's doing that.</p>
+              <p style="margin: 0;">SCHD lifted its quarterly distribution 9% year over year. The point of an income sleeve was never yield-chasing, it's a stream that grows through drawdowns so the plan never depends on selling shares at a bad moment. It's doing that.</p>
             </div>
           </sc-if>
         </div>
@@ -451,7 +462,7 @@
           </button>
           <sc-if value="{{ d3Open }}" hint-placeholder-val="{{ false }}">
             <div style="padding: 0 28px 26px 116px; font-size: 14.5px; color: #4A5560; line-height: 1.75; max-width: 780px;">
-              <p style="margin: 0;">The portfolio fell 9.8% peak-to-trough in February and recovered fully by mid-April. Two things worked: the bond sleeve gained while equities fell, and contributions kept buying through the bottom. The lesson isn't that drawdowns are painless, it's that the account is built so you never have to act during one.</p>
+              <p style="margin: 0;">Markets fell nearly 10% peak-to-trough in February and recovered fully by mid-April. Two things work in stretches like that: ballast sleeves gaining while equities fall, and contributions that keep buying through the bottom. The lesson isn't that drawdowns are painless, it's that the account is built so you never have to act during one.</p>
             </div>
           </sc-if>
         </div>
@@ -493,11 +504,11 @@
         </div>
         <div>
           <button onClick="{{ toggleL4 }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 28px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #0E1F2B;">
-            Is 24% in three tech names too concentrated?
+            Is a big share in a few tech names too concentrated?
             <span style="color: #A9A294; font-size: 18px; flex-shrink: 0;">{{ l4Icon }}</span>
           </button>
           <sc-if value="{{ l4Open }}" hint-placeholder-val="{{ false }}">
-            <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 720px;">It's at the high end of comfortable. The working rule for this account: no single name above 12%, the three combined below 25%. NVDA crossing 6% of the portfolio would trigger a trim under those rules, it's at 5.3% today.</p>
+            <p style="margin: 0; padding: 0 28px 22px; font-size: 14px; color: #4A5560; line-height: 1.7; max-width: 720px;">It can be. The working rule for this account: no single name above 12%, the top three combined below 25%. Crossing those lines triggers a note in your dispatch, never an automatic trade.</p>
           </sc-if>
         </div>
       </div>
@@ -515,7 +526,7 @@
 
   <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
     <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
-      <span>Vantage · Prepared privately for Griffin. Not shared, not shareable.</span>
+      <span>Vantage · Prepared privately for {{ userName }}. Not shared, not shareable.</span>
       <span>Figures as of Jul 2, 2026 open · Not investment advice</span>
     </div>
   </footer>
@@ -554,209 +565,190 @@ class Component extends DCLogic {
     range: '1Y',
     d1: true, d2: false, d3: false,
     l1: false, l2: false, l3: false, l4: false,
-    monthly: 1500, ret: 7, years: 18,
+    monthly: null, ret: 7, years: null,
   };
 
-  data() {
-    return [
-      { ticker: 'VTI',  name: 'Vanguard Total Stock Market ETF', cls: 'US Equity', shares: 412, price: 289.14, cost: 96410, day: 0.51, yield: 1.28, note: 'Core of the portfolio. Bought steadily since 2019; never sold a share.' },
-      { ticker: 'SCHD', name: 'Schwab US Dividend Equity ETF', cls: 'US Equity', shares: 780, price: 82.31, cost: 54912, day: 0.22, yield: 3.42, note: 'The income sleeve. Distributions reinvested automatically each quarter.' },
-      { ticker: 'MSFT', name: 'Microsoft Corporation', cls: 'US Equity', shares: 96, price: 512.40, cost: 26430, day: 0.84, yield: 0.68, note: 'Held since 2018. Largest single-name position; capped at 12% by rule.' },
-      { ticker: 'AAPL', name: 'Apple Inc.', cls: 'US Equity', shares: 210, price: 231.70, cost: 30140, day: -0.31, yield: 0.44, note: 'Legacy position from RSU-era purchases. No new adds planned.' },
-      { ticker: 'NVDA', name: 'NVIDIA Corporation', cls: 'US Equity', shares: 180, price: 142.80, cost: 8964, day: 1.62, yield: 0.03, note: 'Trim triggers at 6% of portfolio per concentration rules. Currently 5.3%.' },
-      { ticker: 'VXUS', name: 'Vanguard Total International ETF', cls: 'International', shares: 620, price: 68.94, cost: 38560, day: 0.18, yield: 3.05, note: 'Underweight vs. target, new contributions routed here through October.' },
-      { ticker: 'BND',  name: 'Vanguard Total Bond Market ETF', cls: 'Bonds', shares: 540, price: 73.85, cost: 40120, day: -0.09, yield: 4.21, note: 'The ballast. Gained through February while equities fell.' },
-      { ticker: 'VNQ',  name: 'Vanguard Real Estate ETF', cls: 'Real Estate', shares: 310, price: 92.60, cost: 26890, day: 0.40, yield: 3.88, note: 'Kept modest in this taxable account, distributions are mostly ordinary income.' },
-      { ticker: 'SGOV', name: 'iShares 0-3 Month Treasury ETF', cls: 'Cash', shares: 685, price: 100.42, cost: 68500, day: 0.01, yield: 5.02, note: 'Emergency fund plus dry powder. State-tax exempt Treasury income.' },
-    ];
-  }
-
-  fmt(n, opts) {
+  fmt(n) {
     if (this.props.privacyMode ?? false) return '$••••••';
     return '$' + Math.round(n).toLocaleString('en-US');
   }
-  fmtSigned(n) {
-    if (this.props.privacyMode ?? false) return '+$•••';
-    const s = n >= 0 ? '+' : '−';
-    return s + '$' + Math.abs(Math.round(n)).toLocaleString('en-US');
+  fmtBig(n) {
+    n = Math.round(n);
+    if (n >= 1e6) return '$' + (n / 1e6).toFixed(2).replace(/\.?0+$/, '') + 'M';
+    if (n >= 1e3) return '$' + Math.round(n / 1e3) + 'k';
+    return '$' + n.toLocaleString('en-US');
   }
-
-  series(range, total) {
-    const cfg = {
-      '1M':  { n: 22, start: total * 0.982, vol: 2400,  seed: 11 },
-      '6M':  { n: 26, start: total * 0.930, vol: 5200,  seed: 23 },
-      '1Y':  { n: 26, start: total * 0.878, vol: 7200,  seed: 37 },
-      'All': { n: 30, start: total * 0.44,  vol: 11000, seed: 51 },
-    }[range];
-    let s = cfg.seed, v = cfg.start;
-    const drift = (total - cfg.start) / cfg.n;
-    const pts = [v];
-    for (let i = 1; i < cfg.n; i++) {
-      s = (s * 9301 + 49297) % 233280;
-      let dip = (range === '1Y' && i > 14 && i < 18) ? -3200 : 0;
-      v += drift + (s / 233280 - 0.48) * cfg.vol * 2 + dip;
-      pts.push(v);
-    }
-    // Scale the walk so it converges exactly to `total` without a cliff
-    const endErr = total - pts[pts.length - 1];
-    return pts.map((v, i) => v + endErr * (i / (pts.length - 1)));
-  }
-
-  toPath(pts, W, H) {
-    const min = Math.min(...pts), max = Math.max(...pts);
-    const pad = (max - min) * 0.08 || 1;
-    const y = v => 270 - ((v - min + pad) / (max - min + 2 * pad)) * 260;
-    const x = i => (i / (pts.length - 1)) * 1000;
-    return { d: pts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' '), endY: y(pts[pts.length - 1]) };
+  __readSettings() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    if (!s || !s.account) return null;
+    var settings = null;
+    try { settings = JSON.parse(localStorage.getItem('pd-profile-settings-' + s.account) || 'null'); } catch (e) {}
+    return settings;
   }
 
   renderVals() { return Object.assign(this.__realVals(), this.__sessionVals()); }
   __realVals() {
-    const H = this.data();
-    const total = H.reduce((a, h) => a + h.shares * h.price, 0);
-    const dayChange = H.reduce((a, h) => a + h.shares * h.price * h.day / 100, 0);
-    const priv = this.props.privacyMode ?? false;
+    var self = this;
+    var settings = this.__readSettings() || {};
+    var priv = this.props.privacyMode ?? false;
+    var positions = (settings.positions || []).filter(function (p) { return p && p.ticker && Number(p.amount) > 0; });
+    var total = positions.reduce(function (a, p) { return a + Number(p.amount); }, 0);
+    var hasHoldings = total > 0;
 
-    // Holdings rows (sortable via prop)
-    const sortKey = this.props.holdingsSort ?? 'value';
-    const rows = H.map(h => {
-      const value = h.shares * h.price;
-      const gainPct = (value - h.cost) / h.cost * 100;
-      return { ...h, value, gainPct };
-    }).sort((a, b) => sortKey === 'day' ? b.day - a.day : sortKey === 'gain' ? b.gainPct - a.gainPct : b.value - a.value);
+    var CLS = { VEA: 'International', VWO: 'International', VXUS: 'International', VT: 'International', BND: 'Bonds', BNDX: 'Bonds', AGG: 'Bonds', TLT: 'Bonds', VNQ: 'Real Estate', SGOV: 'Cash', BIL: 'Cash', GLD: 'Commodities', SLV: 'Commodities' };
+    var NAMES = { QQQ: 'Invesco Nasdaq-100 ETF', FXAIX: 'Fidelity 500 Index Fund', VOO: 'Vanguard S&P 500 ETF', VTI: 'Vanguard Total Stock Market ETF', SPY: 'SPDR S&P 500 ETF', SCHD: 'Schwab US Dividend Equity ETF', IWY: 'iShares Russell Top 200 Growth ETF', VXUS: 'Vanguard Total International ETF', BND: 'Vanguard Total Bond Market ETF', VNQ: 'Vanguard Real Estate ETF', SGOV: 'iShares 0-3 Month Treasury ETF', NVDA: 'NVIDIA Corporation', HOOD: 'Robinhood Markets, Inc.', FIG: 'Figma, Inc.', AAPL: 'Apple Inc.', MSFT: 'Microsoft Corporation', AMZN: 'Amazon.com, Inc.', GOOGL: 'Alphabet Inc.', META: 'Meta Platforms, Inc.', TSLA: 'Tesla, Inc.' };
+    var YLD = { FXAIX: 1.19, VOO: 1.2, VTI: 1.2, SPY: 1.2, IVV: 1.2, SPLG: 1.2, ITOT: 1.2, QQQ: 0.61, QQQM: 0.61, IWY: 0.49, VUG: 0.45, SCHD: 3.39, VYM: 2.6, VIG: 1.7, DGRO: 2.2, JEPI: 7.5, JEPQ: 9.0, BND: 4.4, AGG: 4.3, BNDX: 4.6, TLT: 4.3, VEA: 3.0, VWO: 3.2, VXUS: 3.05, VT: 1.9, VNQ: 3.88, SGOV: 5.0, DIA: 1.6, NVDA: 0.02, AAPL: 0.4, MSFT: 0.7, GOOGL: 0.5, META: 0.35, COST: 0.5 };
 
-    const holdings = rows.map(h => {
-      const expanded = this.state.expanded === h.ticker;
+    var rows = positions.map(function (p) {
+      var t = String(p.ticker).toUpperCase();
+      return { ticker: t, amount: Number(p.amount), isIndex: p.type === 'index', cls: CLS[t] || 'US Equity', y: YLD[t], name: NAMES[t] || (p.type === 'index' ? 'Index fund' : 'Individual stock') };
+    }).sort(function (a, b) { return b.amount - a.amount; });
+
+    var holdings = rows.map(function (h) {
+      var expanded = self.state.expanded === h.ticker;
       return {
-        ticker: h.ticker, name: h.name, shares: h.shares.toLocaleString(),
-        priceF: '$' + h.price.toFixed(2),
-        valueF: this.fmt(h.value),
-        costF: this.fmt(h.cost),
-        unrealF: this.fmtSigned(h.value - h.cost),
-        dayF: (h.day >= 0 ? '+' : '−') + Math.abs(h.day).toFixed(2) + '%',
-        dayColor: h.day >= 0 ? '#159B5A' : '#B4483C',
-        gainF: (h.gainPct >= 0 ? '+' : '−') + Math.abs(h.gainPct).toFixed(1) + '%',
-        gainColor: h.gainPct >= 0 ? '#159B5A' : '#B4483C',
-        weightF: (h.value / total * 100).toFixed(1),
-        yieldF: h.yield.toFixed(2) + '%',
-        note: h.note,
-        expanded,
+        ticker: h.ticker, name: h.name, shares: 'pending',
+        priceF: 'pending',
+        valueF: self.fmt(h.amount),
+        costF: self.fmt(h.amount),
+        unrealF: 'pending',
+        dayF: '', dayColor: '#A9A294',
+        gainF: '', gainColor: '#A9A294',
+        weightF: total ? (h.amount / total * 100).toFixed(1) : '0',
+        yieldF: h.y != null ? h.y.toFixed(2) + '%' : 'n/a',
+        note: 'Entered at onboarding at ' + self.fmt(h.amount) + '. Prices, day moves and gains fill in once nightly closes are logged.',
+        expanded: expanded,
         chev: expanded ? 90 : 0,
         rowBg: expanded ? '#FBFAF6' : 'transparent',
-        toggle: () => this.setState(s => ({ expanded: s.expanded === h.ticker ? null : h.ticker })),
+        toggle: function () { self.setState(function (s) { return { expanded: s.expanded === h.ticker ? null : h.ticker }; }); },
       };
     });
 
-    // Allocation donut
-    const classes = [
+    var clsOrder = [
       { label: 'US Equity', color: '#0E1F2B' },
       { label: 'International', color: '#159B5A' },
       { label: 'Bonds', color: '#7FA8C9' },
       { label: 'Real Estate', color: '#C9A227' },
+      { label: 'Commodities', color: '#8A9A5B' },
       { label: 'Cash', color: '#CFC9BB' },
     ];
-    const C = 2 * Math.PI * 70;
-    let acc = 0;
-    const allocSegs = classes.map(c => {
-      const v = H.filter(h => h.cls === c.label).reduce((a, h) => a + h.shares * h.price, 0);
-      const frac = v / total;
-      const seg = { ...c, pct: (frac * 100).toFixed(1), dash: (frac * C - 3).toFixed(1) + ' ' + (C - frac * C + 3).toFixed(1), offset: (-acc * C).toFixed(1), frac };
+    var C = 2 * Math.PI * 70;
+    var acc = 0;
+    var allocSegs = clsOrder.map(function (c) {
+      var v = rows.filter(function (h) { return h.cls === c.label; }).reduce(function (a, h) { return a + h.amount; }, 0);
+      if (!v) return null;
+      var frac = total ? v / total : 0;
+      var seg = { label: c.label, color: c.color, pct: (frac * 100).toFixed(1), dash: Math.max(0.5, frac * C - 3).toFixed(1) + ' ' + (C - Math.max(0.5, frac * C - 3)).toFixed(1), offset: (-acc * C).toFixed(1), frac: frac };
       acc += frac;
       return seg;
+    }).filter(function (s) { return s; });
+
+    // Performance: no logged closes yet, flat baseline
+    var range = this.state.range;
+    var rangeBtns = ['1M', '6M', '1Y', 'All'].map(function (r) {
+      return {
+        label: r,
+        onClick: function () { self.setState({ range: r }); },
+        bg: r === range ? '#0E1F2B' : '#FFFFFF',
+        color: r === range ? '#F7F6F2' : '#4A5560',
+        border: r === range ? '#0E1F2B' : '#E1DCCF',
+      };
     });
 
-    // Performance
-    const range = this.state.range;
-    const pts = this.series(range, total);
-    const { d: perfPath, endY: perfEndY } = this.toPath(pts);
-    const perfArea = perfPath + ' L1000 270 L0 270 Z';
-    const bench = pts.map((v, i) => pts[0] + (v - pts[0]) * 0.68 + Math.sin(i * 1.3) * 1800);
-    bench[0] = pts[0];
-    const benchPath = this.toPath(pts.concat(bench)).d ? this.toPathWith(bench, pts) : '';
-    const ret = (pts[pts.length - 1] - pts[0]) / pts[0] * 100;
-    const rangeBtns = ['1M', '6M', '1Y', 'All'].map(r => ({
-      label: r,
-      onClick: () => this.setState({ range: r }),
-      bg: r === range ? '#0E1F2B' : '#FFFFFF',
-      color: r === range ? '#F7F6F2' : '#4A5560',
-      border: r === range ? '#0E1F2B' : '#E1DCCF',
-    }));
-    const startLabels = { '1M': 'Jun 2, 2026', '6M': 'Jan 2, 2026', '1Y': 'Jul 2, 2025', 'All': 'Jan 2019' };
-
-    // Income
-    const months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-    const vals = [612, 1184, 688, 594, 1471, 634, 598, 1226, 671, 612, 1288, 702];
-    const maxV = Math.max(...vals);
-    const incomeBars = months.map((m, i) => ({
-      m,
-      h: Math.round(vals[i] / maxV * 110) + 8,
-      color: i >= 9 ? '#159B5A' : '#BFD9CB',
-      valShort: priv ? '•••' : '$' + vals[i].toLocaleString(),
-      valF: priv ? '•••' : '$' + vals[i],
-    }));
-    const annualIncome = 11640;
-    const payouts = [
-      { mon: 'Jul', day: '7',  ticker: 'SGOV', kind: 'Monthly interest', amt: 287 },
-      { mon: 'Jul', day: '10', ticker: 'BND',  kind: 'Monthly interest', amt: 141 },
-      { mon: 'Jul', day: '24', ticker: 'VNQ',  kind: 'Quarterly dividend', amt: 278 },
-      { mon: 'Sep', day: '25', ticker: 'SCHD', kind: 'Quarterly dividend', amt: 549 },
-      { mon: 'Sep', day: '29', ticker: 'VTI',  kind: 'Quarterly dividend', amt: 381 },
-    ].map(p => ({ ...p, amtF: priv ? '$•••' : '$' + p.amt }));
+    // Income, estimated from entered values and current yields
+    var annualIncome = rows.reduce(function (a, h) { return a + (h.y ? h.amount * h.y / 100 : 0); }, 0);
+    var monthlyIncome = annualIncome / 12;
+    var months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+    var incomeBars = months.map(function (m) {
+      return {
+        m: m,
+        h: annualIncome > 0 ? 60 : 4,
+        color: '#BFD9CB',
+        valShort: priv ? '•••' : (annualIncome > 0 ? '~$' + Math.round(monthlyIncome) : '$0'),
+        valF: priv ? '•••' : '~$' + Math.round(monthlyIncome),
+      };
+    });
+    var paying = rows.filter(function (h) { return h.y && h.amount * h.y / 100 >= 0.5; }).sort(function (a, b) { return b.amount * b.y - a.amount * a.y; });
+    var payouts = paying.slice(0, 5).map(function (h) {
+      return { mon: 'QTR', day: '~', ticker: h.ticker, kind: 'Quarterly, estimated', amtF: priv ? '$•••' : '$' + (h.amount * h.y / 100 / 4).toFixed(2) };
+    });
 
     // Risk
-    const targets = { 'US Equity': 58, 'International': 15, 'Bonds': 10, 'Real Estate': 5, 'Cash': 12 };
-    const riskBars = allocSegs.map(s => ({
-      label: s.label, color: s.color,
-      pct: (s.frac * 100).toFixed(1), pctF: (s.frac * 100).toFixed(1),
-      target: targets[s.label],
-    }));
-    const usFrac = allocSegs[0].frac * 100;
-    const singleName = H.filter(h => ['MSFT', 'AAPL', 'NVDA'].includes(h.ticker)).reduce((a, h) => a + h.shares * h.price, 0) / total * 100;
+    var stocks = rows.filter(function (h) { return !h.isIndex; });
+    var top3Stocks = stocks.slice(0, 3);
+    var singleName = top3Stocks.reduce(function (a, h) { return a + (total ? h.amount / total * 100 : 0); }, 0);
+    var singleNameSub = top3Stocks.length ? top3Stocks.map(function (h) { return h.ticker; }).join(', ') + ' combined.' : 'No individual stocks held.';
+    var riskIndiv = { conservative: 10, balanced: 20, aggressive: 30 };
+    var targetIndiv = settings.risk === 'custom' ? (Number(settings.customIndiv) || 0) : (riskIndiv[settings.risk] || 10);
+    var targetIdx = 100 - targetIndiv;
+    var idxPct = total ? rows.filter(function (h) { return h.isIndex; }).reduce(function (a, h) { return a + h.amount; }, 0) / total * 100 : 0;
+    var indivPct = 100 - idxPct;
+    var riskBars = [
+      { label: 'Index funds', color: '#0E1F2B', pct: idxPct.toFixed(1), pctF: idxPct.toFixed(1), target: targetIdx },
+      { label: 'Individual stocks', color: '#C9A227', pct: indivPct.toFixed(1), pctF: indivPct.toFixed(1), target: targetIndiv },
+    ];
+    var drift = indivPct - targetIndiv;
+    var driftNote = Math.abs(drift) < 5
+      ? 'Your index / individual split is within ' + Math.abs(drift).toFixed(1) + ' points of its ' + targetIdx + ' / ' + targetIndiv + ' target, on plan.'
+      : 'Individual stocks are ' + Math.abs(drift).toFixed(1) + ' points ' + (drift > 0 ? 'above' : 'below') + ' their ' + targetIndiv + '% target. Directing new contributions to the underweight side rebalances without selling.';
 
     // Plan
-    const { monthly, years } = this.state;
-    const r = this.state.ret / 100;
-    const n = years;
-    const proj = total * Math.pow(1 + r, n) + monthly * 12 * (Math.pow(1 + r, n) - 1) / (r || 0.0001);
-    const prog = proj / 1500000 * 100;
-    const onTrack = prog >= 100;
-    const planVerdict = onTrack
+    var pay = Number(String(settings.monthly || '').replace(/[^0-9.]/g, '')) || 1000;
+    var spend = Number(String(settings.annualSpend || '').replace(/[^0-9.]/g, '')) || 60000;
+    var target = spend * 25;
+    var targetYear = Number(settings.retireYear) || 2044;
+    var monthly = this.state.monthly == null ? pay : this.state.monthly;
+    var years = this.state.years == null ? Math.min(30, Math.max(5, targetYear - 2026)) : this.state.years;
+    var r = this.state.ret / 100;
+    var proj = total * Math.pow(1 + r, years) + monthly * 12 * (Math.pow(1 + r, years) - 1) / (r || 0.0001);
+    var prog = target ? proj / target * 100 : 0;
+    var onTrack = prog >= 100;
+    var planVerdict = onTrack
       ? 'On track. At these assumptions the target is reached with room to spare, the plan survives a couple of bad years.'
       : 'Short of target at these assumptions. Raising the monthly contribution or extending the horizon closes the gap; counting on higher returns does not.';
 
     return {
+      hasHoldings: hasHoldings, noHoldings: !hasHoldings,
       totalF: this.fmt(total),
-      dayChangeF: this.fmtSigned(dayChange),
-      incomeYtdF: priv ? '$••••' : '$5,842',
-      cashF: this.fmt(68788),
-      allocSegs, holdings,
-      // performance
-      rangeBtns, perfPath, perfArea, benchPath, perfEndY: perfEndY.toFixed(1),
-      perfRetF: (ret >= 0 ? '+' : '−') + Math.abs(ret).toFixed(1) + '%',
-      perfRetColor: ret >= 0 ? '#159B5A' : '#B4483C',
-      perfStartLabel: startLabels[range],
-      showBenchmark: this.props.showBenchmark ?? true,
-      // income
-      incomeBars, payouts,
-      annualIncomeF: priv ? '$••,•••' : '$' + annualIncome.toLocaleString(),
-      // risk
-      riskBars,
+      dayChangeF: 'No closes logged yet',
+      ytdF: 'Pending',
+      incomeYtdF: priv ? '$••••' : '$' + annualIncome.toFixed(2),
+      cashF: rows.length + (rows.length === 1 ? ' entered' : ' entered'),
+      holdingsIntro: rows.length + (rows.length === 1 ? ' position' : ' positions') + ' across ' + allocSegs.length + (allocSegs.length === 1 ? ' asset class' : ' asset classes') + ', as entered at onboarding. Click a row for details.',
+      allocSegs: allocSegs, holdings: holdings,
+      rangeBtns: rangeBtns,
+      perfPath: 'M0 140 L1000 140',
+      perfArea: 'M0 140 L1000 140 L1000 270 L0 270 Z',
+      benchPath: '',
+      perfEndY: '140.0',
+      perfRetF: '0.0%',
+      perfRetColor: '#6B7480',
+      perfStartLabel: 'Onboarding, Jul 2026',
+      showBenchmark: false,
+      incomeBars: incomeBars, payouts: payouts,
+      annualIncomeF: priv ? '$••,•••' : '$' + annualIncome.toFixed(2),
+      riskBars: riskBars,
       singleNameF: singleName.toFixed(1),
-      driftF: (usFrac - 58).toFixed(1),
-      // plan
-      monthly, years, ret: this.state.ret,
-      monthlyF: priv ? '$•,•••' : '$' + monthly.toLocaleString(),
+      singleNameSub: singleNameSub,
+      driftNote: driftNote,
+      monthly: monthly, years: years, ret: this.state.ret,
+      monthlyF: priv ? '$•,•••' : '$' + monthly.toLocaleString('en-US'),
       retF: this.state.ret.toFixed(1),
       endYear: 2026 + years,
       projF: this.fmt(proj),
+      targetBigF: this.fmtBig(target),
+      targetYearF: targetYear,
       progF: Math.min(999, prog).toFixed(0),
       progW: Math.min(100, prog).toFixed(1),
       progColor: onTrack ? '#159B5A' : '#C9A227',
-      planVerdict,
+      planVerdict: planVerdict,
       setMonthly: e => this.setState({ monthly: +e.target.value }),
       setRet: e => this.setState({ ret: +e.target.value }),
       setYears: e => this.setState({ years: +e.target.value }),
-      // dispatches + learn
       d1Open: this.state.d1, d2Open: this.state.d2, d3Open: this.state.d3,
       d1Icon: this.state.d1 ? '−' : '+', d2Icon: this.state.d2 ? '−' : '+', d3Icon: this.state.d3 ? '−' : '+',
       toggleD1: () => this.setState(s => ({ d1: !s.d1 })),

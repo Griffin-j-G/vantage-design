@@ -435,7 +435,7 @@ class Component extends DCLogic {
     var riskDefs = [
       { key: 'conservative', label: 'Conservative', index: 90, indiv: 10, desc: 'Mostly S&P 500 index funds, with a few individual stocks like NVDA or Apple.' },
       { key: 'balanced', label: 'Balanced', index: 80, indiv: 20, desc: 'A bigger individual-stock sleeve on top of a broad index core.' },
-      { key: 'aggressive', label: 'Aggressive', index: 70, indiv: 30, desc: 'The largest individual-stock sleeve \u2014 index funds still anchor it.' },
+      { key: 'aggressive', label: 'Aggressive', index: 70, indiv: 30, desc: 'The largest individual-stock sleeve, index funds still anchor it.' },
       { key: 'custom', label: 'Custom', index: null, indiv: null, desc: 'Set the exact split yourself with the slider below.' },
     ];
     var riskCards = riskDefs.map(function (r) {
@@ -477,9 +477,9 @@ class Component extends DCLogic {
     var posIndexPct = posTotal ? (idxTotal / posTotal * 100) : 0;
     var posIndivPct = 100 - posIndexPct;
     var posVerdict;
-    if (posIndivPct <= 12) posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual \u2014 right in line with a Conservative shape.';
-    else if (posIndivPct <= 22) posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual \u2014 leans toward a Balanced shape.';
-    else posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual \u2014 a heavy individual-stock tilt, closer to Aggressive.';
+    if (posIndivPct <= 12) posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual, right in line with a Conservative shape.';
+    else if (posIndivPct <= 22) posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual, leans toward a Balanced shape.';
+    else posVerdict = Math.round(posIndexPct) + '% index funds \u00b7 ' + Math.round(posIndivPct) + '% individual, a heavy individual-stock tilt, closer to Aggressive.';
 
     var cadenceOpts = ['Weekly', 'Every other week', 'Monthly'].map(function (c) {
       var on = st.cadence === c;

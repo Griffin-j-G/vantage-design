@@ -81,15 +81,16 @@
   <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
 
     <section style="padding: 56px 0 36px;">
-      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">$1,000/mo contributions · Profile: Conservative</p>
+      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">{{ payF }}/mo contributions · Profile: {{ riskLabel }}</p>
       <h1 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.02em;">Plan</h1>
       <p style="margin: 0; font-size: 15px; color: #6B7480; max-width: 640px; line-height: 1.65;">Where each paycheck goes, where the account is heading, and the rules that keep both on track.</p>
     </section>
 
     <!-- PAYCHECK ALLOCATOR -->
+    <sc-if value="{{ hasHoldings }}">
     <section style="padding: 0 0 56px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Paycheck allocator</h2>
-      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 680px;">Slide to choose how much of each $1,000 contribution goes toward broadening your S&P 500 core (FXAIX + SCHD) versus continuing the current, QQQ-heavy growth mix.</p>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 680px;">Slide to choose how much of each {{ payF }} contribution goes toward broadening your S&P 500 core (FXAIX + SCHD) versus continuing your current mix.</p>
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
           <div>
@@ -97,8 +98,8 @@
               <label style="font-size: 13.5px; font-weight: 500;">Toward the broad core (FXAIX + SCHD)</label>
               <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ towardF }}</span>
             </div>
-            <input type="range" min="0" max="1000" step="50" value="{{ toward }}" onChange="{{ setToward }}" style="width: 100%; accent-color: #159B5A;">
-            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0, stay the course</span><span>$1,000, all to core</span></div>
+            <input type="range" min="0" max="{{ pay }}" step="50" value="{{ toward }}" onChange="{{ setToward }}" style="width: 100%; accent-color: #159B5A;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0, stay the course</span><span>{{ payF }}, all to core</span></div>
             <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 10px;">
               <sc-for list="{{ splitRows }}" as="s" hint-placeholder-count="4">
                 <div style="display: grid; grid-template-columns: 140px 1fr 70px; gap: 14px; align-items: center;">
@@ -113,22 +114,23 @@
           </div>
           <div style="border-left: 1px solid #F0EDE4; padding-left: 48px; display: flex; flex-direction: column; justify-content: center; gap: 18px;">
             <div>
-              <p style="margin: 0 0 4px; font-size: 13px; color: #6B7480;">QQQ’s share of the account after 12 months</p>
+              <p style="margin: 0 0 4px; font-size: 13px; color: #6B7480;">{{ maxTicker }} share of the account after 12 months</p>
               <p style="margin: 0; font-family: Fraunces, serif; font-size: 36px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ mixF }}</p>
             </div>
             <div style="height: 20px; border-radius: 6px; overflow: hidden; display: flex; background: #E8E4DA;">
-              <div style="background: #B4483C; transition: width 0.2s; width: {{ stockW }}%; display: flex; align-items: center; padding-left: 10px;"><span style="font-size: 10px; font-weight: 600; color: #FFFFFF;">QQQ</span></div>
+              <div style="background: #B4483C; transition: width 0.2s; width: {{ stockW }}%; display: flex; align-items: center; padding-left: 10px;"><span style="font-size: 10px; font-weight: 600; color: #FFFFFF;">{{ maxTicker }}</span></div>
             </div>
             <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65;">{{ allocVerdict }}</p>
           </div>
         </div>
       </div>
     </section>
+    </sc-if>
 
     <!-- STRATEGIES -->
     <section style="padding: 0 0 56px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Three ready-made strategies</h2>
-      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Concrete $1,000/mo splits, mapped to the three responses on the <a href="Performance.dc.html#risk" style="color: #159B5A; font-weight: 500;">Risk page</a>. Pick one in the payday form, or ignore all three.</p>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Concrete {{ payF }}/mo splits, mapped to the three responses on the <a href="Performance.dc.html#risk" style="color: #159B5A; font-weight: 500;">Risk page</a>. Pick one in the payday form, or ignore all three.</p>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
         <sc-for list="{{ strategies }}" as="st" hint-placeholder-count="3">
           <div style="background: #FFFFFF; border: 1px solid {{ st.border }}; border-radius: 14px; padding: 26px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
@@ -151,7 +153,7 @@
     <!-- GROWTH PROJECTOR -->
     <section style="padding: 0 0 56px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Growth projector</h2>
-      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Starting from today's $4,844.67. Adjust contributions, return, and horizon to see the trajectory.</p>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Starting from your {{ totalF }} entered at onboarding. Adjust contributions, return, and horizon to see the trajectory.</p>
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px;">
         <div style="display: flex; flex-direction: column; gap: 30px; justify-content: center;">
           <div>
@@ -212,7 +214,7 @@
     <!-- MILESTONES -->
     <section style="padding: 0 0 56px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Milestones on the current path</h2>
-      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Assuming $1,000/mo and ~8% annual returns. Dates shift with markets; the shape doesn't.</p>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Assuming {{ payF }}/mo and ~8% annual returns. Dates shift with markets; the shape doesn't.</p>
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 20px;">
         <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4">
           <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
@@ -223,7 +225,7 @@
         </sc-for>
       </div>
       <div style="background: #FBFAF6; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 28px;">
-        <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; max-width: 880px;"><strong style="color: #0E1F2B;">Why they accelerate:</strong> the first $10k takes ~10 months because it's almost all deposits. By $50k the account earns roughly $300/mo on its own, a third paycheck. By $100k, market growth contributes more than you do in a typical month. Same $1,000, each milestone arrives faster than the last.</p>
+        <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; max-width: 880px;"><strong style="color: #0E1F2B;">Why they accelerate:</strong> {{ accelNote }}</p>
       </div>
     </section>
 
@@ -271,7 +273,7 @@
 
   <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
     <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
-      <span>Vantage · Prepared privately for Griffin · Figures are estimates, food for thought, not financial advice</span>
+      <span>Vantage · Prepared privately for {{ userName }} · Figures are estimates, food for thought, not financial advice</span>
       <span>Data refreshes weekdays 8:30 PM CT · New report every Friday</span>
     </div>
   </footer>
@@ -300,103 +302,169 @@ class Component extends DCLogic {
       },
     };
   }
-  state = { toward: 400, monthly: 1000, ret: 8, years: 15, openRule: 0 };
+  state = { toward: null, monthly: null, ret: 8, years: 15, openRule: 0 };
 
   renderVals() { return Object.assign(this.__realVals(), this.__sessionVals()); }
+  __readSettings() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    if (!s || !s.account) return null;
+    var settings = null;
+    try { settings = JSON.parse(localStorage.getItem('pd-profile-settings-' + s.account) || 'null'); } catch (e) {}
+    return settings;
+  }
   __realVals() {
-    // Paycheck allocator
-    const toward = this.state.toward;
-    const growth = 1000 - toward;
-    const splitRows = [
-      { label: 'FXAIX core', amt: '$' + Math.round(toward * 0.7), color: '#159B5A', w: (toward * 0.7 / 10) },
-      { label: 'SCHD dividend index', amt: '$' + Math.round(toward * 0.3), color: '#8A9A5B', w: (toward * 0.3 / 10) },
-      { label: 'QQQ growth', amt: '$' + Math.round(growth * 0.6), color: '#B4483C', w: (growth * 0.6 / 10) },
-      { label: 'IWY growth', amt: '$' + Math.round(growth * 0.4), color: '#0E1F2B', w: (growth * 0.4 / 10) },
-    ].map(r => ({ ...r, w: Math.max(0.5, r.w).toFixed(1) }));
+    var self = this;
+    var settings = this.__readSettings() || {};
+    var fmt = function (v) { return '$' + Math.round(v).toLocaleString('en-US'); };
+    var positions = (settings.positions || []).filter(function (p) { return p && p.ticker && Number(p.amount) > 0; });
+    var total = positions.reduce(function (a, p) { return a + Number(p.amount); }, 0);
+    var hasHoldings = total > 0;
+    var sorted = positions.slice().sort(function (a, b) { return Number(b.amount) - Number(a.amount); });
+    var maxPos = sorted[0] || null;
+    var maxTicker = maxPos ? String(maxPos.ticker).toUpperCase() : 'your largest holding';
+    var pay = Number(String(settings.monthly || '').replace(/[^0-9.]/g, '')) || 1000;
+    var riskNames = { conservative: 'Conservative', balanced: 'Balanced', aggressive: 'Aggressive', custom: 'Custom' };
+    var riskLabel = riskNames[settings.risk] || 'Conservative';
+    var riskIndiv = { conservative: 10, balanced: 20, aggressive: 30 };
+    var targetIndiv = settings.risk === 'custom' ? (Number(settings.customIndiv) || 0) : (riskIndiv[settings.risk] || 10);
+    var stocks = sorted.filter(function (p) { return p.type !== 'index'; }).map(function (p) { return String(p.ticker).toUpperCase(); });
 
-    // QQQ concentration after 12 months of this split
-    const qqqNow = 2248.97;
-    const newQQQ = qqqNow + growth * 0.6 * 12;
-    const newTotal = 4844.67 + 1000 * 12;
-    const qqqShare = newQQQ / newTotal * 100;
-    const mixF = qqqShare.toFixed(0) + '%';
-    const allocVerdict = toward === 0
-      ? 'All into the current mix: QQQ climbs past ' + qqqShare.toFixed(0) + '% of the account, the concentration flag gets worse, not better. Fine only if you\u2019re deliberately betting on tech.'
-      : toward >= 800
-        ? 'Aggressive broadening: QQQ\u2019s share falls fast toward ~' + qqqShare.toFixed(0) + '%. The quickest tax-free way to defuse the concentration flag.'
-        : 'A measured broadening. No selling, no taxes, each paycheck dilutes QQQ (to ~' + qqqShare.toFixed(0) + '% in a year) and grows the diversified core.';
+    // ---- Paycheck allocator ----
+    var toward = this.state.toward == null ? Math.round(pay * 0.4 / 50) * 50 : Math.min(this.state.toward, pay);
+    var growth = pay - toward;
+    var wOf = function (amt) { return Math.max(0.5, pay ? amt / pay * 100 : 0).toFixed(1); };
+    var splitRows = [
+      { label: 'FXAIX core', amt: '$' + Math.round(toward * 0.7), color: '#159B5A', w: wOf(toward * 0.7) },
+      { label: 'SCHD dividend index', amt: '$' + Math.round(toward * 0.3), color: '#8A9A5B', w: wOf(toward * 0.3) },
+      { label: maxTicker + ' (current mix)', amt: '$' + Math.round(growth * 0.6), color: '#B4483C', w: wOf(growth * 0.6) },
+      { label: 'Rest of current mix', amt: '$' + Math.round(growth * 0.4), color: '#0E1F2B', w: wOf(growth * 0.4) },
+    ];
+    var maxAmt = maxPos ? Number(maxPos.amount) : 0;
+    var newMax = maxAmt + growth * 0.6 * 12;
+    var newTotal = total + pay * 12;
+    var maxShare = newTotal ? newMax / newTotal * 100 : 0;
+    var maxShareNow = total ? maxAmt / total * 100 : 0;
+    var mixF = maxShare.toFixed(0) + '%';
+    var allocVerdict = toward === 0
+      ? 'All into the current mix: ' + maxTicker + ' heads toward ' + maxShare.toFixed(0) + '% of the account. Fine only if you’re deliberately leaning into it.'
+      : toward >= pay * 0.8
+        ? 'Aggressive broadening: ' + maxTicker + '’s share moves toward ~' + maxShare.toFixed(0) + '%. The quickest tax-free way to spread the account out.'
+        : 'A measured broadening. No selling, no taxes, each paycheck moves ' + maxTicker + ' toward ~' + maxShare.toFixed(0) + '% in a year while the diversified core grows.';
 
-    // Growth projector
-    const { monthly, ret, years } = this.state;
-    const r = ret / 100 / 12, n = years * 12;
-    const proj = 4844.67 * Math.pow(1 + r, n) + (monthly > 0 ? monthly * (Math.pow(1 + r, n) - 1) / r : 0);
-    const contrib = 4844.67 + monthly * n;
-    const fmt = v => '$' + Math.round(v).toLocaleString('en-US');
-    // paths: sample 30 points
-    const pts = [], cpts = [];
-    for (let i = 0; i <= 30; i++) {
-      const m = i / 30 * n;
-      pts.push(4844.67 * Math.pow(1 + r, m) + (monthly > 0 ? monthly * (Math.pow(1 + r, m) - 1) / r : 0));
-      cpts.push(4844.67 + monthly * m);
+    // ---- Growth projector ----
+    var monthly = this.state.monthly == null ? pay : this.state.monthly;
+    var ret = this.state.ret, years = this.state.years;
+    var start = total;
+    var r = ret / 100 / 12, n = years * 12;
+    var proj = start * Math.pow(1 + r, n) + (monthly > 0 ? monthly * (Math.pow(1 + r, n) - 1) / r : 0);
+    var contrib = start + monthly * n;
+    var pts = [], cpts = [];
+    for (var i = 0; i <= 30; i++) {
+      var m = i / 30 * n;
+      pts.push(start * Math.pow(1 + r, m) + (monthly > 0 ? monthly * (Math.pow(1 + r, m) - 1) / r : 0));
+      cpts.push(start + monthly * m);
     }
-    const maxV = pts[30];
-    const y = v => 290 - v / maxV * 280;
-    const x = i => i / 30 * 640;
-    const line = pts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
-    const contribLine = cpts.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
-    const contribPath = contribLine + ' L640 290 L0 290 Z';
-    const growthPath = line + ' L' + [...cpts].reverse().map((v, i) => x(30 - i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' L') + ' Z';
+    var maxV = pts[30] || 1;
+    var yy = function (v) { return 290 - v / maxV * 280; };
+    var xx = function (i) { return i / 30 * 640; };
+    var line = pts.map(function (v, i) { return (i ? 'L' : 'M') + xx(i).toFixed(1) + ' ' + yy(v).toFixed(1); }).join(' ');
+    var contribLine = cpts.map(function (v, i) { return (i ? 'L' : 'M') + xx(i).toFixed(1) + ' ' + yy(v).toFixed(1); }).join(' ');
+    var contribPath = contribLine + ' L640 290 L0 290 Z';
+    var growthPath = line + ' L' + cpts.slice().reverse().map(function (v, i) { return xx(30 - i).toFixed(1) + ' ' + yy(v).toFixed(1); }).join(' L') + ' Z';
 
-    const strategies = [
-      { tag: 'MATCHES OPTION A', name: 'Stay the Course', border: '#ECE8DE',
-        rows: [ { t: 'QQQ', amt: '$470' }, { t: 'FXAIX', amt: '$290' }, { t: 'IWY', amt: '$110' }, { t: 'Rest of mix', amt: '$130' } ],
-        note: 'Keep buying the current weights (47/29/11/13). QQQ stays ~46% of the account, honest only if you\u2019re deliberately leaning into tech.' },
+    // ---- Strategies, sized to the real paycheck ----
+    var currentRows;
+    if (sorted.length) {
+      var top = sorted.slice(0, 3);
+      currentRows = top.map(function (p) {
+        return { t: String(p.ticker).toUpperCase(), amt: '$' + Math.round(pay * Number(p.amount) / total) };
+      });
+      var used = top.reduce(function (a, p) { return a + Math.round(pay * Number(p.amount) / total); }, 0);
+      if (sorted.length > 3) currentRows.push({ t: 'Rest of mix', amt: '$' + Math.max(0, pay - used) });
+    } else {
+      currentRows = [{ t: 'Your current mix', amt: fmt(pay) }];
+    }
+    var stockPick = stocks.length ? stocks[0] : 'Individual pick';
+    var strategies = [
+      { tag: 'MATCHES OPTION A', name: 'Stay the Course', border: '#ECE8DE', rows: currentRows,
+        note: 'Keep buying your current weights. ' + (maxPos ? maxTicker + ' stays ~' + maxShareNow.toFixed(0) + '% of the account, honest only if that’s a deliberate bet.' : 'Adds to whatever you hold today.') },
       { tag: 'MATCHES OPTION B', name: 'Broaden the Core', border: '#159B5A',
-        rows: [ { t: 'FXAIX', amt: '$600' }, { t: 'SCHD', amt: '$300' }, { t: 'NVDA', amt: '$100' }, { t: 'QQQ / IWY', amt: '$0' } ],
-        note: 'Every dollar to the broad S&P 500 core and dividend index, plus a small individual top-up. Sells nothing, dilutes QQQ\u2019s 46% share over time.' },
+        rows: [ { t: 'FXAIX', amt: '$' + Math.round(pay * 0.6) }, { t: 'SCHD', amt: '$' + Math.round(pay * 0.3) }, { t: stockPick, amt: '$' + Math.round(pay * 0.1) } ],
+        note: 'Most of each paycheck to the broad S&P 500 core and dividend index, plus a small individual top-up. Sells nothing, spreads the account out over time.' },
       { tag: 'MATCHES OPTION C', name: 'Add Ballast', border: '#ECE8DE',
-        rows: [ { t: 'BND (on request)', amt: '$300' }, { t: 'FXAIX', amt: '$500' }, { t: 'SCHD', amt: '$200' }, { t: 'QQQ', amt: '$0' } ],
-        note: 'For lower swings: a bond index fund by request, alongside the broad core, ballast the S&P 500 can\u2019t provide. Off by default, on when you ask in the payday form.' },
+        rows: [ { t: 'BND (on request)', amt: '$' + Math.round(pay * 0.3) }, { t: 'FXAIX', amt: '$' + Math.round(pay * 0.5) }, { t: 'SCHD', amt: '$' + Math.round(pay * 0.2) } ],
+        note: 'For lower swings: a bond index fund by request, alongside the broad core, ballast the S&P 500 can’t provide. Off by default, on when you ask in the payday form.' },
     ];
 
-    const milestones = [
-      { amt: '$10k', when: '≈ May 2027', note: 'Almost entirely deposits, 10 months in, the market has barely had time to matter.' },
-      { amt: '$25k', when: '≈ Dec 2028', note: 'Growth now adds ~$150/mo. Dividends become visible line items instead of cents.' },
-      { amt: '$50k', when: '≈ Sep 2030', note: 'The account earns ~$300/mo by itself, a phantom third paycheck every month.' },
-      { amt: '$100k', when: '≈ Feb 2034', note: 'Market growth now typically outearns your monthly deposit. Compounding takes the wheel.' },
+    // ---- Milestones, computed on the current path ----
+    var startYear = 2026, startMonth = 6; // July 2026
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var mr = 0.08 / 12;
+    var monthsTo = function (target) {
+      if (start >= target) return 0;
+      var v = start;
+      for (var mm = 1; mm <= 600; mm++) {
+        v = v * (1 + mr) + pay;
+        if (v >= target) return mm;
+      }
+      return null;
+    };
+    var whenLabel = function (mm) {
+      if (mm === 0) return 'Already there';
+      if (mm == null) return '50+ years out';
+      var idx = startMonth + mm;
+      return '≈ ' + MONTHS[idx % 12] + ' ' + (startYear + Math.floor(idx / 12));
+    };
+    var milestones = [
+      { amt: '$10k', when: whenLabel(monthsTo(10000)), note: 'Almost entirely deposits at first, the market has barely had time to matter.' },
+      { amt: '$25k', when: whenLabel(monthsTo(25000)), note: 'Growth now adds a visible amount each month. Dividends become line items instead of cents.' },
+      { amt: '$50k', when: whenLabel(monthsTo(50000)), note: 'At ~8%, the account earns roughly $330/mo by itself, a phantom extra paycheck.' },
+      { amt: '$100k', when: whenLabel(monthsTo(100000)), note: 'Market growth starts rivaling your monthly deposit. Compounding takes the wheel.' },
     ];
+    var accelNote = 'the first $10k is almost all deposits. By $50k the account earns roughly $330/mo on its own at 8%. By $100k, market growth can outearn your ' + fmt(pay) + ' in a typical month. Same paycheck, each milestone arrives faster than the last.';
 
-    const ruleData = [
-      { title: 'Rebalance with new money, not sales', body: 'Selling winners to rebalance triggers capital gains tax. Directing fresh contributions to whatever is underweight achieves the same drift correction for free, it\u2019s slower, and that\u2019s fine. This is the engine behind Broaden the Core.' },
-      { title: 'Never wait for a dip to invest a paycheck', body: 'Timing entries on regular contributions is a documented losing game, missing the market\u2019s 10 best days in a decade roughly halves returns, and those days cluster next to the worst ones. The $1,000 goes in on payday, whatever the tape looks like.' },
-      { title: 'Stagger lump sums only in frothy markets', body: 'For regular paychecks: invest immediately. For a rare windfall arriving mid-euphoria, like this AI reset moment, splitting it into 2–3 tranches over a few weeks trades a little expected return for a lot of regret insurance. Issue 15 made exactly this point about new QQQ money.' },
-      { title: 'Keep individual stocks near 10%', body: 'NVDA + HOOD + FIG currently sit at ~10% of the account (flag rule 8). Individual stocks are fine, sized so that being completely wrong about all of them costs one year of contributions, not the plan. Everything else is broad index funds.' },
-      { title: 'Review the shape quarterly, not daily', body: 'Prices move daily; the shape of the portfolio, core vs. growth vs. income vs. individual stocks, moves slowly. The nightly checks watch the daily noise so you don\u2019t have to. October is the first scheduled shape review.' },
-      { title: 'Suggestions are screened, never pushed', body: 'Ticker ideas in dispatches (COST, AAPL, GLD…) are filtered through your Conservative profile before they\u2019re mentioned, and nothing is ever bought on your behalf. Every trade in this account is one you made yourself.' },
+    // ---- Rules of thumb ----
+    var rule4 = stocks.length
+      ? stocks.join(' + ') + ' currently sit at ' + (total ? (sorted.filter(function (p) { return p.type !== 'index'; }).reduce(function (a, p) { return a + Number(p.amount); }, 0) / total * 100).toFixed(0) : 0) + '% of the account against a ~' + targetIndiv + '% target (flag rule 8). Individual stocks are fine, sized so that being completely wrong about all of them costs one stretch of contributions, not the plan.'
+      : 'You hold no individual stocks today. If you add them, size the sleeve near ~' + targetIndiv + '% so being wrong about all of them costs one stretch of contributions, not the plan.';
+    var ruleData = [
+      { title: 'Rebalance with new money, not sales', body: 'Selling winners to rebalance triggers capital gains tax. Directing fresh contributions to whatever is underweight achieves the same drift correction for free, it’s slower, and that’s fine. This is the engine behind Broaden the Core.' },
+      { title: 'Never wait for a dip to invest a paycheck', body: 'Timing entries on regular contributions is a documented losing game, missing the market’s 10 best days in a decade roughly halves returns, and those days cluster next to the worst ones. The paycheck goes in on payday, whatever the tape looks like.' },
+      { title: 'Stagger lump sums only in frothy markets', body: 'For regular paychecks: invest immediately. For a rare windfall arriving mid-euphoria, splitting it into 2–3 tranches over a few weeks trades a little expected return for a lot of regret insurance.' },
+      { title: 'Keep individual stocks near ' + targetIndiv + '%', body: rule4 },
+      { title: 'Review the shape quarterly, not daily', body: 'Prices move daily; the shape of the portfolio, core vs. growth vs. income vs. individual stocks, moves slowly. The nightly checks watch the daily noise so you don’t have to.' },
+      { title: 'Suggestions are screened, never pushed', body: 'Ticker ideas in dispatches are filtered through your ' + riskLabel + ' profile before they’re mentioned, and nothing is ever bought on your behalf. Every trade in this account is one you made yourself.' },
     ];
-    const rules = ruleData.map((rd, i) => ({
-      ...rd,
-      open: this.state.openRule === i,
-      icon: this.state.openRule === i ? '−' : '+',
-      toggle: () => this.setState(s => ({ openRule: s.openRule === i ? null : i })),
-    }));
+    var rules = ruleData.map(function (rd, i) {
+      return Object.assign({}, rd, {
+        open: self.state.openRule === i,
+        icon: self.state.openRule === i ? '−' : '+',
+        toggle: function () { self.setState(function (s) { return { openRule: s.openRule === i ? null : i }; }); },
+      });
+    });
 
     return {
-      toward, splitRows, mixF, allocVerdict,
-      towardF: '$' + toward + ' of $1,000',
-      stockW: qqqShare.toFixed(1),
-      setToward: e => this.setState({ toward: +e.target.value }),
-      monthly, ret, years,
-      setYearsP: e => this.setState({ years: +e.target.value }),
+      hasHoldings: hasHoldings, noHoldings: !hasHoldings,
+      pay: pay, payF: fmt(pay), riskLabel: riskLabel, totalF: fmt(total), maxTicker: maxTicker,
+      toward: toward, splitRows: splitRows, mixF: mixF, allocVerdict: allocVerdict,
+      towardF: '$' + toward + ' of ' + fmt(pay),
+      stockW: Math.min(100, maxShare).toFixed(1),
+      setToward: function (e) { self.setState({ toward: +e.target.value }); },
+      monthly: monthly, ret: ret, years: years,
+      setYearsP: function (e) { self.setState({ years: +e.target.value }); },
       monthlyF: '$' + monthly.toLocaleString('en-US'),
       retF: ret.toFixed(1),
-      setMonthly: e => this.setState({ monthly: +e.target.value }),
-      setRet: e => this.setState({ ret: +e.target.value }),
+      setMonthly: function (e) { self.setState({ monthly: +e.target.value }); },
+      setRet: function (e) { self.setState({ ret: +e.target.value }); },
       projF: fmt(proj), contribF: fmt(contrib),
-      linePath: line, contribPath, growthPath,
+      linePath: line, contribPath: contribPath, growthPath: growthPath,
       axisTop: fmt(maxV), axisMid: fmt(maxV / 2),
       endYear: 2026 + years, midYear: 2026 + Math.round(years / 2),
-      strategies, milestones, rules,
+      strategies: strategies, milestones: milestones, accelNote: accelNote, rules: rules,
     };
   }
 }

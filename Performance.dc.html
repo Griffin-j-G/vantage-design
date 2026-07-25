@@ -91,21 +91,31 @@
       </div>
     </section>
 
+    <sc-if value="{{ noHoldings }}">
+    <section style="padding: 12px 0 88px;">
+      <div style="background: #FFFFFF; border: 1px dashed #D8D3C6; border-radius: 14px; padding: 40px 36px; text-align: center;">
+        <p style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">No holdings yet</p>
+        <p style="margin: 0 0 18px; font-size: 14px; color: #6B7480; line-height: 1.6; max-width: 460px; margin-left: auto; margin-right: auto;">Returns, income and risk all start from the holdings you enter. Add them and this page fills in.</p>
+        <a href="Onboarding.dc.html" style="display: inline-block; font-size: 13.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 11px 22px; border-radius: 8px;">Add your holdings &rarr;</a>
+      </div>
+    </section>
+    </sc-if>
+    <sc-if value="{{ hasHoldings }}">
     <!-- ============ RETURNS ============ -->
     <section id="returns" style="padding: 12px 0 20px; scroll-margin-top: 76px;">
       <p style="margin: 0 0 6px; font-size: 12px; font-weight: 700; color: #159B5A; letter-spacing: 0.08em; text-transform: uppercase;">Returns</p>
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">You vs. the market</h2>
-      <p style="margin: 0 0 22px; font-size: 14px; color: #6B7480; max-width: 640px; line-height: 1.6;">Two days of history so far, a small, honest starting point. Your core tracks the S&amp;P 500, so that's the yardstick.</p>
+      <p style="margin: 0 0 22px; font-size: 14px; color: #6B7480; max-width: 640px; line-height: 1.6;">No price history yet, returns begin accruing once nightly closes log. Your core tracks the S&amp;P 500, so that's the yardstick.</p>
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
-          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">You, since onboarding</p>
-          <p style="margin: 0; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; color: #B4483C; font-variant-numeric: tabular-nums;">−0.95%</p>
-          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">−$46.24 on a $4,890.91 cost basis, Jul 1 → Jul 2.</p>
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Your baseline</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ totalF }}</p>
+          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">Entered at onboarding. Returns start accruing with the first nightly close.</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">S&amp;P 500, same period</p>
           <p style="margin: 0; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; color: #B4483C; font-variant-numeric: tabular-nums;">−0.5%</p>
-          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">The broad index dipped less than your tech tilt. You trailed it by ~0.45 points.</p>
+          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">The broad index over the same stretch, your yardstick once your own closes start logging.</p>
         </div>
         <div style="background: #0E1F2B; border-radius: 14px; padding: 28px 32px; color: #F7F6F2;">
           <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">S&amp;P 500, 2026 year-to-date</p>
@@ -118,41 +128,10 @@
     <!-- SCOREBOARD -->
     <section style="padding: 24px 0 56px;">
       <h3 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em;">The scoreboard</h3>
-      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Gain and loss per holding since onboarding, dollars on the chart, detail in the table.</p>
-      <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px;">
-        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
-          <p style="margin: 0 0 20px; font-size: 13px; font-weight: 500; color: #6B7480;">Dollar gain / loss per holding</p>
-          <div style="display: flex; flex-direction: column; gap: 13px;">
-            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="7">
-              <div style="display: grid; grid-template-columns: 58px 1fr 84px; gap: 12px; align-items: center;">
-                <span style="font-size: 13px; font-weight: 600;">{{ b.ticker }}</span>
-                <div style="position: relative; height: 16px;">
-                  <div style="position: absolute; top: 0; bottom: 0; width: 1.5px; background: #D8D2C4; left: 50%;"></div>
-                  <div style="position: absolute; top: 1px; bottom: 1px; border-radius: 4px; background: {{ b.color }}; left: {{ b.left }}%; width: {{ b.w }}%;"></div>
-                </div>
-                <span style="font-size: 12.5px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; color: {{ b.color }};">{{ b.amtF }}</span>
-              </div>
-            </sc-for>
-          </div>
-          <p style="margin: 20px 0 0; padding-top: 16px; border-top: 1px solid #F0EDE4; font-size: 12.5px; color: #6B7480; line-height: 1.6;">One position (QQQ) accounts for 86% of the total loss, the flip side of it being 46% of the account.</p>
-        </div>
-        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 13px 26px; border-bottom: 1px solid #F0EDE4; font-size: 11.5px; font-weight: 600; color: #6B7480; letter-spacing: 0.05em; text-transform: uppercase;">
-            <span>Holding</span><span style="text-align: right;">Gain / loss</span><span style="text-align: right;">Return</span>
-          </div>
-          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 12.5px 26px; border-bottom: 1px solid #F5F2EA; font-size: 13.5px; align-items: center;">
-              <span style="font-weight: 600;">{{ r.ticker }}</span>
-              <span style="text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; color: {{ r.color }};">{{ r.amtF }}</span>
-              <span style="text-align: right; font-variant-numeric: tabular-nums; color: {{ r.color }};">{{ r.pctF }}</span>
-            </div>
-          </sc-for>
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 13px 26px; background: #FBFAF6; font-size: 13.5px; font-weight: 600;">
-            <span>Portfolio</span>
-            <span style="text-align: right; color: #B4483C; font-variant-numeric: tabular-nums;">−$46.24</span>
-            <span style="text-align: right; color: #B4483C; font-variant-numeric: tabular-nums;">−0.95%</span>
-          </div>
-        </div>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Gain and loss per holding, measured from the values you entered.</p>
+      <div style="background: #FBFAF6; border: 1px dashed #D8D2C4; border-radius: 14px; padding: 28px 32px;">
+        <p style="margin: 0 0 6px; font-size: 14px; font-weight: 600;">Nothing on the scoreboard yet</p>
+        <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">Gain and loss per holding appears here once nightly closes are logged. Each of your {{ posCountLabel }} currently sits at the value you entered.</p>
       </div>
     </section>
 
@@ -164,18 +143,18 @@
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px;">
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Estimated annual dividends</p>
-          <p style="margin: 0; font-family: Fraunces, serif; font-size: 38px; font-weight: 500; color: #159B5A; font-variant-numeric: tabular-nums;">$39.09</p>
-          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">At current payout rates and share counts.</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 38px; font-weight: 500; color: #159B5A; font-variant-numeric: tabular-nums;">{{ incomeF }}</p>
+          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">At current payout rates on the values you entered.</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Portfolio yield</p>
-          <p style="margin: 0; font-family: Fraunces, serif; font-size: 38px; font-weight: 500; font-variant-numeric: tabular-nums;">0.81%</p>
-          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">Low because the account is built for growth, not income.</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 38px; font-weight: 500; font-variant-numeric: tabular-nums;">{{ yieldF }}</p>
+          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ yieldNote }}</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
-          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">First payments land</p>
-          <p style="margin: 0; font-family: Fraunces, serif; font-size: 38px; font-weight: 500; font-variant-numeric: tabular-nums;">Sept</p>
-          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">Roughly $9–10 across your three quarterly payers.</p>
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Payout cadence</p>
+          <p style="margin: 0; font-family: Fraunces, serif; font-size: 38px; font-weight: 500; font-variant-numeric: tabular-nums;">Quarterly</p>
+          <p style="margin: 8px 0 0; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ payersNote }}</p>
         </div>
       </div>
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
@@ -198,7 +177,7 @@
             </div>
           </div>
         </sc-for>
-        <div style="padding: 14px 26px 18px; font-size: 12.5px; color: #6B7480; line-height: 1.6;">HOOD and FIG pay nothing. SCHD punches far above its weight, 3.7% of the portfolio, 15% of the income. Reinvesting these (DRIP) is the sensible default at this size.</div>
+        <div style="padding: 14px 26px 18px; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ incomeFoot }}</div>
       </div>
     </section>
 
@@ -210,18 +189,18 @@
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px;">
         <div style="background: #0E1F2B; border-radius: 14px; padding: 24px 28px; color: #F7F6F2;">
           <p style="margin: 0 0 6px; font-size: 12px; color: #9AA7B1;">Biggest position</p>
-          <p style="margin: 0; font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums;">46.4%</p>
-          <p style="margin: 8px 0 0; font-size: 12px; color: #C9A227; line-height: 1.5; font-weight: 500;">QQQ, nearly double the 25% line. The one standing flag.</p>
+          <p style="margin: 0; font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ maxPosPct }}%</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #C9A227; line-height: 1.5; font-weight: 500;">{{ maxPosSub }}</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Top three positions</p>
-          <p style="margin: 0; font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums;">86.2%</p>
-          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">QQQ + FXAIX + IWY, all US large-cap, tech-heavy.</p>
+          <p style="margin: 0; font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ top3Pct }}%</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">{{ top3Sub }}</p>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
-          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">Effective NVIDIA exposure</p>
-          <p style="margin: 0; font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums;">~14%</p>
-          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">Direct, plus what's held inside your funds.</p>
+          <p style="margin: 0 0 6px; font-size: 12px; color: #6B7480;">{{ effTitle }}</p>
+          <p style="margin: 0; font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums;">{{ effVal }}</p>
+          <p style="margin: 8px 0 0; font-size: 12px; color: #6B7480; line-height: 1.5;">{{ effSub }}</p>
         </div>
       </div>
 
@@ -231,27 +210,27 @@
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 110px 1fr; gap: 22px; align-items: start;">
           <span style="font-size: 11.5px; font-weight: 700; color: #B4483C; background: #FAEDEB; border: 1px solid #F0D8D4; padding: 6px 0; border-radius: 999px; text-align: center;">HIGH</span>
           <div>
-            <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600;">A tech-led selloff, ~65% of the portfolio is in the blast radius</p>
-            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">QQQ (46.4%) + IWY (11.0%) + NVDA (6.7%) = 64.1% in tech-concentrated positions. Not hypothetical, it happened this fortnight: the Nasdaq-100 fell 3.8% and your account followed it down.</p>
+            <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600;">{{ highTitle }}</p>
+            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">{{ highBody }}</p>
           </div>
         </div>
         <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: grid; grid-template-columns: 110px 1fr; gap: 22px; align-items: start;">
           <span style="font-size: 11.5px; font-weight: 700; color: #B07A1E; background: #FBF3E2; border: 1px solid #EFDFBC; padding: 6px 0; border-radius: 999px; text-align: center;">ELEVATED</span>
           <div>
             <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600;">AI sentiment turning the wrong way</p>
-            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">The top seven US companies are ~40–45% of the account through your funds. If AI spending disappoints, the damage lands on exactly the names you own most of. Q2 earnings season is the next test.</p>
+            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">Mega-cap tech makes up a large share of broad index funds, so if AI spending disappoints, the damage lands on names you own through your funds too. Q2 earnings season is the next test.</p>
           </div>
         </div>
         <div style="background: #FBFAF6; border: 1px dashed #D8D2C4; border-radius: 14px; padding: 24px 28px; display: grid; grid-template-columns: 110px 1fr; gap: 22px; align-items: start;">
           <span style="font-size: 11.5px; font-weight: 700; color: #159B5A; background: #EAF5EF; border: 1px solid #CBE5D6; padding: 6px 0; border-radius: 999px; text-align: center;">NOT EXPOSED</span>
           <div>
             <p style="margin: 0 0 6px; font-size: 15px; font-weight: 600;">What you're <em>not</em> exposed to</p>
-            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">No bonds, no international, no small caps, no commodities, no crypto. Concentration cuts both ways: fewer risks, but much bigger ones. Bonds are available as ballast on request in the payday form.</p>
+            <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;">{{ notExposedBody }}</p>
           </div>
         </div>
       </div>
 
-      <h3 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em;">History, replayed on your $4,845</h3>
+      <h3 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 22px; font-weight: 500; letter-spacing: -0.015em;">History, replayed on your {{ totalF }}</h3>
       <p style="margin: 0 0 22px; font-size: 14px; color: #6B7480; max-width: 680px;">What past drawdowns would have done to this exact portfolio, versus the S&amp;P 500. Approximate, but honest.</p>
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
         <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 12px; padding: 14px 28px; border-bottom: 1px solid #F0EDE4; font-size: 11.5px; font-weight: 600; color: #6B7480; letter-spacing: 0.05em; text-transform: uppercase;">
@@ -270,7 +249,7 @@
         </sc-for>
       </div>
       <div style="background: #0E1F2B; border-radius: 14px; padding: 28px 34px; color: #F7F6F2; margin-top: 24px;">
-        <p style="margin: 0; font-size: 14.5px; line-height: 1.75; color: #D9DEE2; max-width: 820px;"><strong style="color: #F7F6F2;">The point here is pre-commitment, not fear.</strong> Every scenario above eventually recovered, the people who got hurt sold at the bottom. Decide now, while the account is down a painless $46, what you'd do at −$1,900. If the honest answer is "sell," broaden the mix on <a href="Plan.dc.html" style="color: #3FBF7F; font-weight: 500;">Plan</a> before the test arrives, not during it.</p>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.75; color: #D9DEE2; max-width: 820px;"><strong style="color: #F7F6F2;">The point here is pre-commitment, not fear.</strong> Every scenario above eventually recovered, the people who got hurt sold at the bottom. Decide now, calmly, what you'd do at {{ crashDollarsF }}, a 2008-sized hit. If the honest answer is "sell," broaden the mix on <a href="Plan.dc.html" style="color: #3FBF7F; font-weight: 500;">Plan</a> before the test arrives, not during it.</p>
       </div>
 
       <div style="background: #FBFAF6; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 30px; margin-top: 20px; display: flex; gap: 18px; align-items: flex-start;">
@@ -278,6 +257,7 @@
         <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7;"><strong style="color: #0E1F2B;">One thing this page can't see: your emergency fund.</strong> Everything above assumes this money isn't needed for years. The standard advice is 3–6 months of expenses in savings <em>before</em> money goes into markets, if that's not in place, it quietly outranks everything else here.</p>
       </div>
     </section>
+    </sc-if>
 
   </main>
 
@@ -320,47 +300,146 @@ class Component extends DCLogic {
     };
   }
   renderVals() { return Object.assign(this.__realVals(), this.__sessionVals()); }
+  __readSettings() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    if (!s || !s.account) return null;
+    var settings = null;
+    try { settings = JSON.parse(localStorage.getItem('pd-profile-settings-' + s.account) || 'null'); } catch (e) {}
+    return settings;
+  }
   __realVals() {
-    const data = [
-      { ticker: 'HOOD', amt: 5.55, pct: 3.76 },
-      { ticker: 'SCHD', amt: 2.97, pct: 1.70 },
-      { ticker: 'FIG', amt: 0.71, pct: 9.47 },
-      { ticker: 'FXAIX', amt: -2.95, pct: -0.21 },
-      { ticker: 'NVDA', amt: -4.56, pct: -1.39 },
-      { ticker: 'IWY', amt: -8.32, pct: -1.53 },
-      { ticker: 'QQQ', amt: -39.67, pct: -1.73 },
-    ];
-    const maxAbs = 40;
-    const bars = data.map(d => {
-      const w = Math.max(0.8, Math.abs(d.amt) / maxAbs * 50);
+    var settings = this.__readSettings() || {};
+    var fmt = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+    var positions = (settings.positions || []).filter(function (p) { return p && p.ticker && Number(p.amount) > 0; });
+    var total = positions.reduce(function (a, p) { return a + Number(p.amount); }, 0);
+    var hasHoldings = total > 0;
+
+    var SLEEVE = { QQQ: 'Growth', QQQM: 'Growth', IWY: 'Growth', IWF: 'Growth', VUG: 'Growth', SCHG: 'Growth', VOOG: 'Growth', SCHD: 'Income', VYM: 'Income', VIG: 'Income', DGRO: 'Income', JEPI: 'Income', JEPQ: 'Income', BND: 'Bonds', BNDX: 'Bonds', AGG: 'Bonds', TLT: 'Bonds', GLD: 'Commodities', SLV: 'Commodities' };
+    var INTL = { VEA: 1, VWO: 1, VXUS: 1, VT: 1, BNDX: 1 };
+    var SMALL = { IWM: 1 };
+    var TECH_STOCKS = { NVDA: 1, AAPL: 1, MSFT: 1, GOOGL: 1, GOOG: 1, META: 1, AMZN: 1, TSLA: 1, AMD: 1, AVGO: 1, HOOD: 1, FIG: 1, PLTR: 1, CRM: 1 };
+    var YLD = { FXAIX: 1.19, VOO: 1.2, VTI: 1.2, SPY: 1.2, IVV: 1.2, SPLG: 1.2, ITOT: 1.2, SCHB: 1.2, SCHX: 1.2, QQQ: 0.61, QQQM: 0.61, IWY: 0.49, IWF: 0.5, VUG: 0.45, SCHG: 0.4, SCHD: 3.39, VYM: 2.6, VIG: 1.7, DGRO: 2.2, JEPI: 7.5, JEPQ: 9.0, BND: 4.4, AGG: 4.3, BNDX: 4.6, TLT: 4.3, IWM: 1.1, VEA: 3.0, VWO: 3.2, VXUS: 3.1, VT: 1.9, VNQ: 3.8, DIA: 1.6, GLD: 0, SLV: 0, NVDA: 0.02, AAPL: 0.4, MSFT: 0.7, AMZN: 0, GOOGL: 0.5, META: 0.35, TSLA: 0, HOOD: 0, FIG: 0, COST: 0.5 };
+    var LOOK = { QQQ: 0.095, QQQM: 0.095, IWY: 0.10, IWF: 0.11, FXAIX: 0.07, VOO: 0.07, SPY: 0.07, IVV: 0.07, SPLG: 0.07, VTI: 0.06, ITOT: 0.06, SCHX: 0.065, SCHG: 0.11, VUG: 0.11, VOOG: 0.11 };
+
+    var rows = positions.map(function (p) {
+      var t = String(p.ticker).toUpperCase();
+      var isIndex = p.type === 'index';
+      return { ticker: t, amount: Number(p.amount), isIndex: isIndex, sleeve: SLEEVE[t] || (isIndex ? 'Core' : 'Individual') };
+    }).sort(function (a, b) { return b.amount - a.amount; });
+    var pctOf = function (amt) { return total ? amt / total * 100 : 0; };
+    var posCountLabel = rows.length + (rows.length === 1 ? ' holding' : ' holdings');
+
+    // ---- Income ----
+    var payersData = rows.map(function (r) {
+      var y = YLD[r.ticker];
+      return { ticker: r.ticker, y: y == null ? null : y, income: y ? r.amount * y / 100 : 0 };
+    });
+    var income = payersData.reduce(function (a, p) { return a + p.income; }, 0);
+    var yieldPct = total ? income / total * 100 : 0;
+    var paying = payersData.filter(function (p) { return p.income > 0.005; }).sort(function (a, b) { return b.income - a.income; });
+    var topIncome = paying.length ? paying[0].income : 0;
+    var payers = paying.map(function (p) {
       return {
-        ticker: d.ticker,
-        amtF: (d.amt >= 0 ? '+$' : '−$') + Math.abs(d.amt).toFixed(2),
-        color: d.amt >= 0 ? '#159B5A' : '#B4483C',
-        left: d.amt >= 0 ? 50 : 50 - w,
-        w: w.toFixed(2),
+        ticker: p.ticker,
+        yield: p.y.toFixed(2) + '%',
+        amt: '$' + p.income.toFixed(2),
+        share: income ? (p.income / income * 100).toFixed(0) : '0',
+        w: topIncome ? Math.max(1, Math.round(p.income / topIncome * 100)) : 0,
       };
     });
-    const rows = data.map(d => ({
-      ticker: d.ticker,
-      amtF: (d.amt >= 0 ? '+$' : '−$') + Math.abs(d.amt).toFixed(2),
-      pctF: (d.pct >= 0 ? '+' : '−') + Math.abs(d.pct).toFixed(2) + '%',
-      color: d.amt >= 0 ? '#159B5A' : '#B4483C',
-    }));
-    const payers = [
-      { ticker: 'FXAIX', yield: '1.19%', amt: '$16.61', share: '42', w: 100 },
-      { ticker: 'QQQ', yield: '0.61%', amt: '$13.73', share: '35', w: 83 },
-      { ticker: 'SCHD', yield: '3.39%', amt: '$6.05', share: '15', w: 36 },
-      { ticker: 'IWY', yield: '0.49%', amt: '$2.64', share: '7', w: 16 },
-      { ticker: 'NVDA', yield: '0.02%', amt: '$0.07', share: '0.2', w: 1 },
+    var nonPayers = payersData.filter(function (p) { return !p.income && p.y != null; }).map(function (p) { return p.ticker; });
+    var unknownYld = payersData.filter(function (p) { return p.y == null; }).map(function (p) { return p.ticker; });
+    var incomeFoot = '';
+    if (nonPayers.length) incomeFoot += nonPayers.join(' and ') + (nonPayers.length === 1 ? ' pays' : ' pay') + ' nothing. ';
+    if (unknownYld.length) incomeFoot += 'No yield on file for ' + unknownYld.join(', ') + ', excluded from the estimate. ';
+    if (paying.length) {
+      var punchy = paying.slice().sort(function (a, b) { return (b.income / income) / (pctOf(rows.filter(function (r) { return r.ticker === b.ticker; })[0].amount) / 100) - (a.income / income) / (pctOf(rows.filter(function (r) { return r.ticker === a.ticker; })[0].amount) / 100); })[0];
+      var pr = rows.filter(function (r) { return r.ticker === punchy.ticker; })[0];
+      incomeFoot += punchy.ticker + ' punches above its weight, ' + pctOf(pr.amount).toFixed(1) + '% of the portfolio, ' + (punchy.income / income * 100).toFixed(0) + '% of the income. ';
+    }
+    incomeFoot += 'Reinvesting these (DRIP) is the sensible default at this size.';
+    var yieldNote = yieldPct < 1.5 ? 'Low because the account is built for growth, not income.' : 'A meaningful income stream for the size of the account.';
+    var payersNote = 'Most funds pay quarterly, expect the first payments within about three months of onboarding.';
+
+    // ---- Risk stats ----
+    var maxRow = rows[0] || null;
+    var maxW = maxRow ? pctOf(maxRow.amount) : 0;
+    var top3 = rows.slice(0, 3);
+    var top3Pct = top3.reduce(function (a, r) { return a + pctOf(r.amount); }, 0);
+    var nvdaRow = null;
+    rows.forEach(function (r) { if (r.ticker === 'NVDA') nvdaRow = r; });
+    var hasNvda = !!nvdaRow;
+    var nvdaEff = (nvdaRow ? pctOf(nvdaRow.amount) : 0) + rows.filter(function (r) { return LOOK[r.ticker]; }).reduce(function (a, r) { return a + pctOf(r.amount) * LOOK[r.ticker]; }, 0);
+    var maxPosSub = maxRow ? maxRow.ticker + ', ' + (maxW > 25 ? (maxW > 45 ? 'nearly double' : 'above') + ' the 25% line. The one standing flag.' : 'under the 25% single-position line.') : '';
+    var top3Sub = top3.map(function (r) { return r.ticker; }).join(' + ') + '.';
+    var effTitle = hasNvda ? 'Effective NVIDIA exposure' : 'Effective single-company exposure';
+    var effVal = hasNvda ? '~' + Math.round(nvdaEff) + '%' : 'Low';
+    var effSub = hasNvda ? "Direct, plus what's held inside your funds." : 'No single company near the 20% flag line once fund holdings are counted.';
+
+    // ---- Exposure ----
+    var techRows = rows.filter(function (r) { return r.sleeve === 'Growth' || (!r.isIndex && TECH_STOCKS[r.ticker]); });
+    var techPct = techRows.reduce(function (a, r) { return a + pctOf(r.amount); }, 0);
+    var highTitle, highBody;
+    if (techPct >= 20) {
+      highTitle = 'A tech-led selloff, ~' + Math.round(techPct) + '% of the portfolio is in the blast radius';
+      highBody = techRows.map(function (r) { return r.ticker + ' (' + pctOf(r.amount).toFixed(1) + '%)'; }).join(' + ') + ' = ' + techPct.toFixed(1) + '% in tech-concentrated positions. When tech resets, these fall together, and furthest.';
+    } else {
+      highTitle = 'A broad-market selloff, most of the account is stocks';
+      highBody = 'Your holdings are overwhelmingly equities, so a broad drawdown pulls the whole account down at once. Diversification softens single-name blowups, not market-wide ones.';
+    }
+    var hasBonds = rows.some(function (r) { return r.sleeve === 'Bonds'; });
+    var hasIntl = rows.some(function (r) { return INTL[r.ticker]; });
+    var hasSmall = rows.some(function (r) { return SMALL[r.ticker]; });
+    var hasComm = rows.some(function (r) { return r.sleeve === 'Commodities'; });
+    var missing = [];
+    if (!hasBonds) missing.push('bonds');
+    if (!hasIntl) missing.push('international');
+    if (!hasSmall) missing.push('small caps');
+    if (!hasComm) missing.push('commodities');
+    missing.push('crypto');
+    var notExposedBody = 'No ' + missing.join(', no ') + '. Concentration cuts both ways: fewer risks, but much bigger ones. Bonds are available as ballast on request in the payday form.';
+
+    // ---- Scenarios, weighted by your real sleeve mix ----
+    var shares = { Core: 0, Growth: 0, Income: 0, Bonds: 0, Commodities: 0, Individual: 0 };
+    rows.forEach(function (r) { shares[r.sleeve] += total ? r.amount / total : 0; });
+    var scenDefs = [
+      { name: '2008 financial crisis', sub: 'Oct 2007 – Mar 2009', sp: -55, f: { Core: -52, Growth: -50, Income: -45, Bonds: 5, Commodities: 3, Individual: -55 } },
+      { name: '2020 COVID crash', sub: 'Feb – Mar 2020, 5 weeks', sp: -34, f: { Core: -34, Growth: -28, Income: -35, Bonds: 0, Commodities: -3, Individual: -35 } },
+      { name: '2022 tech winter', sub: 'Full year, growth hit hardest', sp: -19, f: { Core: -19, Growth: -33, Income: -7, Bonds: -13, Commodities: 0, Individual: -35 } },
+      { name: '2015–16 flat market', sub: 'Grinding sideways, 18 months', sp: 1, f: { Core: 0, Growth: 0, Income: 3, Bonds: 2, Commodities: -10, Individual: 0 } },
     ];
-    const scenarios = [
-      { name: '2008 financial crisis', sub: 'Oct 2007 – Mar 2009', you: '≈ −50%', dollars: '−$2,420', blend: '≈ −55%', color: '#B4483C' },
-      { name: '2020 COVID crash', sub: 'Feb – Mar 2020, 5 weeks', you: '≈ −33%', dollars: '−$1,600', blend: '≈ −34%', color: '#B4483C' },
-      { name: '2022 tech winter', sub: 'Full year · QQQ −33%, NVDA −50%', you: '≈ −31%', dollars: '−$1,500', blend: '≈ −19%', color: '#B4483C' },
-      { name: '2015–16 flat market', sub: 'Grinding sideways, 18 months', you: '≈ 0%', dollars: '±$0', blend: '≈ +1%', color: '#6B7480' },
-    ];
-    return { bars, rows, payers, scenarios };
+    var crashDollars = 0;
+    var scenarios = scenDefs.map(function (d, i) {
+      var you = 0;
+      for (var k in shares) you += shares[k] * d.f[k];
+      var dollars = total * you / 100;
+      if (i === 0) crashDollars = dollars;
+      var flat = Math.abs(you) < 1;
+      return {
+        name: d.name, sub: d.sub,
+        you: flat ? '≈ 0%' : '≈ ' + (you > 0 ? '+' : '−') + Math.abs(you).toFixed(0) + '%',
+        dollars: flat ? '±$0' : (dollars > 0 ? '+' : '−') + fmt(Math.abs(dollars)),
+        blend: '≈ ' + (d.sp > 0 ? '+' : '−') + Math.abs(d.sp) + '%',
+        color: you < -1 ? '#B4483C' : '#6B7480',
+      };
+    });
+    var crashDollarsF = '−' + fmt(Math.abs(crashDollars));
+
+    return {
+      hasHoldings: hasHoldings, noHoldings: !hasHoldings,
+      totalF: fmt(total), posCountLabel: posCountLabel,
+      incomeF: '$' + income.toFixed(2), yieldF: yieldPct.toFixed(2) + '%', yieldNote: yieldNote, payersNote: payersNote,
+      payers: payers, incomeFoot: incomeFoot,
+      maxPosPct: maxW.toFixed(1), maxPosSub: maxPosSub,
+      top3Pct: top3Pct.toFixed(1), top3Sub: top3Sub,
+      effTitle: effTitle, effVal: effVal, effSub: effSub,
+      highTitle: highTitle, highBody: highBody, notExposedBody: notExposedBody,
+      scenarios: scenarios, crashDollarsF: crashDollarsF,
+    };
   }
 }
 </script>

@@ -562,6 +562,80 @@ class Component extends DCLogic {
   }
 
   // ---------- dataset ----------
+  // ---------- personal exposure, from onboarding holdings ----------
+  __positions() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var settings = null;
+    if (s && s.account) { try { settings = JSON.parse(localStorage.getItem('pd-profile-settings-' + s.account) || 'null'); } catch (e) {} }
+    var positions = ((settings && settings.positions) || []).filter(function (p) { return p && p.ticker && Number(p.amount) > 0; });
+    var total = positions.reduce(function (a, p) { return a + Number(p.amount); }, 0);
+    return { positions: positions, total: total };
+  }
+  __exposure(ticker) {
+    var P = this._pos || (this._pos = this.__positions());
+    if (!P.total) return { direct: 0, fund: 0 };
+    var F = {
+      NVDA: { QQQ: 9.5, QQQM: 9.5, FXAIX: 7, VOO: 7, SPY: 7, IVV: 7, SPLG: 7, VTI: 6, ITOT: 6, IWY: 10, SCHG: 11, VUG: 11 },
+      AAPL: { QQQ: 8.5, QQQM: 8.5, FXAIX: 6, VOO: 6, SPY: 6, IVV: 6, SPLG: 6, VTI: 5.2, ITOT: 5.2, IWY: 10, SCHG: 10, VUG: 10 },
+      MSFT: { QQQ: 9, QQQM: 9, FXAIX: 6.5, VOO: 6.5, SPY: 6.5, IVV: 6.5, SPLG: 6.5, VTI: 5.6, ITOT: 5.6, IWY: 10.5, SCHG: 10.5, VUG: 10.5 },
+      GOOGL: { QQQ: 5, QQQM: 5, FXAIX: 3.7, VOO: 3.7, SPY: 3.7, IVV: 3.7, VTI: 3.2, IWY: 5.5, SCHG: 6, VUG: 6 },
+      AVGO: { QQQ: 4.5, QQQM: 4.5, FXAIX: 2.2, VOO: 2.2, SPY: 2.2, IVV: 2.2, VTI: 1.9, IWY: 3, SCHG: 3.5, VUG: 3.5 },
+      TSLA: { QQQ: 3, QQQM: 3, FXAIX: 1.8, VOO: 1.8, SPY: 1.8, IVV: 1.8, VTI: 1.6, IWY: 2.5, SCHG: 3, VUG: 3 },
+      AMD: { QQQ: 1.2, QQQM: 1.2, FXAIX: 0.5, VOO: 0.5, SPY: 0.5, IVV: 0.5, VTI: 0.45 },
+      COST: { QQQ: 2.4, QQQM: 2.4, FXAIX: 0.9, VOO: 0.9, SPY: 0.9, IVV: 0.9, VTI: 0.8 },
+      XOM: { FXAIX: 0.9, VOO: 0.9, SPY: 0.9, IVV: 0.9, VTI: 0.8, SCHD: 1.5, VYM: 2.5 },
+      CVX: { FXAIX: 0.55, VOO: 0.55, SPY: 0.55, IVV: 0.55, VTI: 0.5, SCHD: 4, VYM: 2 },
+    };
+    var f = F[ticker] || {};
+    var direct = 0, fund = 0;
+    P.positions.forEach(function (p) {
+      var t = String(p.ticker).toUpperCase();
+      var w = Number(p.amount) / P.total * 100;
+      if (t === ticker) direct += w;
+      else if (f[t]) fund += w * f[t] / 100;
+    });
+    return { direct: direct, fund: fund };
+  }
+  __personalize(stocks) {
+    var self = this;
+    var BLURB = {
+      NVDA: 'The stock itself is high quality and the center of the AI trade; the debate is valuation, not the business.',
+      AAPL: 'A mega-cap staple, steady services growth and huge buybacks anchor the big index funds.',
+      MSFT: 'A diversified, cash-generative business that anchors most broad index funds.',
+      COST: 'The kind of durable, dividend-growing business that suits a small individual-stock sleeve.',
+      AVGO: 'An AI-and-chip name that moves closely with Nvidia, it adds correlation more than diversification.',
+      TSLA: 'One of the more volatile large-caps in the market, its 52-week range runs from $139 to $389.',
+      XOM: 'An energy major with a 3.3% dividend yield, a classic diversifier away from tech.',
+      CVX: 'An energy major with a 4.1% yield, among the highest of the big names.',
+      AMD: 'A distant-second chip name that trades in near-lockstep with Nvidia.',
+      GOOGL: 'At roughly 25x earnings, the cheapest of the mega-caps.',
+      SCHD: 'Holds ~100 established dividend payers, so it behaves very differently from a growth-heavy core.',
+    };
+    stocks.forEach(function (s) {
+      var e = self.__exposure(s.ticker);
+      var tot = e.direct + e.fund;
+      s.exp = e;
+      s.held = tot > 0.2;
+      s.heldBadge = e.direct > 0
+        ? ('Held, ' + e.direct.toFixed(1) + '% directly' + (e.fund > 0.2 ? ', plus fund exposure' : ''))
+        : (e.fund > 0.2 ? 'Held via your index funds' : '');
+      var pers;
+      if (e.direct > 0 && e.fund > 0.5) pers = 'You own it twice over: ' + e.direct.toFixed(1) + '% directly and another ~' + e.fund.toFixed(1) + '% inside your funds, about ' + tot.toFixed(0) + '% of the account all-in.';
+      else if (e.direct > 0) pers = 'You hold it directly at ' + e.direct.toFixed(1) + '% of the account.';
+      else if (e.fund > 0.3) pers = 'You don\u2019t hold it directly, but it\u2019s about ' + e.fund.toFixed(1) + '% of your account through your funds.';
+      else pers = 'It barely registers in your account today, so this would be a genuinely new position.';
+      s.take = (BLURB[s.ticker] || '') + ' ' + pers;
+      if (tot > 10) s.expNote = 'Adding more would push a name you already hold at ~' + tot.toFixed(0) + '% even higher. New money is better sent to the broad core.';
+      else if (tot > 3) s.expNote = 'Already a meaningful effective holding via your funds. A direct add mostly concentrates what you already own.';
+      else if (s.sector === 'Energy' || s.sector === 'Dividend fund' || s.sector === 'Consumer Staples') s.expNote = 'Light in your account today, a position here would broaden you rather than concentrate you.';
+      else s.expNote = 'A new position for your individual-stock sleeve, size it inside that sleeve\u2019s cap.';
+    });
+  }
+
   get data() {
     if (this._d) return this._d;
     const S = (ticker, name, sector, price, chg, cap, pe, lo, hi, div, vol, held, heldBadge, exp, take, expNote, news) =>
@@ -592,7 +666,7 @@ class Component extends DCLogic {
         'Broadcom is about 2.2% of your account through your funds, and it moves closely with NVDA \u2014 both are AI-and-chip names. Since your account is already tilted heavily toward that theme (QQQ is 46% of it), Broadcom mostly adds correlation, not diversification.',
         'Highly correlated with Nvidia, which you\u2019re already heavy in. A direct AVGO position would stack the same bet rather than spread it.',
         [{ title: 'Broadcom guides in line as networking demand steadies', source: 'Reuters', time: '3h ago' }, { title: 'Software integration ahead of schedule, management says', source: 'WSJ', time: '1d ago' }, { title: 'Semis pull back broadly from record levels', source: 'Bloomberg', time: '1d ago' }]),
-      S('TSLA', 'Tesla', 'Automotive', 246.40, -3.24, '$785B', '71.0', 138.80, 389.49, '\u2014', '92M', false, '',
+      S('TSLA', 'Tesla', 'Automotive', 246.40, -3.24, '$785B', '71.0', 138.80, 389.49, 'none', '92M', false, '',
         { direct: 0, fund: 0.9 },
         'Tesla is under 1% of your account today and it\u2019s one of the more volatile large-caps in the market \u2014 its 52-week range runs from $139 to $389. For a Conservative, long-horizon profile, a direct position here would add a lot of day-to-day swing for exposure you can already get, in smaller doses, through your funds.',
         'Volatile even by single-stock standards. It sits at odds with the calm, diversified profile the rest of your account is built around.',
@@ -607,7 +681,7 @@ class Component extends DCLogic {
         'Like Exxon, Chevron is barely present in your account (~0.5%) and would diversify you away from tech. Its 4.1% yield is among the highest of any name you\u2019ve looked at \u2014 income that your growth-tilted account is currently light on.',
         'Another energy name that would broaden you rather than concentrate you. The 4.1% yield is the standout for an income-light account.',
         [{ title: 'Chevron holds output guidance for the year', source: 'Reuters', time: '5h ago' }, { title: 'Dividend aristocrat status intact after latest raise', source: 'Barron\u2019s', time: '2d ago' }, { title: 'Upstream costs decline quarter over quarter', source: 'Bloomberg', time: '3d ago' }]),
-      S('AMD', 'Advanced Micro Devices', 'Semiconductors', 168.30, -1.44, '$272B', '45.1', 116.90, 227.30, '\u2014', '41M', false, '',
+      S('AMD', 'Advanced Micro Devices', 'Semiconductors', 168.30, -1.44, '$272B', '45.1', 116.90, 227.30, 'none', '41M', false, '',
         { direct: 0, fund: 0.7 },
         'AMD is a distant-second chip name that trades in near-lockstep with Nvidia. Given your account already carries ~14% Nvidia exposure and a 46% QQQ weight, AMD would pile onto the exact theme your one open flag is about.',
         'Same AI-and-chip trade you\u2019re already heavy in. It adds correlation to your biggest concentration, not balance.',
@@ -617,12 +691,13 @@ class Component extends DCLogic {
         'Alphabet is about 3.4% of your account through your funds \u2014 a meaningful position you already own passively. At ~25x earnings it\u2019s the cheapest of the mega-caps you\u2019re exposed to, but a direct add would still concentrate you further into large-cap tech.',
         'Already a solid effective holding via funds, and the cheapest mega-cap you own. Little reason to convert that into single-stock risk.',
         [{ title: 'Alphabet ad revenue steady; cloud keeps gaining share', source: 'WSJ', time: '4h ago' }, { title: 'Regulatory overhang eases modestly', source: 'Reuters', time: '1d ago' }, { title: 'Capital returns expand with latest authorization', source: 'Bloomberg', time: '2d ago' }]),
-      S('SCHD', 'Schwab U.S. Dividend ETF', 'Dividend fund', 27.85, 0.54, '\u2014', '\u2014', 24.20, 29.10, '3.62%', '8M', true, 'Held, 3.7% of your account',
+      S('SCHD', 'Schwab U.S. Dividend ETF', 'Dividend fund', 27.85, 0.54, 'n/a', 'n/a', 24.20, 29.10, '3.62%', '8M', true, 'Held, 3.7% of your account',
         { direct: 3.7, fund: 0 },
         'You already own SCHD directly at 3.7% \u2014 it\u2019s your smallest sleeve and the one that leans against your tech concentration. It holds ~100 established dividend payers, so it behaves very differently from your QQQ-heavy core. Of everything on your dashboard, this is the fund we\u2019d point to for adding balance.',
         'This is the one holding that offsets your tech tilt. Adding here broadens the index sleeve and nudges down QQQ\u2019s 46% share \u2014 exactly the direction of your open flag.',
         [{ title: 'Dividend ETFs draw inflows as investors seek balance', source: 'Bloomberg', time: '6h ago' }, { title: 'SCHD\u2019s annual reconstitution refreshes holdings', source: 'ETF.com', time: '2d ago' }, { title: 'Payout growth continues across core names', source: 'Reuters', time: '4d ago' }]),
     ];
+    this.__personalize(stocks);
     const byT = {}; stocks.forEach(s => { byT[s.ticker] = s; });
     const sectors = [
       { name: 'Energy', chg: 1.38 }, { name: 'Financials', chg: 0.62 }, { name: 'Health Care', chg: 0.44 },
@@ -818,16 +893,26 @@ class Component extends DCLogic {
         { label: 'In your account', cells: cells(s => (s.exp.direct + s.exp.fund).toFixed(1) + '%') },
       ];
       const nm = tks.map(t => d.byT[t].name.split(' ')[0]);
-      out.compareTake = 'Both are already inside your funds, so on a look-through basis you own a slice of each today. ' + nm[0] + ' and ' + nm[1] + ' move together far more than most pairs \u2014 they\u2019re both mega-cap tech \u2014 so choosing between them does little to change your diversification. If the goal is balance, the more useful comparison is either of these against a name outside tech, like XOM or SCHD.';
+      const bothIn = tks.slice(0, 2).every(t => { const s2 = d.byT[t]; return (s2.exp.direct + s2.exp.fund) > 0.3; });
+      out.compareTake = (bothIn ? 'Both are already inside your holdings on a look-through basis, so you own a slice of each today. ' : '') + nm[0] + ' and ' + nm[1] + ' move together far more than most pairs, so choosing between them does little to change your diversification. If the goal is balance, the more useful comparison is either of these against a name outside tech, like XOM or SCHD.';
     }
 
     // ---- list ----
     if (view === 'list' && st.listKey) {
+      const expOf = (t) => { const s2 = d.byT[t]; return s2 ? s2.exp.direct + s2.exp.fund : 0; };
+      const sumExp = (arr) => arr.reduce((a, t) => a + expOf(t), 0);
+      const chipX = sumExp(['NVDA', 'AVGO', 'AMD']);
+      const enX = sumExp(['XOM', 'CVX']);
+      const techX = sumExp(['AAPL', 'MSFT', 'NVDA', 'GOOGL']);
       const defs = {
-        semis: { title: 'Large-cap semiconductors', sub: 'The chip names, sorted by size. You already own this theme heavily.', tks: ['NVDA', 'AVGO', 'AMD'], foot: 'A reminder: QQQ is 46% of your account and it\u2019s chip-heavy. You have this theme covered \u2014 more here would deepen your one open flag, not diversify it.' },
-        energy: { title: 'Energy today', sub: 'Up 1.4% \u2014 the day\u2019s strongest sector. One of your account\u2019s thinnest exposures.', tks: ['XOM', 'CVX'], foot: 'Energy is under 1% of your account. Of everything in the market right now, this is one of the few areas that would genuinely diversify your tech-heavy holdings \u2014 and both names carry 3%+ yields.' },
-        dividend: { title: 'Dividend & income names', sub: 'Higher-yield names for an income-light account.', tks: ['SCHD', 'CVX', 'XOM', 'COST'], foot: 'Your account yields about 0.8% today. Leaning slightly toward names like these \u2014 especially SCHD, which you already hold \u2014 is the cleanest way to add income without abandoning your index-first approach.' },
-        tech: { title: 'Large-cap technology', sub: 'The sector that already dominates your account.', tks: ['AAPL', 'MSFT', 'NVDA', 'GOOGL'], foot: 'You already own all of these through your funds \u2014 together they\u2019re the bulk of your account. Worth understanding, rarely worth adding to directly.' },
+        semis: { title: 'Large-cap semiconductors', sub: 'The chip names, sorted by size.', tks: ['NVDA', 'AVGO', 'AMD'],
+          foot: chipX > 5 ? 'Chip names are already about ' + chipX.toFixed(0) + '% of your account on a look-through basis. More here would deepen that theme, not diversify it.' : 'Chip names are about ' + chipX.toFixed(1) + '% of your account today. Adding here is a deliberate theme bet, size it inside the individual-stock sleeve.' },
+        energy: { title: 'Energy today', sub: 'Up 1.4%, the day\u2019s strongest sector.', tks: ['XOM', 'CVX'],
+          foot: 'Energy is about ' + enX.toFixed(1) + '% of your account. ' + (enX < 2 ? 'One of the few areas that would genuinely diversify your holdings, and both names carry 3%+ yields.' : 'Already represented in your holdings; both names carry 3%+ yields.') },
+        dividend: { title: 'Dividend & income names', sub: 'Higher-yield names for adding income.', tks: ['SCHD', 'CVX', 'XOM', 'COST'],
+          foot: (expOf('SCHD') > 0.2 ? 'SCHD, which you already hold, is the cleanest way to add income without abandoning an index-first approach.' : 'Names like these are the cleanest way to add income without abandoning an index-first approach.') },
+        tech: { title: 'Large-cap technology', sub: 'The mega-cap names.', tks: ['AAPL', 'MSFT', 'NVDA', 'GOOGL'],
+          foot: techX > 10 ? 'You already own these through your funds, together about ' + techX.toFixed(0) + '% of your account on a look-through basis. Worth understanding, rarely worth adding to directly.' : 'On a look-through basis these are about ' + techX.toFixed(1) + '% of your account today.' },
       }[st.listKey];
       out.listTitle = defs.title; out.listSubtitle = defs.sub; out.listFoot = defs.foot;
       out.listRows = defs.tks.map(t => { const s = d.byT[t]; const m = this.mv(s.chg); return { ticker: s.ticker, name: s.name, cap: s.cap, price: this.money(s.price), chg: this.pct(s.chg), color: m.color, spark: this.spark(s.ticker, '1W', s.price, s.chg, 120, 44), onOpen: () => this.open(t) }; });
