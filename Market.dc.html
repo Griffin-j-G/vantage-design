@@ -416,7 +416,7 @@
           <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 60px 34px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); text-align: center;">
             <div style="width: 52px; height: 52px; border-radius: 14px; background: #F1EFE8; border: 1px solid #E6E2D8; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A9A294" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 L14.5 9.2 L20 10 L16 14 L17 19.6 L12 17 L7 19.6 L8 14 L4 10 L9.5 9.2 Z"></path></svg></div>
             <h2 style="margin: 0 0 8px; font-family: Fraunces, serif; font-size: 22px; font-weight: 500;">Your watchlist is empty</h2>
-            <p style="margin: 0 auto 22px; font-size: 14px; color: #6B7480; line-height: 1.6; max-width: 380px;">Ask about any stock above, then tap <strong style="color:#0E1F2B;">Add to watchlist</strong> on its page. It's a quiet place to track names you're researching — no alerts, no noise.</p>
+            <p style="margin: 0 auto 22px; font-size: 14px; color: #6B7480; line-height: 1.6; max-width: 380px;">Ask about any stock above, then tap <strong style="color:#0E1F2B;">Add to watchlist</strong> on its page. It's a quiet place to track names you're researching, no alerts, no noise.</p>
             <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
               <sc-for list="{{ suggestions }}" as="s" hint-placeholder-count="5">
                 <button onClick="{{ s.onClick }}" style="font-family: inherit; font-size: 12.5px; font-weight: 500; color: #4A5560; background: #FFFFFF; border: 1px solid #E6E2D8; cursor: pointer; padding: 7px 14px; border-radius: 999px;" style-hover="border-color: #0E1F2B; color: #0E1F2B;">{{ s.label }}</button>
@@ -462,7 +462,7 @@
           <div style="flex: 1;">
             <p style="margin: 0 0 8px; font-size: 15px; color: #0E1F2B; line-height: 1.6;">I couldn't find a match for <strong style="color:#0E1F2B;">"{{ errorQuery }}"</strong>. It may be delisted, an unsupported symbol, or a typo.</p>
             <sc-if value="{{ hasSuggestion }}" hint-placeholder-val="{{ true }}">
-              <p style="margin: 0 0 16px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Closest thing I track is <strong style="color:#0E1F2B;">{{ suggTicker }} — {{ suggName }}</strong>. Want that?</p>
+              <p style="margin: 0 0 16px; font-size: 13.5px; color: #6B7480; line-height: 1.6;">Closest thing I track is <strong style="color:#0E1F2B;">{{ suggTicker }}, {{ suggName }}</strong>. Want that?</p>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button onClick="{{ onOpenSuggestion }}" style="font-family: inherit; font-size: 13px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; border: none; cursor: pointer; padding: 10px 18px; border-radius: 10px;" style-hover="background: #17303F;">Pull up {{ suggTicker }} →</button>
                 <button onClick="{{ onShowOverview }}" style="font-family: inherit; font-size: 13px; font-weight: 600; color: #4A5560; background: #FFFFFF; border: 1px solid #E6E2D8; cursor: pointer; padding: 10px 18px; border-radius: 10px;" style-hover="border-color: #0E1F2B; color: #0E1F2B;">Back to overview</button>
@@ -567,10 +567,10 @@ class Component extends DCLogic {
     const S = (ticker, name, sector, price, chg, cap, pe, lo, hi, div, vol, held, heldBadge, exp, take, expNote, news) =>
       ({ ticker, name, sector, price, chg, cap, pe, lo, hi, div, vol, held, heldBadge, exp, take, expNote, news });
     const stocks = [
-      S('NVDA', 'Nvidia', 'Semiconductors', 118.42, -1.82, '$2.91T', '34.2', 86.62, 153.13, '0.03%', '214M', true, 'Held — 6.7% directly, plus fund exposure',
+      S('NVDA', 'Nvidia', 'Semiconductors', 118.42, -1.82, '$2.91T', '34.2', 86.62, 153.13, '0.03%', '214M', true, 'Held, 6.7% directly, plus fund exposure',
         { direct: 6.7, fund: 7.3 },
-        'You already own NVDA twice over: a 6.7% individual position and another ~7.3% buried inside QQQ, IWY and FXAIX. That puts your true Nvidia exposure near 14% of the account — well above where a single name should sit for a Conservative profile. The stock itself is high quality; the issue is that adding more here deepens the same concentration flag we track on your dashboard.',
-        'Adding to NVDA would push a name you already hold at ~14% even higher. If you want semiconductor exposure, you already have it — new money is better sent to the broad S&P core.',
+        'You already own NVDA twice over: a 6.7% individual position and another ~7.3% buried inside QQQ, IWY and FXAIX. That puts your true Nvidia exposure near 14% of the account, well above where a single name should sit for a Conservative profile. The stock itself is high quality; the issue is that adding more here deepens the same concentration flag we track on your dashboard.',
+        'Adding to NVDA would push a name you already hold at ~14% even higher. If you want semiconductor exposure, you already have it, new money is better sent to the broad S&P core.',
         [{ title: 'Nvidia slips as investors reweight AI names after Q2 datacenter guide', source: 'Bloomberg', time: '2h ago' }, { title: 'Analysts trim price targets but keep long-term thesis intact', source: 'Reuters', time: '6h ago' }, { title: 'Chip sector cools from record highs on valuation concerns', source: 'WSJ', time: '1d ago' }]),
       S('AAPL', 'Apple', 'Consumer Tech', 214.05, 0.41, '$3.24T', '33.1', 164.08, 237.49, '0.45%', '48M', true, 'Held via your index funds',
         { direct: 0, fund: 5.8 },
@@ -617,7 +617,7 @@ class Component extends DCLogic {
         'Alphabet is about 3.4% of your account through your funds \u2014 a meaningful position you already own passively. At ~25x earnings it\u2019s the cheapest of the mega-caps you\u2019re exposed to, but a direct add would still concentrate you further into large-cap tech.',
         'Already a solid effective holding via funds, and the cheapest mega-cap you own. Little reason to convert that into single-stock risk.',
         [{ title: 'Alphabet ad revenue steady; cloud keeps gaining share', source: 'WSJ', time: '4h ago' }, { title: 'Regulatory overhang eases modestly', source: 'Reuters', time: '1d ago' }, { title: 'Capital returns expand with latest authorization', source: 'Bloomberg', time: '2d ago' }]),
-      S('SCHD', 'Schwab U.S. Dividend ETF', 'Dividend fund', 27.85, 0.54, '\u2014', '\u2014', 24.20, 29.10, '3.62%', '8M', true, 'Held — 3.7% of your account',
+      S('SCHD', 'Schwab U.S. Dividend ETF', 'Dividend fund', 27.85, 0.54, '\u2014', '\u2014', 24.20, 29.10, '3.62%', '8M', true, 'Held, 3.7% of your account',
         { direct: 3.7, fund: 0 },
         'You already own SCHD directly at 3.7% \u2014 it\u2019s your smallest sleeve and the one that leans against your tech concentration. It holds ~100 established dividend payers, so it behaves very differently from your QQQ-heavy core. Of everything on your dashboard, this is the fund we\u2019d point to for adding balance.',
         'This is the one holding that offsets your tech tilt. Adding here broadens the index sleeve and nudges down QQQ\u2019s 46% share \u2014 exactly the direction of your open flag.',
@@ -836,7 +836,7 @@ class Component extends DCLogic {
     // ---- watch full ----
     out.watchFull = watch.map(t => {
       const s = d.byT[t]; const m = this.mv(s.chg); const total = s.exp.direct + s.exp.fund;
-      return { ticker: s.ticker, name: s.name, price: this.money(s.price), chg: this.pct(s.chg), color: m.color, exp: total > 0.05 ? total.toFixed(1) + '%' : '—', onOpen: () => this.open(t), onRemove: () => this.toggleWatch(t) };
+      return { ticker: s.ticker, name: s.name, price: this.money(s.price), chg: this.pct(s.chg), color: m.color, exp: total > 0.05 ? total.toFixed(1) + '%' : '-', onOpen: () => this.open(t), onRemove: () => this.toggleWatch(t) };
     });
 
     // ---- error ----

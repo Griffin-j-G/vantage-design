@@ -98,7 +98,7 @@
               <span style="font-size: 14px; font-weight: 600; color: #159B5A; font-variant-numeric: tabular-nums;">{{ towardF }}</span>
             </div>
             <input type="range" min="0" max="1000" step="50" value="{{ toward }}" onChange="{{ setToward }}" style="width: 100%; accent-color: #159B5A;">
-            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0 — stay the course</span><span>$1,000 — all to core</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #A9A294; margin-top: 4px;"><span>$0, stay the course</span><span>$1,000, all to core</span></div>
             <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 10px;">
               <sc-for list="{{ splitRows }}" as="s" hint-placeholder-count="4">
                 <div style="display: grid; grid-template-columns: 140px 1fr 70px; gap: 14px; align-items: center;">
@@ -223,7 +223,7 @@
         </sc-for>
       </div>
       <div style="background: #FBFAF6; border: 1px solid #ECE8DE; border-radius: 14px; padding: 22px 28px;">
-        <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; max-width: 880px;"><strong style="color: #0E1F2B;">Why they accelerate:</strong> the first $10k takes ~10 months because it's almost all deposits. By $50k the account earns roughly $300/mo on its own — a third paycheck. By $100k, market growth contributes more than you do in a typical month. Same $1,000, each milestone arrives faster than the last.</p>
+        <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; max-width: 880px;"><strong style="color: #0E1F2B;">Why they accelerate:</strong> the first $10k takes ~10 months because it's almost all deposits. By $50k the account earns roughly $300/mo on its own, a third paycheck. By $100k, market growth contributes more than you do in a typical month. Same $1,000, each milestone arrives faster than the last.</p>
       </div>
     </section>
 
@@ -250,7 +250,7 @@
       <div style="background: #0E1F2B; border-radius: 14px; padding: 36px 40px; color: #F7F6F2; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;">
         <div>
           <h2 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">Your two forms</h2>
-          <p style="margin: 0; font-size: 14px; color: #9AA7B1; line-height: 1.7; max-width: 560px;">The <strong style="color: #F7F6F2;">payday check-in</strong> takes 60 seconds when money lands — it's how contributions and buys enter the system. The <strong style="color: #F7F6F2;">setup form</strong> is where you change the risk profile, contribution amount, or preferences.</p>
+          <p style="margin: 0; font-size: 14px; color: #9AA7B1; line-height: 1.7; max-width: 560px;">The <strong style="color: #F7F6F2;">payday check-in</strong> takes 60 seconds when money lands, it's how contributions and buys enter the system. The <strong style="color: #F7F6F2;">setup form</strong> is where you change the risk profile, contribution amount, or preferences.</p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSec2TTUMAXD-VrZpr9xgj5dwCfMcA7C3gDei96EDrcuu6PYEQ/viewform" target="_blank" style="font-size: 13.5px; font-weight: 600; color: #0E1F2B; background: #F7F6F2; text-decoration: none; padding: 12px 26px; border-radius: 999px; text-align: center; white-space: nowrap;">Payday check-in →</a>
@@ -271,7 +271,7 @@
 
   <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
     <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
-      <span>Vantage · Prepared privately for Griffin · Figures are estimates — food for thought, not financial advice</span>
+      <span>Vantage · Prepared privately for Griffin · Figures are estimates, food for thought, not financial advice</span>
       <span>Data refreshes weekdays 8:30 PM CT · New report every Friday</span>
     </div>
   </footer>
@@ -321,10 +321,10 @@ class Component extends DCLogic {
     const qqqShare = newQQQ / newTotal * 100;
     const mixF = qqqShare.toFixed(0) + '%';
     const allocVerdict = toward === 0
-      ? 'All into the current mix: QQQ climbs past ' + qqqShare.toFixed(0) + '% of the account — the concentration flag gets worse, not better. Fine only if you\u2019re deliberately betting on tech.'
+      ? 'All into the current mix: QQQ climbs past ' + qqqShare.toFixed(0) + '% of the account, the concentration flag gets worse, not better. Fine only if you\u2019re deliberately betting on tech.'
       : toward >= 800
         ? 'Aggressive broadening: QQQ\u2019s share falls fast toward ~' + qqqShare.toFixed(0) + '%. The quickest tax-free way to defuse the concentration flag.'
-        : 'A measured broadening. No selling, no taxes — each paycheck dilutes QQQ (to ~' + qqqShare.toFixed(0) + '% in a year) and grows the diversified core.';
+        : 'A measured broadening. No selling, no taxes, each paycheck dilutes QQQ (to ~' + qqqShare.toFixed(0) + '% in a year) and grows the diversified core.';
 
     // Growth projector
     const { monthly, ret, years } = this.state;
@@ -350,28 +350,28 @@ class Component extends DCLogic {
     const strategies = [
       { tag: 'MATCHES OPTION A', name: 'Stay the Course', border: '#ECE8DE',
         rows: [ { t: 'QQQ', amt: '$470' }, { t: 'FXAIX', amt: '$290' }, { t: 'IWY', amt: '$110' }, { t: 'Rest of mix', amt: '$130' } ],
-        note: 'Keep buying the current weights (47/29/11/13). QQQ stays ~46% of the account — honest only if you\u2019re deliberately leaning into tech.' },
+        note: 'Keep buying the current weights (47/29/11/13). QQQ stays ~46% of the account, honest only if you\u2019re deliberately leaning into tech.' },
       { tag: 'MATCHES OPTION B', name: 'Broaden the Core', border: '#159B5A',
         rows: [ { t: 'FXAIX', amt: '$600' }, { t: 'SCHD', amt: '$300' }, { t: 'NVDA', amt: '$100' }, { t: 'QQQ / IWY', amt: '$0' } ],
         note: 'Every dollar to the broad S&P 500 core and dividend index, plus a small individual top-up. Sells nothing, dilutes QQQ\u2019s 46% share over time.' },
       { tag: 'MATCHES OPTION C', name: 'Add Ballast', border: '#ECE8DE',
         rows: [ { t: 'BND (on request)', amt: '$300' }, { t: 'FXAIX', amt: '$500' }, { t: 'SCHD', amt: '$200' }, { t: 'QQQ', amt: '$0' } ],
-        note: 'For lower swings: a bond index fund by request, alongside the broad core — ballast the S&P 500 can\u2019t provide. Off by default, on when you ask in the payday form.' },
+        note: 'For lower swings: a bond index fund by request, alongside the broad core, ballast the S&P 500 can\u2019t provide. Off by default, on when you ask in the payday form.' },
     ];
 
     const milestones = [
-      { amt: '$10k', when: '≈ May 2027', note: 'Almost entirely deposits — 10 months in, the market has barely had time to matter.' },
+      { amt: '$10k', when: '≈ May 2027', note: 'Almost entirely deposits, 10 months in, the market has barely had time to matter.' },
       { amt: '$25k', when: '≈ Dec 2028', note: 'Growth now adds ~$150/mo. Dividends become visible line items instead of cents.' },
-      { amt: '$50k', when: '≈ Sep 2030', note: 'The account earns ~$300/mo by itself — a phantom third paycheck every month.' },
+      { amt: '$50k', when: '≈ Sep 2030', note: 'The account earns ~$300/mo by itself, a phantom third paycheck every month.' },
       { amt: '$100k', when: '≈ Feb 2034', note: 'Market growth now typically outearns your monthly deposit. Compounding takes the wheel.' },
     ];
 
     const ruleData = [
-      { title: 'Rebalance with new money, not sales', body: 'Selling winners to rebalance triggers capital gains tax. Directing fresh contributions to whatever is underweight achieves the same drift correction for free — it\u2019s slower, and that\u2019s fine. This is the engine behind Broaden the Core.' },
-      { title: 'Never wait for a dip to invest a paycheck', body: 'Timing entries on regular contributions is a documented losing game — missing the market\u2019s 10 best days in a decade roughly halves returns, and those days cluster next to the worst ones. The $1,000 goes in on payday, whatever the tape looks like.' },
-      { title: 'Stagger lump sums only in frothy markets', body: 'For regular paychecks: invest immediately. For a rare windfall arriving mid-euphoria — like this AI reset moment — splitting it into 2–3 tranches over a few weeks trades a little expected return for a lot of regret insurance. Issue 15 made exactly this point about new QQQ money.' },
-      { title: 'Keep individual stocks near 10%', body: 'NVDA + HOOD + FIG currently sit at ~10% of the account (flag rule 8). Individual stocks are fine — sized so that being completely wrong about all of them costs one year of contributions, not the plan. Everything else is broad index funds.' },
-      { title: 'Review the shape quarterly, not daily', body: 'Prices move daily; the shape of the portfolio — core vs. growth vs. income vs. individual stocks — moves slowly. The nightly checks watch the daily noise so you don\u2019t have to. October is the first scheduled shape review.' },
+      { title: 'Rebalance with new money, not sales', body: 'Selling winners to rebalance triggers capital gains tax. Directing fresh contributions to whatever is underweight achieves the same drift correction for free, it\u2019s slower, and that\u2019s fine. This is the engine behind Broaden the Core.' },
+      { title: 'Never wait for a dip to invest a paycheck', body: 'Timing entries on regular contributions is a documented losing game, missing the market\u2019s 10 best days in a decade roughly halves returns, and those days cluster next to the worst ones. The $1,000 goes in on payday, whatever the tape looks like.' },
+      { title: 'Stagger lump sums only in frothy markets', body: 'For regular paychecks: invest immediately. For a rare windfall arriving mid-euphoria, like this AI reset moment, splitting it into 2–3 tranches over a few weeks trades a little expected return for a lot of regret insurance. Issue 15 made exactly this point about new QQQ money.' },
+      { title: 'Keep individual stocks near 10%', body: 'NVDA + HOOD + FIG currently sit at ~10% of the account (flag rule 8). Individual stocks are fine, sized so that being completely wrong about all of them costs one year of contributions, not the plan. Everything else is broad index funds.' },
+      { title: 'Review the shape quarterly, not daily', body: 'Prices move daily; the shape of the portfolio, core vs. growth vs. income vs. individual stocks, moves slowly. The nightly checks watch the daily noise so you don\u2019t have to. October is the first scheduled shape review.' },
       { title: 'Suggestions are screened, never pushed', body: 'Ticker ideas in dispatches (COST, AAPL, GLD…) are filtered through your Conservative profile before they\u2019re mentioned, and nothing is ever bought on your behalf. Every trade in this account is one you made yourself.' },
     ];
     const rules = ruleData.map((rd, i) => ({
