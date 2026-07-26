@@ -1,0 +1,38 @@
+# Netlify config for the Vantage design prototype.
+#
+# publish = "dist" is deliberate. The repo root also holds CLAUDE.md, .claude/
+# and screenshots/, none of which should be served publicly -- so deploys go
+# from a staged directory built by scripts/build-dist.ps1 rather than from the
+# root. Adding a file to the root does NOT publish it; add it to the build
+# script.
+#
+# There is no build step: the prototype is static .dc.html files that the
+# support.js runtime mounts in the browser.
+
+[build]
+  publish = "dist"
+  # dist/ is gitignored and built here, on Netlify's Linux builders, so the
+  # allowlist lives in one place. Mirror any change in scripts/build-dist.ps1,
+  # which does the same staging locally.
+  command = """
+    mkdir -p dist/uploads && \
+    cp *.dc.html support.js dist/ && \
+    cp uploads/vantage-icon.png uploads/vantage-logo-dark.png dist/uploads/ && \
+    cp static/index.html static/robots.txt dist/
+  """
+
+# The prototype has no index of its own; every screen is a separate file.
+[[redirects]]
+  from = "/"
+  to = "/Login.dc.html"
+  status = 302
+  force = false
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Preview build: keep it out of search results.
+    X-Robots-Tag = "noindex, nofollow"

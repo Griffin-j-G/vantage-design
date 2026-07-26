@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Vantage</title>
+  <link rel="icon" href="uploads/vantage-icon.png">
+  <script>
+    // The prototype has no server-side routing; every screen is its own file.
+    // Send a bare visit to the sign-in screen, which is where the session gate
+    // lives -- Login.dc.html forwards on to Overview if a session already exists.
+    location.replace('Login.dc.html');
+  </script>
+  <meta http-equiv="refresh" content="0; url=Login.dc.html">
+  <style>
+    body { margin:0; min-height:100vh; display:flex; align-items:center;
+           justify-content:center; background:#F7F6F2; color:#6B7480;
+           font-family: Inter, system-ui, sans-serif; font-size:14px; }
+  </style>
+</head>
+<body>
+  <p>Loading Vantage… <a href="Login.dc.html" style="color:#159B5A;">Continue</a></p>
+</body>
+</html>
