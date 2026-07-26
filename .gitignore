@@ -9,3 +9,5 @@ node_modules/
 # of truth is the repo root plus static/.
 dist/
 .claude/
+# Netlify CLI/deploy state, written locally during a deploy.
+.netlify/
