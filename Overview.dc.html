@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./atlas.js"></script>
 </head>
 <body>
 <x-dc>
@@ -18,6 +19,16 @@
     body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
   
     @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .pd-menu-btn:hover { background: #EEEBE2; }
+    .pd-menu-panel { position: absolute; right: 0; top: calc(100% + 6px); min-width: 190px; background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 12px; box-shadow: 0 10px 30px rgba(14,31,43,0.14); padding: 6px; display: none; flex-direction: column; z-index: 120; }
+    .pd-menu:hover .pd-menu-panel, .pd-menu:focus-within .pd-menu-panel { display: flex; }
+    .pd-menu-item { display: flex; align-items: center; gap: 10px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #0E1F2B; text-decoration: none; background: none; border: none; width: 100%; box-sizing: border-box; text-align: left; padding: 9px 12px; border-radius: 8px; cursor: pointer; }
+    .pd-menu-item:hover { background: #F1EFE8; color: #0E1F2B; }
+    .pd-menu-ico { width: 18px; display: inline-flex; justify-content: center; font-size: 13px; }
+    .pd-menu-sep { height: 1px; background: #F0EDE4; margin: 5px 8px; }
+    .pd-menu-danger { color: #B4483C; }
+    .pd-menu-danger:hover { background: #FAEDEB; color: #B4483C; }
   </style>
   <script>
     (function () {
@@ -61,19 +72,27 @@
       <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
       <div style="display: flex; gap: 4px; flex-wrap: wrap;">
         <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Overview</a>
-        <a href="Market.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Market</a>
+        <a href="Learn.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Learn</a>
         <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
         <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Activity</a>
         <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
         <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
         <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Reports</a>
       </div>
-      <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-        <a href="Profile.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 12px 4px 5px; border-radius: 999px;" style-hover="background: #EEEBE2;">
-          <div style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</div>
+      <div class="pd-menu" style="position: relative; display: flex; align-items: center; white-space: nowrap;">
+        <button class="pd-menu-btn" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: none; border: none; cursor: pointer; padding: 4px 10px 4px 5px; border-radius: 999px;">
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</span>
           <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
-        </a>
-        <button onClick="{{ onLogout }}" style="font-family: inherit; font-size: 12px; font-weight: 500; color: #6B7480; background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 6px;" style-hover="color: #B4483C; background: #EEEBE2;">Log out</button>
+          <span style="font-size: 10px; color: #A9A294;">▾</span>
+        </button>
+        <div class="pd-menu-panel">
+          <a class="pd-menu-item" href="Profile.dc.html"><span class="pd-menu-ico">👤</span>Profile</a>
+          <a class="pd-menu-item" href="Settings.dc.html"><span class="pd-menu-ico">⚙️</span>Settings</a>
+          <a class="pd-menu-item" href="Feedback.dc.html"><span class="pd-menu-ico">💬</span>Feedback</a>
+          <a class="pd-menu-item" href="Learn.dc.html"><span class="pd-menu-ico">🎓</span>Help &amp; Learn</a>
+          <div class="pd-menu-sep"></div>
+          <button class="pd-menu-item pd-menu-danger" onClick="{{ onLogout }}"><span class="pd-menu-ico">↩</span>Log out</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -83,10 +102,19 @@
     <!-- HERO -->
     <section style="padding: 56px 0 40px;">
       <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">As of Wednesday, Jul 2, 2026 close · Markets closed Jul 3–4 · Account {{ userAccount }}</p>
-      <h1 style="margin: 0 0 28px; font-family: Fraunces, serif; font-size: 44px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;">Good morning, {{ userName }}.</h1>
+      <h1 style="margin: 0 0 16px; font-family: Fraunces, serif; font-size: 44px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;">Good morning, {{ userName }}.</h1>
+
+      <!-- BUILT AROUND YOU: every chip is live personalization from this profile -->
+      <div data-tour="personal" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 28px;">
+        <span style="display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: #F7F6F2; background: #159B5A; border-radius: 999px; padding: 7px 14px; letter-spacing: 0.02em;">✦ Built around you</span>
+        <a href="Profile.dc.html" title="Change on Profile" style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: #0E1F2B; background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 999px; padding: 7px 14px; text-decoration: none;" style-hover="border-color: #159B5A;">🎯 {{ riskLabel }} profile · {{ targetSplit }}</a>
+        <a href="Settings.dc.html" title="Change in Settings" style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: #0E1F2B; background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 999px; padding: 7px 14px; text-decoration: none;" style-hover="border-color: #159B5A;">💵 {{ monthlyF }} · {{ cadenceLabel }}</a>
+        <a href="Learn.dc.html" title="Keep learning" style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: #0E1F2B; background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 999px; padding: 7px 14px; text-decoration: none;" style-hover="border-color: #159B5A;">🎓 {{ learnLabel }}</a>
+        <button onClick="{{ onStartTour }}" title="Atlas walks you through this page" style="font-family: inherit; display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: #159B5A; background: #FFFFFF; border: 1px dashed #159B5A; border-radius: 999px; padding: 7px 14px; cursor: pointer;" style-hover="background: #EAF6EF;">▶ Take the tour</button>
+      </div>
 
       <sc-if value="{{ hasHoldings }}">
-        <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <div data-tour="hero" style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
           <p style="margin: 0 0 8px; font-size: 13px; font-weight: 500; color: #6B7480;">Total portfolio value</p>
           <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
             <span style="font-family: Fraunces, serif; font-size: 52px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">{{ totalValueF }}</span>
@@ -127,7 +155,7 @@
 
     <!-- CHART + DONUT -->
     <sc-if value="{{ hasHoldings }}">
-    <section style="padding: 0 0 40px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
+    <section data-tour="chart" style="padding: 0 0 40px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px;">
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
         <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px;">
           <p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B7480;">Value · July 2026</p>
@@ -176,7 +204,7 @@
     </sc-if>
 
     <!-- WHAT TO LOOK OUT FOR -->
-    <section style="padding: 0 0 40px;">
+    <section data-tour="invest" style="padding: 0 0 40px;">
       <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 6px; flex-wrap: wrap;">
         <h2 style="margin: 0; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">How to invest your next {{ monthlyF }}</h2>
         <span style="font-size: 12px; color: #A9A294;">Built from your profile: {{ riskLabel }} · {{ targetSplit }}</span>
@@ -222,7 +250,7 @@
     </section>
 
     <!-- WEEK IN 60 SECONDS -->
-    <section style="padding: 0 0 40px;">
+    <section data-tour="week" style="padding: 0 0 40px;">
       <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
         <h2 style="margin: 0 0 20px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">Your week in 60 seconds</h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px;">
@@ -247,7 +275,7 @@
     </section>
 
     <!-- THE ONE FLAG -->
-    <section style="padding: 0 0 48px;">
+    <section data-tour="flag" style="padding: 0 0 48px;">
       <div style="background: #0E1F2B; border-radius: 14px; padding: 32px 36px; color: #F7F6F2; display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center;">
         <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(201,162,39,0.18); border: 1px solid rgba(201,162,39,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #C9A227;">⚑</div>
         <div>
@@ -259,7 +287,7 @@
     </section>
 
     <!-- LEARN THE BASICS -->
-    <section style="padding: 0 0 88px;">
+    <section data-tour="ideas" style="padding: 0 0 88px;">
       <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">New to this? The four ideas that matter</h2>
       <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px; line-height: 1.6;">More than anything you could pick, these four decide how it goes. Everything on this dashboard rests on them.</p>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;">
@@ -322,7 +350,7 @@ class Component extends DCLogic {
     if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
     if (!raw) { window.location.replace('Login.dc.html'); }
     var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
-    var userName = (s && s.name) || 'Griffin';
+    var userName = (s && s.name) || 'Investor';
     return {
       userName: userName,
       userInitial: (userName.charAt(0) || 'G').toUpperCase(),
@@ -436,8 +464,30 @@ class Component extends DCLogic {
       ? 'Adding more to ' + maxT2 + ', already ' + maxW2.toFixed(1) + '% of the account. New money there deepens the concentration flag instead of easing it.'
       : 'Chasing whatever ran up last week. New money does more good topping up whichever side of your split has drifted below target.';
 
+    // ---- Learning progress, from the Learn page's per-profile store ----
+    var acct = (sessionStorageAcct());
+    var learnDone = 0, LEARN_TOTAL = 13;
+    try {
+      var learn = JSON.parse(localStorage.getItem('pd-learn-' + (acct || 'unknown')) || 'null');
+      if (learn && learn.done) for (var lk in learn.done) { if (learn.done[lk]) learnDone++; }
+    } catch (e) {}
+    var learnLabel = learnDone === 0 ? 'Start learning · 13 short lessons'
+      : learnDone >= LEARN_TOTAL ? 'All 13 lessons done 🎉'
+      : learnDone + ' of ' + LEARN_TOTAL + ' lessons done';
+
+    function sessionStorageAcct() {
+      var raw = null;
+      try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+      var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+      return s && s.account;
+    }
+
     return {
       week1: week1, week2: week2, flagBanner: flagBanner, skipNote: skipNote,
+      learnLabel: learnLabel,
+      onStartTour: function () { if (window.VantageAtlas) window.VantageAtlas.start(0); },
       hasHoldings: hasHoldings,
       noHoldings: !hasHoldings,
       totalValueF: fmt(total),

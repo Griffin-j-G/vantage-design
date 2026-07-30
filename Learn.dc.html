@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./atlas.js"></script>
+<script src="./neon.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="uploads/vantage-icon.png">
+  <link rel="apple-touch-icon" href="uploads/vantage-icon.png">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F7F6F2; -webkit-font-smoothing: antialiased; }
+
+    @keyframes pdShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .pd-menu-btn:hover { background: #EEEBE2; }
+    .pd-menu-panel { position: absolute; right: 0; top: calc(100% + 6px); min-width: 190px; background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 12px; box-shadow: 0 10px 30px rgba(14,31,43,0.14); padding: 6px; display: none; flex-direction: column; z-index: 120; }
+    .pd-menu:hover .pd-menu-panel, .pd-menu:focus-within .pd-menu-panel { display: flex; }
+    .pd-menu-item { display: flex; align-items: center; gap: 10px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #0E1F2B; text-decoration: none; background: none; border: none; width: 100%; box-sizing: border-box; text-align: left; padding: 9px 12px; border-radius: 8px; cursor: pointer; }
+    .pd-menu-item:hover { background: #F1EFE8; color: #0E1F2B; }
+    .pd-menu-ico { width: 18px; display: inline-flex; justify-content: center; font-size: 13px; }
+    .pd-menu-sep { height: 1px; background: #F0EDE4; margin: 5px 8px; }
+    .pd-menu-danger { color: #B4483C; }
+    .pd-menu-danger:hover { background: #FAEDEB; color: #B4483C; }
+  </style>
+  <script>
+    (function () {
+      var s = null;
+      try { s = localStorage.getItem('pd-session'); } catch (e) {}
+      if (!s) { try { s = sessionStorage.getItem('pd-session'); } catch (e) {} }
+      if (!s && window.name && window.name.indexOf('pd-session:') === 0) s = window.name.slice(11);
+      if (!s) location.replace('Login.dc.html');
+    })();
+  </script>
+  <script>
+    (function () {
+      function hide() { var el = document.getElementById('pd-skeleton'); if (!el) return; el.style.opacity = '0'; setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 400); }
+      if (document.readyState === 'complete') { setTimeout(hide, 650); }
+      else { window.addEventListener('load', function () { setTimeout(hide, 650); }); }
+      setTimeout(hide, 3000);
+    })();
+  </script>
+</helmet>
+
+<div style="font-family: Inter, sans-serif; color: #0E1F2B; background: #F7F6F2; min-height: 100vh;" data-screen-label="Learn">
+
+  <div id="pd-skeleton" style="position:fixed;inset:0;z-index:200;background:#F7F6F2;pointer-events:none;transition:opacity 0.4s ease;">
+    <div style="height:64px;border-bottom:1px solid #E6E2D8;">
+      <div style="max-width:1160px;margin:0 auto;height:64px;padding:0 32px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div style="width:96px;height:20px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+        <div style="width:112px;height:30px;border-radius:999px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;padding:56px 32px;box-sizing:border-box;">
+      <div style="width:180px;height:14px;border-radius:6px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:18px;"></div>
+      <div style="width:58%;height:40px;border-radius:10px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;margin-bottom:28px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px;"><div style="width:100%;height:220px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:220px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div><div style="width:100%;height:220px;border-radius:14px;background:linear-gradient(90deg,#E8E4DA 25%,#F4F1EA 50%,#E8E4DA 75%);background-size:200% 100%;animation:pdShimmer 1.3s ease-in-out infinite;"></div></div>
+    </div>
+  </div>
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(247,246,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #E6E2D8;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="Overview.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;"><img src="uploads/vantage-icon.png" alt="Vantage" style="height: 32px; width: 32px; border-radius: 8px; display: block;"><span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #0E1F2B;">Vantage</span></a>
+      <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+        <a href="Overview.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Overview</a>
+        <a href="Learn.dc.html" style="font-size: 12.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Learn</a>
+        <a href="Holdings.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Holdings</a>
+        <a href="Activity.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Activity</a>
+        <a href="Performance.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Performance</a>
+        <a href="Plan.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Plan</a>
+        <a href="Report.dc.html" style="font-size: 12.5px; font-weight: 500; color: #4A5560; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="color: #0E1F2B; background: #EEEBE2;">Reports</a>
+      </div>
+      <div class="pd-menu" style="position: relative; display: flex; align-items: center; white-space: nowrap;">
+        <button class="pd-menu-btn" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: none; border: none; cursor: pointer; padding: 4px 10px 4px 5px; border-radius: 999px;">
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: #0E1F2B; color: #F7F6F2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{ userInitial }}</span>
+          <span style="font-size: 13px; font-weight: 500; color: #0E1F2B;">{{ userName }}</span>
+          <span style="font-size: 10px; color: #A9A294;">▾</span>
+        </button>
+        <div class="pd-menu-panel">
+          <a class="pd-menu-item" href="Profile.dc.html"><span class="pd-menu-ico">👤</span>Profile</a>
+          <a class="pd-menu-item" href="Settings.dc.html"><span class="pd-menu-ico">⚙️</span>Settings</a>
+          <a class="pd-menu-item" href="Feedback.dc.html"><span class="pd-menu-ico">💬</span>Feedback</a>
+          <a class="pd-menu-item" href="Learn.dc.html"><span class="pd-menu-ico">🎓</span>Help &amp; Learn</a>
+          <div class="pd-menu-sep"></div>
+          <button class="pd-menu-item pd-menu-danger" onClick="{{ onLogout }}"><span class="pd-menu-ico">↩</span>Log out</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 0 32px;">
+
+    <!-- HERO -->
+    <section style="padding: 56px 0 36px;">
+      <p style="margin: 0 0 6px; font-size: 13px; font-weight: 500; color: #6B7480; letter-spacing: 0.06em; text-transform: uppercase;">Learn · No jargon, no prerequisites</p>
+      <h1 style="margin: 0 0 10px; font-family: Fraunces, serif; font-size: 40px; font-weight: 500; letter-spacing: -0.02em;">The ideas behind your dashboard</h1>
+      <p style="margin: 0 0 18px; font-size: 15px; color: #6B7480; max-width: 660px; line-height: 1.65;">Short courses, plain-language breakdowns, quick quizzes, videos, and a forum for anything they don&rsquo;t cover. Pick a section below.</p>
+      <!-- UP NEXT: personalized continue-learning card -->
+      <div data-tour="upnext" style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; padding: 22px 28px; align-items: center;">
+          <div>
+            <p style="margin: 0 0 5px; font-size: 11px; font-weight: 700; color: #159B5A; letter-spacing: 0.06em; text-transform: uppercase;">✦ Up next for you, {{ userName }}</p>
+            <p style="margin: 0 0 3px; font-family: Fraunces, serif; font-size: 19px; font-weight: 600;">{{ nextUpTitle }}</p>
+            <p style="margin: 0; font-size: 12.5px; color: #6B7480;">{{ nextUpSub }}</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; justify-content: flex-end;">
+            <div style="flex: 1; max-width: 200px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11.5px; font-weight: 600; color: #6B7480;">Your progress</span>
+                <span style="font-size: 11.5px; font-weight: 700; color: #159B5A; font-variant-numeric: tabular-nums;">{{ progPct }}%</span>
+              </div>
+              <div style="height: 8px; background: #F0EDE4; border-radius: 4px; position: relative;">
+                <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: #159B5A; width: {{ progPct }}%; transition: width 0.3s;"></div>
+              </div>
+              <p style="margin: 6px 0 0; font-size: 11px; color: #A9A294;">{{ overallLabel }}</p>
+            </div>
+            <button onClick="{{ onNextUp }}" style="font-family: inherit; font-size: 13px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; border: none; border-radius: 999px; padding: 11px 22px; cursor: pointer; white-space: nowrap;" style-hover="background: #159B5A;">{{ nextUpBtn }}</button>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #F0EDE4; background: #FBFAF6; padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+          <p style="margin: 0; font-size: 12.5px; color: #4A5560; line-height: 1.6;">🧭 <strong style="color: #0E1F2B;">Atlas suggests:</strong> {{ recoText }}</p>
+          <div style="display: flex; gap: 8px; flex-shrink: 0;">
+            <button onClick="{{ onReco }}" style="font-family: inherit; font-size: 12px; font-weight: 600; color: #159B5A; background: #FFFFFF; border: 1px solid #CDE9D9; border-radius: 999px; padding: 7px 15px; cursor: pointer;" style-hover="background: #EAF6EF;">{{ recoBtn }}</button>
+            <button onClick="{{ onStartTour }}" style="font-family: inherit; font-size: 12px; font-weight: 600; color: #6B7480; background: none; border: 1px dashed #D8D3C6; border-radius: 999px; padding: 7px 15px; cursor: pointer;" style-hover="color: #0E1F2B; border-color: #0E1F2B;">▶ How this page works</button>
+          </div>
+        </div>
+      </div>
+      <div data-tour="tabs" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 26px; border-bottom: 1px solid #E6E2D8; padding-bottom: 0;">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+          <button onClick="{{ t.onPick }}" style="font-family: inherit; font-size: 13.5px; font-weight: 600; padding: 10px 18px 12px; border: none; border-bottom: 2.5px solid {{ t.underline }}; background: none; color: {{ t.color }}; cursor: pointer;">{{ t.label }}{{ t.badge }}</button>
+        </sc-for>
+      </div>
+    </section>
+
+    <sc-if value="{{ tabCourses }}" hint-placeholder-val="{{ true }}">
+    <!-- COURSES -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Courses</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Three short tracks, each lesson takes about two minutes to read. Tick them off as you go.</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start;">
+        <sc-for list="{{ courses }}" as="c" hint-placeholder-count="3">
+          <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+            <div style="padding: 24px 26px 18px;">
+              <p style="margin: 0 0 4px; font-size: 11.5px; font-weight: 700; color: {{ c.accent }}; letter-spacing: 0.06em; text-transform: uppercase;">{{ c.tag }}</p>
+              <h3 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 19px; font-weight: 600;">{{ c.title }}</h3>
+              <p style="margin: 0 0 14px; font-size: 12.5px; color: #6B7480; line-height: 1.6;">{{ c.sub }}</p>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 1; height: 7px; background: #F0EDE4; border-radius: 4px; position: relative;">
+                  <div style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: {{ c.accent }}; width: {{ c.progW }}%; transition: width 0.25s;"></div>
+                </div>
+                <span style="font-size: 11.5px; font-weight: 600; color: #6B7480; font-variant-numeric: tabular-nums; white-space: nowrap;">{{ c.progLabel }}</span>
+              </div>
+            </div>
+            <sc-for list="{{ c.lessons }}" as="l">
+              <div style="border-top: 1px solid #F0EDE4;">
+                <button onClick="{{ l.onToggle }}" style="width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 26px; background: {{ l.rowBg }}; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif;">
+                  <span onClick="{{ l.onDone }}" title="Mark done" style="width: 18px; height: 18px; border-radius: 6px; border: 1.5px solid {{ l.boxBorder }}; background: {{ l.boxBg }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <span style="color: #FFFFFF; font-size: 11px; line-height: 1; opacity: {{ l.check }};">✓</span>
+                  </span>
+                  <span style="flex: 1; font-size: 13px; font-weight: 600; color: {{ l.titleColor }};">{{ l.title }}</span>
+                  <span style="color: #A9A294; font-size: 15px; flex-shrink: 0;">{{ l.icon }}</span>
+                </button>
+                <sc-if value="{{ l.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding: 2px 26px 18px 56px;">
+                    <p style="margin: 0 0 12px; font-size: 13px; color: #4A5560; line-height: 1.7;">{{ l.body }}</p>
+                    <button onClick="{{ l.onDone }}" style="font-family: inherit; font-size: 12px; font-weight: 600; color: {{ l.doneBtnColor }}; background: {{ l.doneBtnBg }}; border: 1px solid {{ l.doneBtnBorder }}; border-radius: 999px; padding: 7px 16px; cursor: pointer;">{{ l.doneBtnLabel }}</button>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    </sc-if>
+
+    <sc-if value="{{ tabBreak }}" hint-placeholder-val="{{ false }}">
+    <!-- BREAKDOWNS -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Breakdowns</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">The words that appear all over your dashboard, each explained in a minute. Click to expand.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start;">
+        <sc-for list="{{ breakdowns }}" as="b">
+          <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+            <button onClick="{{ b.onToggle }}" style="width: 100%; display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: none; border: none; cursor: pointer; text-align: left; font-family: Inter, sans-serif;">
+              <span style="width: 34px; height: 34px; border-radius: 10px; background: #F1EFE8; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">{{ b.emoji }}</span>
+              <span style="flex: 1;">
+                <span style="display: block; font-size: 14.5px; font-weight: 600; color: #0E1F2B;">{{ b.title }}</span>
+                <span style="display: block; font-size: 12px; color: #A9A294; margin-top: 2px;">{{ b.hook }}</span>
+              </span>
+              <span style="color: #A9A294; font-size: 17px; flex-shrink: 0;">{{ b.icon }}</span>
+            </button>
+            <sc-if value="{{ b.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin: 0; padding: 0 24px 20px 72px; font-size: 13.5px; color: #4A5560; line-height: 1.7;">{{ b.body }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    </sc-if>
+
+    <sc-if value="{{ tabQuiz }}" hint-placeholder-val="{{ false }}">
+    <!-- QUESTIONNAIRE: INVESTOR TYPE -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Questionnaire: what kind of investor are you?</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Five honest answers. At the end it compares the result with the risk profile you chose at onboarding.</p>
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <div style="display: flex; flex-direction: column; gap: 22px;">
+          <sc-for list="{{ q1s }}" as="q">
+            <div>
+              <p style="margin: 0 0 10px; font-size: 14px; font-weight: 600;">{{ q.n }}. {{ q.text }}</p>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                <sc-for list="{{ q.options }}" as="o">
+                  <button onClick="{{ o.onPick }}" style="font-family: inherit; font-size: 13px; font-weight: 500; padding: 11px 14px; border-radius: 10px; border: 1px solid {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; cursor: pointer; text-align: left; line-height: 1.45;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ q1Done }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 26px; background: #0E1F2B; border-radius: 12px; padding: 24px 28px; color: #F7F6F2;">
+            <p style="margin: 0 0 4px; font-size: 12px; font-weight: 600; color: #3FBF7F; letter-spacing: 0.06em; text-transform: uppercase;">Your result</p>
+            <p style="margin: 0 0 8px; font-family: Fraunces, serif; font-size: 24px; font-weight: 500;">{{ q1Result }}</p>
+            <p style="margin: 0; font-size: 13.5px; color: #D9DEE2; line-height: 1.7; max-width: 680px;">{{ q1Note }}</p>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <!-- QUESTIONNAIRE: KNOWLEDGE CHECK -->
+    <section style="padding: 0 0 56px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Knowledge check</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Five quick questions on the basics. You get the answer, and the why, the moment you pick.</p>
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(14,31,43,0.05);">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <sc-for list="{{ q2s }}" as="q">
+            <div>
+              <p style="margin: 0 0 10px; font-size: 14px; font-weight: 600;">{{ q.n }}. {{ q.text }}</p>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <sc-for list="{{ q.options }}" as="o">
+                  <button onClick="{{ o.onPick }}" style="font-family: inherit; font-size: 13px; font-weight: 500; padding: 11px 16px; border-radius: 10px; border: 1px solid {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; cursor: pointer; text-align: left; line-height: 1.5;">{{ o.label }}</button>
+                </sc-for>
+              </div>
+              <sc-if value="{{ q.answered }}" hint-placeholder-val="{{ false }}">
+                <p style="margin: 10px 0 0; font-size: 12.5px; color: {{ q.fbColor }}; line-height: 1.6;"><strong>{{ q.verdict }}</strong> {{ q.why }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #F0EDE4; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <span style="font-size: 13.5px; font-weight: 600;">Score: <span style="color: #159B5A; font-variant-numeric: tabular-nums;">{{ q2Score }}</span></span>
+          <button onClick="{{ onResetQuizzes }}" style="font-family: inherit; font-size: 12.5px; font-weight: 600; color: #6B7480; background: none; border: 1px solid #E6E2D8; border-radius: 999px; padding: 8px 18px; cursor: pointer;" style-hover="color: #0E1F2B; border-color: #0E1F2B;">Reset both questionnaires</button>
+        </div>
+      </div>
+    </section>
+
+    </sc-if>
+
+    <sc-if value="{{ tabVideos }}" hint-placeholder-val="{{ false }}">
+    <!-- VIDEOS -->
+    <section style="padding: 0 0 88px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Watch instead</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Prefer video? Each card opens a curated YouTube search for that topic, pick whichever explainer suits you.</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+        <sc-for list="{{ videos }}" as="v">
+          <a href="{{ v.href }}" target="_blank" style="text-decoration: none; background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden; display: block;" style-hover="border-color: #159B5A;">
+            <div style="background: #0E1F2B; padding: 26px 24px; display: flex; align-items: center; gap: 14px;">
+              <span style="width: 42px; height: 42px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;">▶</span>
+              <span style="font-family: Fraunces, serif; font-size: 17px; font-weight: 500; color: #F7F6F2; line-height: 1.35;">{{ v.title }}</span>
+            </div>
+            <div style="padding: 16px 24px 20px;">
+              <p style="margin: 0 0 8px; font-size: 12.5px; color: #4A5560; line-height: 1.6;">{{ v.desc }}</p>
+              <span style="font-size: 11.5px; font-weight: 600; color: #159B5A;">{{ v.tag }} · Opens YouTube →</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    </sc-if>
+
+    <sc-if value="{{ tabForum }}" hint-placeholder-val="{{ false }}">
+    <!-- FORUM -->
+    <section style="padding: 0 0 88px;">
+      <h2 style="margin: 0 0 6px; font-family: Fraunces, serif; font-size: 28px; font-weight: 500; letter-spacing: -0.015em;">Forum</h2>
+      <p style="margin: 0 0 24px; font-size: 14px; color: #6B7480; max-width: 640px;">Ask anything the courses didn&rsquo;t cover. Questions are shared with everyone on this dashboard, upvote the ones you want answered too.</p>
+
+      <!-- ASK -->
+      <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); display: flex; flex-direction: column; gap: 14px; margin-bottom: 26px;">
+        <input type="text" value="{{ qTitle }}" onChange="{{ onQTitle }}" onKeyDown="{{ onQKey }}" placeholder="Your question, one clear line" style="font-family: inherit; font-size: 14.5px; font-weight: 600; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 10px; padding: 13px 16px; outline: none;" style-focus="border-color: #159B5A;">
+        <textarea value="{{ qBody }}" onChange="{{ onQBody }}" rows="3" placeholder="Add context if it helps (optional)" style="font-family: inherit; font-size: 13.5px; color: #0E1F2B; background: #FFFFFF; border: 1px solid #E6E2D8; border-radius: 10px; padding: 12px 16px; outline: none; resize: vertical; line-height: 1.6;" style-focus="border-color: #159B5A;"></textarea>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+          <span style="font-size: 12.5px; color: {{ forumMsgColor }};">{{ forumMsg }}</span>
+          <button onClick="{{ onAsk }}" style="font-family: inherit; font-size: 13.5px; font-weight: 600; color: #F7F6F2; background: #0E1F2B; border: none; border-radius: 8px; padding: 11px 22px; cursor: pointer;" style-hover="background: #159B5A;">Post question</button>
+        </div>
+      </div>
+
+      <!-- SORT -->
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap;">
+        <span style="font-size: 13px; font-weight: 600; color: #6B7480;">{{ threadCount }}</span>
+        <div style="display: flex; gap: 6px;">
+          <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="2">
+            <button onClick="{{ s.onPick }}" style="font-family: inherit; font-size: 12px; font-weight: 600; padding: 7px 16px; border-radius: 999px; border: 1px solid {{ s.border }}; background: {{ s.bg }}; color: {{ s.color }}; cursor: pointer;">{{ s.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- THREADS -->
+      <sc-if value="{{ hasThreads }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <sc-for list="{{ threads }}" as="t">
+            <div style="background: #FFFFFF; border: 1px solid #ECE8DE; border-radius: 14px; box-shadow: 0 1px 3px rgba(14,31,43,0.05); overflow: hidden;">
+              <div style="display: flex; align-items: stretch;">
+                <button onClick="{{ t.onVote }}" title="Upvote" style="font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 56px; flex-shrink: 0; background: {{ t.voteBg }}; border: none; border-right: 1px solid #F0EDE4; cursor: pointer; padding: 12px 0;">
+                  <span style="font-size: 13px; color: {{ t.voteColor }};">&#9650;</span>
+                  <span style="font-size: 13px; font-weight: 700; color: {{ t.voteColor }}; font-variant-numeric: tabular-nums;">{{ t.votes }}</span>
+                </button>
+                <button onClick="{{ t.onOpen }}" style="font-family: Inter, sans-serif; flex: 1; display: flex; flex-direction: column; gap: 4px; text-align: left; background: none; border: none; cursor: pointer; padding: 14px 20px; min-width: 0;">
+                  <span style="font-size: 14.5px; font-weight: 600; color: #0E1F2B; line-height: 1.4;">{{ t.title }}</span>
+                  <span style="font-size: 12px; color: #A9A294;">{{ t.meta }}</span>
+                </button>
+                <span style="display: flex; align-items: center; padding: 0 18px; color: #A9A294; font-size: 16px;">{{ t.icon }}</span>
+              </div>
+              <sc-if value="{{ t.open }}" hint-placeholder-val="{{ false }}">
+                <div style="border-top: 1px solid #F0EDE4; padding: 16px 20px 20px 56px; display: flex; flex-direction: column; gap: 14px;">
+                  <sc-if value="{{ t.hasBody }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.7; white-space: pre-wrap;">{{ t.body }}</p>
+                  </sc-if>
+                  <sc-for list="{{ t.replies }}" as="r">
+                    <div style="border-left: 2.5px solid #E6E2D8; padding: 2px 0 2px 14px;">
+                      <p style="margin: 0 0 3px; font-size: 11.5px; font-weight: 600; color: #159B5A;">{{ r.author }} <span style="color: #A9A294; font-weight: 500;">· {{ r.when }}</span></p>
+                      <p style="margin: 0; font-size: 13.5px; color: #4A5560; line-height: 1.65; white-space: pre-wrap;">{{ r.body }}</p>
+                    </div>
+                  </sc-for>
+                  <div style="display: flex; gap: 8px;">
+                    <input type="text" value="{{ t.replyDraft }}" onChange="{{ t.onReplyDraft }}" onKeyDown="{{ t.onReplyKey }}" placeholder="Write a reply…" style="flex: 1; font-family: inherit; font-size: 13px; color: #0E1F2B; background: #FCFBF8; border: 1px solid #E6E2D8; border-radius: 8px; padding: 10px 14px; outline: none; min-width: 0;" style-focus="border-color: #159B5A;">
+                    <button onClick="{{ t.onReply }}" style="font-family: inherit; font-size: 13px; font-weight: 600; color: #0E1F2B; background: #FCFBF8; border: 1px solid #0E1F2B; border-radius: 8px; padding: 10px 18px; cursor: pointer;" style-hover="background: #0E1F2B; color: #F7F6F2;">Reply</button>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noThreads }}" hint-placeholder-val="{{ false }}">
+        <div style="background: #FBFAF6; border: 1px dashed #D8D3C6; border-radius: 14px; padding: 40px 32px; text-align: center;">
+          <p style="margin: 0 0 4px; font-family: Fraunces, serif; font-size: 18px; font-weight: 500;">No questions yet</p>
+          <p style="margin: 0; font-size: 13px; color: #6B7480;">Ask the first one above, there are no dumb questions here.</p>
+        </div>
+      </sc-if>
+    </section>
+    </sc-if>
+
+  </main>
+
+  <!-- FUTURE: portfolio chat agent mounts here -->
+  <div id="agent-dock" style="position: fixed; right: 28px; bottom: 28px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <button id="agent-launcher" style="font-family: inherit; display: flex; align-items: center; gap: 10px; background: #0E1F2B; color: #F7F6F2; border: none; cursor: pointer; padding: 11px 18px 11px 12px; border-radius: 999px; box-shadow: 0 6px 20px rgba(14,31,43,0.22);" style-hover="background: #17303F;">
+      <span style="position: relative; width: 30px; height: 30px; border-radius: 50%; background: rgba(63,191,127,0.16); border: 1px solid rgba(63,191,127,0.4); color: #3FBF7F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">A<span style="position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%; background: #3FBF7F; border: 2px solid #0E1F2B;"></span></span>
+      <span style="font-size: 13.5px; font-weight: 600;">Ask Atlas</span>
+    </button>
+  </div>
+
+  <footer style="border-top: 1px solid #E6E2D8; padding: 28px 32px 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: #A9A294; flex-wrap: wrap;">
+      <span>Vantage · Prepared privately for {{ userName }} · Education, not financial advice</span>
+      <span>Progress saves on this device</span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  __sessionVals() {
+    var raw = null;
+    try { raw = localStorage.getItem('pd-session'); } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
+    if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
+    if (!raw) { window.location.replace('Login.dc.html'); }
+    var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
+    var userName = (s && s.name) || 'there';
+    return {
+      userName: userName,
+      userInitial: (userName.charAt(0) || 'V').toUpperCase(),
+      userAccount: (s && s.account) || '',
+      onLogout: () => {
+        try { localStorage.removeItem('pd-session'); } catch (e) {}
+        try { sessionStorage.removeItem('pd-session'); } catch (e) {}
+        if (window.name && window.name.indexOf('pd-session:') === 0) window.name = '';
+        window.location.href = 'Login.dc.html';
+      },
+    };
+  }
+  state = { openLesson: null, openBreak: null, done: {}, q1: {}, q2: {}, loaded: false,
+    tab: 'courses', threads: null, qTitle: '', qBody: '', forumMsg: '', forumErr: false,
+    openThread: null, replyDraft: '', sort: 'new', voted: {} };
+
+  __key() { return 'pd-learn-' + (this.__sessionVals().userAccount || 'unknown'); }
+  __settings() {
+    var acct = this.__sessionVals().userAccount;
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem('pd-profile-settings-' + acct) || 'null'); } catch (e) {}
+    return s || {};
+  }
+
+  componentDidMount() {
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(this.__key()) || 'null'); } catch (e) {}
+    if (saved && typeof saved === 'object') {
+      this.setState({ done: saved.done || {}, q1: saved.q1 || {}, q2: saved.q2 || {}, loaded: true });
+    } else {
+      this.setState({ loaded: true });
+    }
+    this.loadForum();
+  }
+
+  __votedKey() { return 'pd-forum-voted-' + (this.__sessionVals().userAccount || 'unknown'); }
+
+  loadForum() {
+    var self = this;
+    var voted = {};
+    try { voted = JSON.parse(localStorage.getItem(this.__votedKey()) || '{}') || {}; } catch (e) {}
+    VantageDB.forumList().then(function (list) {
+      self.setState({ threads: list || [], voted: voted });
+    }).catch(function () {
+      self.setState({ threads: [], voted: voted });
+    });
+  }
+
+  askForum() {
+    var self = this;
+    var title = (this.state.qTitle || '').trim();
+    if (!title) { this.setState({ forumMsg: 'Give your question a one-line title first.', forumErr: true }); return; }
+    var sv = this.__sessionVals();
+    this.setState({ forumMsg: 'Posting…', forumErr: false });
+    VantageDB.forumAsk({ title: title, body: this.state.qBody, author: sv.userName, account: sv.userAccount }).then(function (res) {
+      if (res.ok) {
+        self.setState({ qTitle: '', qBody: '', forumMsg: 'Posted.', forumErr: false, sort: 'new' });
+        self.loadForum();
+      } else {
+        self.setState({ forumMsg: 'Couldn’t post right now. Try again.', forumErr: true });
+      }
+    }).catch(function () { self.setState({ forumMsg: 'Couldn’t post right now. Try again.', forumErr: true }); });
+  }
+
+  replyForum(threadId) {
+    var self = this;
+    var body = (this.state.replyDraft || '').trim();
+    if (!body) return;
+    var sv = this.__sessionVals();
+    VantageDB.forumReply({ threadId: threadId, body: body, author: sv.userName, account: sv.userAccount }).then(function () {
+      self.setState({ replyDraft: '' });
+      self.loadForum();
+    });
+  }
+
+  voteForum(t) {
+    var self = this;
+    var voted = Object.assign({}, this.state.voted);
+    var delta = voted[t.id] ? -1 : 1;
+    if (voted[t.id]) delete voted[t.id]; else voted[t.id] = true;
+    try { localStorage.setItem(this.__votedKey(), JSON.stringify(voted)); } catch (e) {}
+    var threads = (this.state.threads || []).map(function (x) {
+      if (x.id !== t.id) return x;
+      return Object.assign({}, x, { votes: (x.votes || 0) + delta });
+    });
+    this.setState({ voted: voted, threads: threads });
+    VantageDB.forumVote(t.id, (t.votes || 0) + delta);
+  }
+
+  persist() {
+    try {
+      localStorage.setItem(this.__key(), JSON.stringify({ done: this.state.done, q1: this.state.q1, q2: this.state.q2 }));
+    } catch (e) {}
+  }
+  save(patch) { this.setState(patch, () => this.persist()); }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var settings = this.__settings();
+
+    // ---------- Courses ----------
+    var courseDefs = [
+      { key: 'zero', tag: 'Start here', accent: '#159B5A', title: 'Investing from zero', sub: 'The five ideas that turn a paycheck into a portfolio.', lessons: [
+        { t: 'What a stock actually is', b: 'A stock is a small slice of ownership in a real company. When you own one, you own a piece of its profits and its future. Prices wobble daily because millions of people keep re-guessing that future, the business underneath changes far more slowly.' },
+        { t: 'What an index fund is', b: 'An index fund buys hundreds of companies in one ticket and simply holds the whole market. No manager picking winners, which is exactly why it works: it never misses the winners, charges almost nothing, and no single disaster can sink it.' },
+        { t: 'Why compounding does the heavy lifting', b: 'Your money earns returns, then those returns earn returns. At 8%/yr, money doubles roughly every nine years, so a dollar invested in your twenties can be worth eight by retirement. The trick isn’t brilliance, it’s starting early and not interrupting it.' },
+        { t: 'What a dividend is', b: 'Some companies pay you cash simply for holding their shares, usually every quarter. Reinvested, dividends buy more shares that pay more dividends, one of the quietest forms of compounding. Your Performance page estimates yours.' },
+        { t: 'Your first paycheck, the boring right answer', b: 'For most beginners the right first move is embarrassingly simple: a broad, cheap index fund, bought automatically every payday, held for decades. Everything else on this site is refinement on top of that.' },
+      ]},
+      { key: 'dash', tag: 'Your dashboard', accent: '#7FA8C9', title: 'Understanding your dashboard', sub: 'What every number on Vantage means and where it comes from.', lessons: [
+        { t: 'The split: index funds vs individual stocks', b: 'Your risk profile sets a target like 90/10: the index side is the engine you can trust, the individual side is deliberate bets kept small. Every nightly check measures your real holdings against that split.' },
+        { t: 'What the flags watch for', b: 'Eight standing rules run every weeknight: single positions growing too big, the mix drifting from target, funds raising fees, dividends being cut. A tripped flag never trades anything, it just earns an honest paragraph in your dispatch.' },
+        { t: 'Reading the allocation donut', b: 'Each slice is one holding, sized by its share of the account. A healthy donut has no dominating slice; one giant wedge means one position decides your results, that’s what the 25% concentration line is about.' },
+        { t: 'Where the numbers come from (and when)', b: 'Vantage isn’t linked to your brokerage. It knows what you enter at onboarding and what you log on Activity, and prices update once nightly closes are recorded. If something looks stale, it’s waiting on you or the clock, never guessing.' },
+      ]},
+      { key: 'risk', tag: 'Staying sane', accent: '#C9A227', title: 'Risk & behavior', sub: 'The part that actually decides how this goes.', lessons: [
+        { t: 'Drawdowns are the admission price', b: 'Diversified markets have historically fallen 30–50% every decade or so, and recovered every time. The falls aren’t a malfunction, they’re the price of the long-run return. Expecting them ahead of time is half the defense.' },
+        { t: 'Why panic selling is the biggest risk', b: 'The market’s best days cluster right next to its worst ones. Sell in a scary week and you almost always miss the rebound, missing just the ten best days in a decade roughly halves your outcome. The plan is built so you never have to act during a drop.' },
+        { t: 'Diversification, what it can and can’t do', b: 'Spreading across hundreds of companies erases single-company disasters, that’s its job. It cannot save you from a whole-market fall, nothing can. It turns fatal risks into temporary ones, which is all you need.' },
+        { t: 'Fees, the silent compounder', b: 'Fees compound exactly like returns, against you, forever. A 1% annual fee can quietly consume a quarter of a lifetime’s growth; the 0.02–0.2% funds on your Holdings page cost almost nothing. It’s the one return you control completely.' },
+      ]},
+    ];
+    var totalLessons = 0, totalDone = 0;
+    var courses = courseDefs.map(function (c) {
+      var doneCount = 0;
+      var lessons = c.lessons.map(function (l, i) {
+        var id = c.key + '-' + i;
+        var done = !!st.done[id];
+        if (done) doneCount++;
+        var open = st.openLesson === id;
+        return {
+          title: l.t, body: l.b, open: open,
+          icon: open ? '−' : '+',
+          rowBg: open ? '#FBFAF6' : 'transparent',
+          titleColor: done ? '#A9A294' : '#0E1F2B',
+          boxBg: done ? '#159B5A' : '#FFFFFF',
+          boxBorder: done ? '#159B5A' : '#D8D3C6',
+          check: done ? 1 : 0,
+          doneBtnLabel: done ? '✓ Done' : 'Mark as done',
+          doneBtnColor: done ? '#159B5A' : '#0E1F2B',
+          doneBtnBg: done ? '#EAF6EF' : '#FFFFFF',
+          doneBtnBorder: done ? '#CDE9D9' : '#0E1F2B',
+          onToggle: function () { self.setState(function (s) { return { openLesson: s.openLesson === id ? null : id }; }); },
+          onDone: function (e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            var next = Object.assign({}, self.state.done);
+            next[id] = !next[id];
+            self.save({ done: next });
+          },
+        };
+      });
+      totalLessons += c.lessons.length;
+      totalDone += doneCount;
+      return {
+        tag: c.tag, accent: c.accent, title: c.title, sub: c.sub, lessons: lessons,
+        progW: (doneCount / c.lessons.length * 100).toFixed(0),
+        progLabel: doneCount + ' / ' + c.lessons.length,
+      };
+    });
+    var overallLabel = totalDone === 0 ? 'Fresh start, ' + totalLessons + ' short lessons ahead'
+      : totalDone >= totalLessons ? 'All ' + totalLessons + ' lessons done, nicely finished'
+      : totalDone + ' of ' + totalLessons + ' lessons done';
+
+    // ---------- Breakdowns ----------
+    var breakDefs = [
+      { t: 'Compounding', e: '🌱', h: 'Returns earning returns', b: 'Leave money invested and its growth starts growing. $100 at 8% is $108 after a year, but $216 after ten and $466 after twenty, the curve bends upward because every year builds on the last. Time matters more than the amount you start with.' },
+      { t: 'Index funds', e: '🧺', h: 'The whole market in one ticket', b: 'Instead of betting on one company, an index fund holds them all, the S&P 500 fund on many dashboards owns 500 businesses at once. You get the market’s average return, which over decades has beaten the vast majority of professionals, for a fee near zero.' },
+      { t: 'Diversification', e: '🛡️', h: 'No single point of failure', b: 'Any one company can go to zero; five hundred can’t all fail at once. Spreading money across many businesses, sectors and (eventually) countries means a disaster somewhere is a scratch, not a wound. Its limit: it can’t protect against the whole market falling together.' },
+      { t: 'Expense ratios', e: '🧾', h: 'What a fund charges to exist', b: 'A fund’s yearly fee, taken silently out of returns. 0.03% means 30 cents per $1,000 per year; 1% means $10, and compounded over 30 years that gap can swallow a fifth of your final balance. It’s the most reliable predictor of fund performance: cheaper wins.' },
+      { t: 'Dividends & yield', e: '💧', h: 'Cash for holding', b: 'Profits some companies hand back to shareholders, usually quarterly. Yield is that cash as a percentage of price, 3% yield pays $30 a year per $1,000 held. High yield isn’t automatically better; the healthiest payers grow the payment for decades.' },
+      { t: 'Drawdowns & volatility', e: '🌊', h: 'The normal storms', b: 'Volatility is the day-to-day wobble; a drawdown is a real fall from a peak, 10% corrections most years, 30%+ crashes every decade or so. Historically every diversified-market drawdown has eventually recovered. The account is designed so you never need to sell inside one.' },
+      { t: 'Cost basis & gains', e: '📐', h: 'What you paid vs what it’s worth', b: 'Cost basis is what you paid; the difference from today’s value is your unrealized gain or loss, unrealized because nothing is real until you sell. Selling winners triggers capital-gains tax, which is why rebalancing with new money beats rebalancing by selling.' },
+      { t: 'Dollar-cost averaging', e: '📆', h: 'Same amount, every payday', b: 'Investing a fixed amount on a schedule, whatever the market is doing. You automatically buy more shares when prices are low and fewer when they’re high, and you never have to guess the right moment, because there isn’t one.' },
+    ];
+    var breakdowns = breakDefs.map(function (d, i) {
+      var open = st.openBreak === i;
+      return {
+        title: d.t, emoji: d.e, hook: d.h, body: d.b, open: open,
+        icon: open ? '−' : '+',
+        onToggle: function () { self.setState(function (s) { return { openBreak: s.openBreak === i ? null : i }; }); },
+      };
+    });
+
+    // ---------- Questionnaire 1: investor type ----------
+    var q1Defs = [
+      { text: 'The market drops 20% next month. Honestly, you would…', opts: ['Sell some, sleep matters', 'Do nothing and wait it out', 'Buy more while it’s cheap'] },
+      { text: 'When do you expect to need this money?', opts: ['Within about 5 years', 'In 5–15 years', '15+ years away'] },
+      { text: 'A friend’s single stock doubled in a year. You feel…', opts: ['Suspicious, that’s gambling', 'Happy for them, not tempted', 'Eager to find the next one'] },
+      { text: 'How much could your account swing in a year without keeping you up?', opts: ['Around 10%', 'Around 25%', '40% or more'] },
+      { text: 'Checking your balance daily would make you…', opts: ['Anxious, I’d rather not look', 'Mildly curious', 'Energized, I love the action'] },
+    ];
+    var q1s = q1Defs.map(function (q, qi) {
+      var picked = st.q1[qi];
+      return {
+        n: qi + 1, text: q.text,
+        options: q.opts.map(function (label, oi) {
+          var on = picked === oi;
+          return {
+            label: label,
+            bg: on ? '#0E1F2B' : '#FFFFFF',
+            color: on ? '#F7F6F2' : '#4A5560',
+            border: on ? '#0E1F2B' : '#E6E2D8',
+            onPick: function () {
+              var next = Object.assign({}, self.state.q1);
+              next[qi] = oi;
+              self.save({ q1: next });
+            },
+          };
+        }),
+      };
+    });
+    var q1Answers = Object.keys(st.q1).length;
+    var q1Done = q1Answers >= q1Defs.length;
+    var q1Result = '', q1Note = '';
+    if (q1Done) {
+      var sum = 0;
+      for (var k in st.q1) sum += st.q1[k];
+      var avg = sum / q1Defs.length;
+      var kind = avg < 0.7 ? 'conservative' : avg < 1.5 ? 'balanced' : 'aggressive';
+      var names = { conservative: 'Conservative', balanced: 'Balanced', aggressive: 'Aggressive' };
+      q1Result = names[kind];
+      var current = settings.risk === 'custom' ? 'Custom' : (names[settings.risk] || null);
+      var descr = {
+        conservative: 'You value sleep over spectacle. A big index core with a small individual-stock sleeve fits, boring by design, effective by design.',
+        balanced: 'You can stomach real swings in exchange for growth, but you still want the index core doing most of the work.',
+        aggressive: 'You lean into risk and long horizons. The index core still anchors everything; the individual sleeve just gets more room.',
+      }[kind];
+      if (!current) q1Note = descr + ' You haven’t set a risk profile yet, onboarding will ask.';
+      else if (current.toLowerCase() === q1Result.toLowerCase()) q1Note = descr + ' This matches the ' + current + ' profile you chose at onboarding, your setup and your instincts agree.';
+      else q1Note = descr + ' Your saved profile is ' + current + '. Neither answer is wrong, but if this result keeps feeling more like you, revisit the choice on your Profile page.';
+    }
+
+    // ---------- Questionnaire 2: knowledge check ----------
+    var q2Defs = [
+      { text: 'What does a broad index fund actually do?', correct: 1, opts: ['Pays experts to pick the best stocks', 'Buys the whole market and simply holds it', 'Guarantees a fixed return each year'], why: 'No picking, no guarantees, it owns everything and rides the market’s average, which is the point.' },
+      { text: 'An expense ratio of 1% per year is…', correct: 2, opts: ['Negligible, it’s only 1%', 'Only charged when you sell', 'Expensive, it can eat a big slice of decades of growth'], why: 'Fees compound against you. Over 30 years, 1%/yr can consume roughly a fifth to a quarter of your final balance.' },
+      { text: 'The best predictor of your long-run result is…', correct: 0, opts: ['How long you stay invested and keep contributing', 'How well you time your entries and exits', 'How many hot stocks you catch early'], why: 'Time in the market and steady contributions beat timing and picking for almost everyone, including professionals.' },
+      { text: 'A diversified market fund falls 30%. Historically, the best move has been…', correct: 1, opts: ['Sell before it gets worse', 'Keep contributing and wait, every such fall has recovered', 'Move everything into a single safer stock'], why: 'Every broad-market drawdown in history has eventually recovered; sellers at the bottom are the ones who locked in the loss.' },
+      { text: 'A dividend is…', correct: 2, opts: ['A fee funds charge for holding stocks', 'A loan a company must repay you', 'Cash a company pays you from its profits for holding shares'], why: 'It’s your slice of the profits, reinvested, it quietly compounds into more shares paying more dividends.' },
+    ];
+    var q2Correct = 0, q2Answered = 0;
+    var q2s = q2Defs.map(function (q, qi) {
+      var picked = st.q2[qi];
+      var answered = picked != null;
+      if (answered) { q2Answered++; if (picked === q.correct) q2Correct++; }
+      return {
+        n: qi + 1, text: q.text, answered: answered,
+        verdict: answered ? (picked === q.correct ? 'Correct.' : 'Not quite.') : '',
+        why: answered ? q.why : '',
+        fbColor: answered ? (picked === q.correct ? '#159B5A' : '#B4483C') : '#6B7480',
+        options: q.opts.map(function (label, oi) {
+          var isPick = picked === oi;
+          var isCorrect = answered && oi === q.correct;
+          var bg = isCorrect ? '#EAF6EF' : (isPick ? '#FAEDEB' : '#FFFFFF');
+          var border = isCorrect ? '#159B5A' : (isPick ? '#F0D8D4' : '#E6E2D8');
+          var color = isCorrect ? '#159B5A' : (isPick ? '#B4483C' : '#4A5560');
+          if (!answered) { bg = '#FFFFFF'; border = '#E6E2D8'; color = '#4A5560'; }
+          return {
+            label: label, bg: bg, border: border, color: color,
+            onPick: function () {
+              if (self.state.q2[qi] != null) return;
+              var next = Object.assign({}, self.state.q2);
+              next[qi] = oi;
+              self.save({ q2: next });
+            },
+          };
+        }),
+      };
+    });
+    var q2Score = q2Answered ? q2Correct + ' / ' + q2Answered + ' answered' : 'nothing answered yet';
+
+    // ---------- Videos ----------
+    var yt = function (q) { return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); };
+    var videos = [
+      { title: 'Index funds, explained', tag: 'Foundations', desc: 'Why owning everything beats picking anything, the single most useful idea in investing.', href: yt('index funds explained for beginners') },
+      { title: 'The power of compound interest', tag: 'Foundations', desc: 'See the curve that makes starting early matter more than being clever.', href: yt('compound interest explained investing') },
+      { title: 'How the S&P 500 works', tag: 'Foundations', desc: 'The 500 companies behind the world’s most-watched index, and your core fund.', href: yt('S&P 500 explained for beginners') },
+      { title: 'Dividends 101', tag: 'Income', desc: 'How companies pay you to hold them, and why reinvesting is the quiet superpower.', href: yt('dividend investing explained for beginners') },
+      { title: 'Time in the market vs timing the market', tag: 'Behavior', desc: 'The evidence on why waiting for a dip costs more than it saves.', href: yt('time in the market vs timing the market') },
+      { title: 'Expense ratios & fund fees', tag: 'Costs', desc: 'The 30-second check that can save you a fifth of your retirement.', href: yt('expense ratio explained index funds') },
+    ];
+
+    // ---------- Tabs ----------
+    var threadsRaw = st.threads || [];
+    var tabDefs = [
+      { key: 'courses', label: 'Courses' },
+      { key: 'break', label: 'Breakdowns' },
+      { key: 'quiz', label: 'Quizzes' },
+      { key: 'videos', label: 'Videos' },
+      { key: 'forum', label: 'Forum', badge: threadsRaw.length ? ' · ' + threadsRaw.length : '' },
+    ];
+    var tabs = tabDefs.map(function (d) {
+      var on = st.tab === d.key;
+      return {
+        label: d.label,
+        badge: d.badge || '',
+        color: on ? '#0E1F2B' : '#8A93A0',
+        underline: on ? '#159B5A' : 'transparent',
+        onPick: function () { self.setState({ tab: d.key }); },
+      };
+    });
+
+    // ---------- Forum ----------
+    var fmtWhen = function (iso) {
+      try {
+        var diff = (Date.now() - new Date(iso).getTime()) / 60000;
+        if (diff < 1) return 'just now';
+        if (diff < 60) return Math.floor(diff) + 'm ago';
+        if (diff < 1440) return Math.floor(diff / 60) + 'h ago';
+        return Math.floor(diff / 1440) + 'd ago';
+      } catch (e) { return ''; }
+    };
+    var sorted = threadsRaw.slice();
+    if (st.sort === 'top') sorted.sort(function (a, b) { return (b.votes || 0) - (a.votes || 0); });
+    var threads = sorted.map(function (t) {
+      var open = st.openThread === t.id;
+      var replies = (t.replies || []).map(function (r) {
+        return { author: r.author || 'Someone', body: r.body, when: fmtWhen(r.created_at) };
+      });
+      var didVote = !!st.voted[t.id];
+      return {
+        title: t.title,
+        votes: t.votes || 0,
+        voteBg: didVote ? '#EAF6EF' : '#FBFAF6',
+        voteColor: didVote ? '#159B5A' : '#6B7480',
+        meta: (t.author || 'Someone') + ' · ' + fmtWhen(t.created_at) + ' · ' + replies.length + (replies.length === 1 ? ' reply' : ' replies'),
+        icon: open ? '−' : '+',
+        open: open,
+        hasBody: !!(t.body && t.body.trim()),
+        body: t.body || '',
+        replies: replies,
+        replyDraft: open ? st.replyDraft : '',
+        onVote: function () { self.voteForum(t); },
+        onOpen: function () { self.setState(function (s) { return { openThread: s.openThread === t.id ? null : t.id, replyDraft: '' }; }); },
+        onReplyDraft: function (e) { self.setState({ replyDraft: e.target.value }); },
+        onReplyKey: function (e) { if (e.key === 'Enter') self.replyForum(t.id); },
+        onReply: function () { self.replyForum(t.id); },
+      };
+    });
+    var sorts = [{ key: 'new', label: 'New' }, { key: 'top', label: 'Top' }].map(function (d) {
+      var on = st.sort === d.key;
+      return {
+        label: d.label,
+        bg: on ? '#0E1F2B' : '#FFFFFF',
+        color: on ? '#F7F6F2' : '#4A5560',
+        border: on ? '#0E1F2B' : '#E6E2D8',
+        onPick: function () { self.setState({ sort: d.key }); },
+      };
+    });
+
+    // ---------- Personalized "up next" + Atlas recommendation ----------
+    var scrollToContent = function () {
+      setTimeout(function () {
+        var el = document.querySelector('main > section:nth-of-type(2)');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 90);
+    };
+    var nextUp = null;
+    for (var ci = 0; ci < courseDefs.length && !nextUp; ci++) {
+      for (var li = 0; li < courseDefs[ci].lessons.length; li++) {
+        var lid = courseDefs[ci].key + '-' + li;
+        if (!st.done[lid]) { nextUp = { id: lid, course: courseDefs[ci], idx: li }; break; }
+      }
+    }
+    var nextUpTitle, nextUpSub, nextUpBtn;
+    if (nextUp) {
+      nextUpTitle = nextUp.course.lessons[nextUp.idx].t;
+      nextUpSub = nextUp.course.title + ' · lesson ' + (nextUp.idx + 1) + ' of ' + nextUp.course.lessons.length + ' · about 2 minutes';
+      nextUpBtn = totalDone === 0 ? 'Start here →' : 'Continue →';
+    } else {
+      nextUpTitle = 'Everything read, nicely done';
+      nextUpSub = 'Re-open any lesson below, or test yourself again in the quizzes.';
+      nextUpBtn = 'Review courses';
+    }
+    var onNextUp = function () {
+      self.setState({ tab: 'courses', openLesson: nextUp ? nextUp.id : null });
+      scrollToContent();
+    };
+    var progPct = totalLessons ? Math.round(totalDone / totalLessons * 100) : 0;
+
+    var riskNames = { conservative: 'Conservative', balanced: 'Balanced', aggressive: 'Aggressive' };
+    var savedRisk = riskNames[settings.risk] || null;
+    var recoText, recoBtn, recoTab = 'quiz';
+    if (!settings.risk) {
+      recoText = 'You haven’t set a risk profile yet. Take the two-minute investor-type questionnaire so Vantage knows how to shape your dashboard.';
+      recoBtn = 'Take the questionnaire';
+    } else if (!q1Done) {
+      recoText = 'Your dashboard is tuned to the ' + (savedRisk || 'Custom') + ' profile you chose. Take the questionnaire to see whether your instincts agree with it.';
+      recoBtn = 'Check your instincts';
+    } else if (savedRisk && q1Result && q1Result.toLowerCase() !== savedRisk.toLowerCase()) {
+      recoText = 'Your quiz says ' + q1Result + ' but your saved profile is ' + savedRisk + '. The Risk & behavior course is the best ten minutes for sorting out which one is really you.';
+      recoBtn = 'Open Risk & behavior';
+      recoTab = 'courses';
+    } else {
+      recoText = 'Your instincts match your ' + (savedRisk || q1Result) + ' profile. Next best step: Breakdowns, which decodes every term that appears on your dashboard.';
+      recoBtn = 'Browse breakdowns';
+      recoTab = 'break';
+    }
+    var onReco = function () {
+      if (recoTab === 'courses') {
+        var target = null;
+        for (var i = 0; i < courseDefs[2].lessons.length; i++) {
+          if (!self.state.done['risk-' + i]) { target = 'risk-' + i; break; }
+        }
+        self.setState({ tab: 'courses', openLesson: target });
+      } else {
+        self.setState({ tab: recoTab });
+      }
+      scrollToContent();
+    };
+
+    var out = this.__sessionVals();
+    out.nextUpTitle = nextUpTitle;
+    out.nextUpSub = nextUpSub;
+    out.nextUpBtn = nextUpBtn;
+    out.onNextUp = onNextUp;
+    out.progPct = progPct;
+    out.recoText = recoText;
+    out.recoBtn = recoBtn;
+    out.onReco = onReco;
+    out.onStartTour = function () { if (window.VantageAtlas) window.VantageAtlas.start(0); };
+    out.tabs = tabs;
+    out.tabCourses = st.tab === 'courses';
+    out.tabBreak = st.tab === 'break';
+    out.tabQuiz = st.tab === 'quiz';
+    out.tabVideos = st.tab === 'videos';
+    out.tabForum = st.tab === 'forum';
+    out.qTitle = st.qTitle;
+    out.qBody = st.qBody;
+    out.onQTitle = function (e) { self.setState({ qTitle: e.target.value, forumMsg: '' }); };
+    out.onQBody = function (e) { self.setState({ qBody: e.target.value, forumMsg: '' }); };
+    out.onQKey = function (e) { if (e.key === 'Enter') self.askForum(); };
+    out.onAsk = function () { self.askForum(); };
+    out.forumMsg = st.forumMsg;
+    out.forumMsgColor = st.forumErr ? '#B4483C' : '#159B5A';
+    out.threads = threads;
+    out.hasThreads = threads.length > 0;
+    out.noThreads = st.threads !== null && threads.length === 0;
+    out.threadCount = threads.length === 0 ? 'No questions yet' : threads.length + (threads.length === 1 ? ' question' : ' questions');
+    out.sorts = sorts;
+    out.courses = courses;
+    out.overallLabel = overallLabel;
+    out.breakdowns = breakdowns;
+    out.q1s = q1s;
+    out.q1Done = q1Done;
+    out.q1Result = q1Result;
+    out.q1Note = q1Note;
+    out.q2s = q2s;
+    out.q2Score = q2Score;
+    out.onResetQuizzes = function () { self.save({ q1: {}, q2: {} }); };
+    out.videos = videos;
+    return out;
+  }
+}
+</script>
+</body>
+</html>

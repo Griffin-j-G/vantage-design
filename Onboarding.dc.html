@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./neon.js"></script>
 </head>
 <body>
 <x-dc>
@@ -355,8 +356,12 @@ class Component extends DCLogic {
       logTime: '8:30 PM CT',
       onboarded: true,
     };
-    try { localStorage.setItem('pd-profile-settings-' + s.account, JSON.stringify(settings)); } catch (e) {}
-    window.location.href = 'Overview.dc.html';
+    // New account finished setup — have Atlas offer the tour on first Overview visit.
+    try { localStorage.setItem('pd-atlas-tour-pending', s.account || '1'); } catch (e) {}
+    var done = function () { window.location.href = 'Overview.dc.html'; };
+    // saveProfile caches locally and pushes to Neon when connected.
+    var timer = setTimeout(done, 4000);
+    VantageDB.saveProfile(s.account, settings).then(function () { clearTimeout(timer); done(); }, function () { clearTimeout(timer); done(); });
   }
 
   next() {

@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Retired: the Market tab was replaced by Learn. Redirect old links. -->
+<script>location.replace('Learn.dc.html');</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -510,7 +512,7 @@ class Component extends DCLogic {
     if (!raw) { try { raw = sessionStorage.getItem('pd-session'); } catch (e) {} }
     if (!raw && window.name && window.name.indexOf('pd-session:') === 0) raw = window.name.slice(11);
     var s = null; try { s = JSON.parse(raw || 'null'); } catch (e) {}
-    var userName = (s && s.name) || 'Griffin';
+    var userName = (s && s.name) || 'Investor';
     return {
       userName: userName,
       userInitial: (userName.charAt(0) || 'G').toUpperCase(),
