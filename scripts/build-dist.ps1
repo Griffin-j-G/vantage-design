@@ -16,6 +16,8 @@ New-Item -ItemType Directory (Join-Path $dist 'uploads') -Force | Out-Null
 
 Copy-Item (Join-Path $root '*.dc.html') $dist
 Copy-Item (Join-Path $root 'support.js') $dist
+Copy-Item (Join-Path $root 'atlas.js') $dist
+Copy-Item (Join-Path $root 'neon.js') $dist
 Copy-Item (Join-Path $root 'uploads\vantage-icon.png') (Join-Path $dist 'uploads')
 Copy-Item (Join-Path $root 'uploads\vantage-logo-dark.png') (Join-Path $dist 'uploads')
 
